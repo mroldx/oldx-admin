@@ -21,6 +21,10 @@ public class IndexController {
     private String city;
     @RequestMapping("/")
     public String index(HttpServletRequest request) {
+
+
+
+
       /* user u=new user();
         u.setLogin_time(new Date());
         String ip=request.getRemoteAddr();
