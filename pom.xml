@@ -13,7 +13,11 @@
     </parent>
 
     <groupId>com.moli</groupId>
+<<<<<<< HEAD
     <artifactId>parent</artifactId>
+=======
+    <artifactId>moliweb</artifactId>
+>>>>>>> 3b16999191dce9234bbf9db8919ab8c583e459d7
     <version>0.0.1-SNAPSHOT</version>
 
     <name>moli</name>
