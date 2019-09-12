@@ -7,9 +7,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/spring_security_jwt?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://47.107.73.52/moli?useUnicode=true&characterEncoding=utf-8
     username: root
-    password: 123
+    password: moli520
     driver-class-name: com.mysql.jdbc.Driver
     hikari:
       minimum-idle: 5
