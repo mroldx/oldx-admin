@@ -1,9 +1,7 @@
 package com.oldx.web.dao;
 
 
-import com.oldx.mbg.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
 /**
  * @www.codesheep.cn
@@ -11,6 +9,6 @@ import org.apache.ibatis.annotations.Select;
  */
 @Mapper
 public interface UserRepository{
-    @Select("select * from user where username=#{username}")
-    User findByUsername(String username);
+   /* @Select("select * from user where username=#{username}")
+    User findByUsername(String username);*/
 }

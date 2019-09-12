@@ -34,12 +34,12 @@
                     <label>密码</label>
                     <input type="password" name="password" />
                 </div>
-               <!-- <div class="form-group type1" style="display:inline-block">
+                <div class="form-group type1" style="display:inline-block">
                     <label>验证码</label>
                     <input type="text" name="imageCode" style="width:50%; display:inline-block" />
                     <img data-th-src="@{/image/code}" id="validateCodeImg" onclick="reloadCode()" style="display:inline-block;margin-left:.2rem" />
-                </div>-->
-               <!-- <div class="form-group type2" style="display: none">
+                </div>
+                <div class="form-group type2" style="display: none">
                     <label>手机号</label>
                     <input type="text" name="mobile" />
                 </div>
@@ -59,7 +59,7 @@
                     <a href="javascript:void(0)" id="social-login" style="color: #32c787;font-weight: 600">使用社交账号登录：</a>&nbsp;&nbsp;
                     <a href="/login/qq" title="QQ登录"><img th:src="@{img/social/QQ_bind.svg}" style="width: 1.4rem;"/></a>&nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="/login/weixin" title="微信登录"><img th:src="@{img/social/wechat_bind.svg}" style="width: 1.7rem;margin-top: -1px;"/></a>
-                </div>-->
+                </div>
                 <div class="form-group">
                     <button class="type1" onclick="formLogin()" id="form-login-button" type="submit">登录</button>
                     <button class="type2" onclick="mobileLogin()" id="mobile-login-button" type="submit" style="display: none">登录</button>
@@ -90,10 +90,10 @@
         </div>
     </div>
 </div>
-<!--<div data-th-include="common/footer"></div>-->
+<div data-th-include="common/footer"></div>
 </body>
-<!--<script th:inline="javascript">
+<script th:inline="javascript">
     var ctx = [[@{/}]];
 </script>
-<script data-th-src="@{js/app/login.js}"></script>-->
+<script data-th-src="@{js/app/login.js}"></script>
 </html>
