@@ -43,9 +43,10 @@ spring:
 logging:
   level:
     org.springframework.security: info
+mybatis:
+  mapper-locations:
+    - classpath:dao/*.xml
+    - classpath*:com/**/mapper/*.xml
 
-
-  thymeleaf:
-    cache: false
 
 

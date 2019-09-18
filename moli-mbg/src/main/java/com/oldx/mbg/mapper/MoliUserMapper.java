@@ -2,9 +2,11 @@ package com.oldx.mbg.mapper;
 
 import com.oldx.mbg.pojo.MoliUser;
 import com.oldx.mbg.pojo.MoliUserExample;
-import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+@Mapper
 public interface MoliUserMapper {
     long countByExample(MoliUserExample example);
 
