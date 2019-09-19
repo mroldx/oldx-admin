@@ -1,4 +1,4 @@
-package com.oldx.mbg.pojo;
+package com.oldx.mbg.domain;
 
 import java.util.ArrayList;
 import java.util.Date;

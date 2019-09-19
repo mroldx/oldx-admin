@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.oldx.mbg.mapper.MDeptMapper">
-  <resultMap id="BaseResultMap" type="com.oldx.mbg.pojo.MDept">
+  <resultMap id="BaseResultMap" type="com.oldx.mbg.domain.MDept">
     <id column="dept_id" jdbcType="BIGINT" property="deptId" />
     <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
     <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List">
     dept_id, parent_id, dept_name, creat_time
   </sql>
-  <select id="selectByExample" parameterType="com.oldx.mbg.pojo.MDeptExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.oldx.mbg.domain.MDeptExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -92,19 +92,19 @@
     delete from m_dept
     where dept_id = #{deptId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.oldx.mbg.pojo.MDeptExample">
+  <delete id="deleteByExample" parameterType="com.oldx.mbg.domain.MDeptExample">
     delete from m_dept
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.oldx.mbg.pojo.MDept">
+  <insert id="insert" parameterType="com.oldx.mbg.domain.MDept">
     insert into m_dept (dept_id, parent_id, dept_name, 
       creat_time)
     values (#{deptId,jdbcType=BIGINT}, #{parentId,jdbcType=VARCHAR}, #{deptName,jdbcType=VARCHAR}, 
       #{creatTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.oldx.mbg.pojo.MDept">
+  <insert id="insertSelective" parameterType="com.oldx.mbg.domain.MDept">
     insert into m_dept
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="deptId != null">
@@ -135,7 +135,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.oldx.mbg.pojo.MDeptExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.oldx.mbg.domain.MDeptExample" resultType="java.lang.Long">
     select count(*) from m_dept
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -171,7 +171,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.oldx.mbg.pojo.MDept">
+  <update id="updateByPrimaryKeySelective" parameterType="com.oldx.mbg.domain.MDept">
     update m_dept
     <set>
       <if test="parentId != null">
@@ -186,7 +186,7 @@
     </set>
     where dept_id = #{deptId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.oldx.mbg.pojo.MDept">
+  <update id="updateByPrimaryKey" parameterType="com.oldx.mbg.domain.MDept">
     update m_dept
     set parent_id = #{parentId,jdbcType=VARCHAR},
       dept_name = #{deptName,jdbcType=VARCHAR},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.oldx.mbg.mapper.MMenuMapper">
-  <resultMap id="BaseResultMap" type="com.oldx.mbg.pojo.MMenu">
+  <resultMap id="BaseResultMap" type="com.oldx.mbg.domain.MMenu">
     <id column="menu_id" jdbcType="BIGINT" property="menuId" />
     <result column="parent_id" jdbcType="BIGINT" property="parentId" />
     <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
@@ -10,7 +10,7 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.oldx.mbg.pojo.MMenu">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.oldx.mbg.domain.MMenu">
     <result column="perms" jdbcType="LONGVARCHAR" property="perms" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -77,7 +77,7 @@
   <sql id="Blob_Column_List">
     perms
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.oldx.mbg.pojo.MMenuExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="com.oldx.mbg.domain.MMenuExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -93,7 +93,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.oldx.mbg.pojo.MMenuExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.oldx.mbg.domain.MMenuExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -119,13 +119,13 @@
     delete from m_menu
     where menu_id = #{menuId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.oldx.mbg.pojo.MMenuExample">
+  <delete id="deleteByExample" parameterType="com.oldx.mbg.domain.MMenuExample">
     delete from m_menu
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.oldx.mbg.pojo.MMenu">
+  <insert id="insert" parameterType="com.oldx.mbg.domain.MMenu">
     insert into m_menu (menu_id, parent_id, menu_name, 
       url, type, create_time, 
       modify_time, perms)
@@ -133,7 +133,7 @@
       #{url,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{modifyTime,jdbcType=TIMESTAMP}, #{perms,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.oldx.mbg.pojo.MMenu">
+  <insert id="insertSelective" parameterType="com.oldx.mbg.domain.MMenu">
     insert into m_menu
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="menuId != null">
@@ -188,7 +188,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.oldx.mbg.pojo.MMenuExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.oldx.mbg.domain.MMenuExample" resultType="java.lang.Long">
     select count(*) from m_menu
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -253,7 +253,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.oldx.mbg.pojo.MMenu">
+  <update id="updateByPrimaryKeySelective" parameterType="com.oldx.mbg.domain.MMenu">
     update m_menu
     <set>
       <if test="parentId != null">
@@ -280,7 +280,7 @@
     </set>
     where menu_id = #{menuId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.oldx.mbg.pojo.MMenu">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.oldx.mbg.domain.MMenu">
     update m_menu
     set parent_id = #{parentId,jdbcType=BIGINT},
       menu_name = #{menuName,jdbcType=VARCHAR},
@@ -291,7 +291,7 @@
       perms = #{perms,jdbcType=LONGVARCHAR}
     where menu_id = #{menuId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.oldx.mbg.pojo.MMenu">
+  <update id="updateByPrimaryKey" parameterType="com.oldx.mbg.domain.MMenu">
     update m_menu
     set parent_id = #{parentId,jdbcType=BIGINT},
       menu_name = #{menuName,jdbcType=VARCHAR},

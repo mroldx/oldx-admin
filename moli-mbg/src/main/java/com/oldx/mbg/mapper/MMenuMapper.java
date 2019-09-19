@@ -1,9 +1,10 @@
 package com.oldx.mbg.mapper;
 
-import com.oldx.mbg.pojo.MMenu;
-import com.oldx.mbg.pojo.MMenuExample;
-import java.util.List;
+import com.oldx.mbg.domain.MMenu;
+import com.oldx.mbg.domain.MMenuExample;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface MMenuMapper {
     long countByExample(MMenuExample example);

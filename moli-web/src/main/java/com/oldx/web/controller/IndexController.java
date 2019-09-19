@@ -1,36 +1,37 @@
 package com.oldx.web.controller;
 
 import com.oldx.common.api.CommonResult;
+import com.oldx.mbg.domain.MoliUser;
 import com.oldx.web.dao.UserRepository;
 import com.oldx.web.service.UserService;
+import io.swagger.annotations.Api;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@Api(tags = "IndexController", description = "后台用户管理")
 public class IndexController {
     // 图形验证码 session key
     public static final String SESSION_KEY_IMAGE_CODE = "SESSION_KEY_IMAGE_CODE";
     @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping("/")
+    private Logger log = LoggerFactory.getLogger(this.getClass());
+
+   /* @RequestMapping("/")
     public String index() {
         return "login";
     }
 
-    @RequestMapping("/loginn")
+    @RequestMapping("/login")
     public String login() {
-        return "login111";
-    }
+        return "/login";
+    }*/
 
-    @RequestMapping("/error/500")
+    @RequestMapping(value = "/error/500",method = RequestMethod.POST)
     public String qqq() {
         return "error/500";
     }
@@ -38,15 +39,26 @@ public class IndexController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/image/code")
-    public void createCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @RequestMapping(value = "/image/code1",method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult createCode(MoliUser moliUser){
         System.out.println("验证码来了。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。");
+        MoliUser user=userService.insertUser(moliUser);
+        if (user==null){
+            return CommonResult.failed("用户名已存在添加失败");
+        }
+        log.info("添加用户成功");
+        return CommonResult.success(user);
     }
 
-    @RequestMapping("/user")
+    @PostMapping("insertUser")
     @ResponseBody
-    public CommonResult user() {
-        userService.insertUser();
-        return CommonResult.success("牛逼");
+    public CommonResult user(MoliUser moliUser) {
+      MoliUser user=userService.insertUser(moliUser);
+      if (user==null){
+          return CommonResult.failed("用户名已存在添加失败");
+      }
+        log.info("添加用户成功");
+        return CommonResult.success(user);
     }
 }

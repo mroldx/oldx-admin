@@ -1,7 +1,7 @@
 package com.oldx.mbg.mapper;
 
-import com.oldx.mbg.pojo.MUserLog;
-import com.oldx.mbg.pojo.MUserLogExample;
+import com.oldx.mbg.domain.MUserLog;
+import com.oldx.mbg.domain.MUserLogExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

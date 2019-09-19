@@ -1,5 +1,8 @@
 package com.oldx.web.service;
 
+import com.oldx.mbg.domain.MoliUser;
+
 public interface UserService {
-    void insertUser();
+    MoliUser insertUser(MoliUser user);
+    MoliUser getUserByUserName(String username);
 }

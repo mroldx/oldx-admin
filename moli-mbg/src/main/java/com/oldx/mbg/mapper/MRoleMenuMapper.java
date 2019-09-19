@@ -1,7 +1,7 @@
 package com.oldx.mbg.mapper;
 
-import com.oldx.mbg.pojo.MRoleMenu;
-import com.oldx.mbg.pojo.MRoleMenuExample;
+import com.oldx.mbg.domain.MRoleMenu;
+import com.oldx.mbg.domain.MRoleMenuExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

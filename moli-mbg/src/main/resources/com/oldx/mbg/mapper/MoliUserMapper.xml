@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.oldx.mbg.mapper.MoliUserMapper">
-  <resultMap id="BaseResultMap" type="com.oldx.mbg.pojo.MoliUser">
+  <resultMap id="BaseResultMap" type="com.oldx.mbg.domain.MoliUser">
     <id column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -78,7 +78,7 @@
     user_id, username, password, dept_id, email, mobile, status, create_time, modify_time, 
     last_login_time, sex, icon, desciption
   </sql>
-  <select id="selectByExample" parameterType="com.oldx.mbg.pojo.MoliUserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.oldx.mbg.domain.MoliUserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -102,13 +102,13 @@
     delete from moli_user
     where user_id = #{userId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.oldx.mbg.pojo.MoliUserExample">
+  <delete id="deleteByExample" parameterType="com.oldx.mbg.domain.MoliUserExample">
     delete from moli_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.oldx.mbg.pojo.MoliUser">
+  <insert id="insert" parameterType="com.oldx.mbg.domain.MoliUser">
     insert into moli_user (user_id, username, password, 
       dept_id, email, mobile, 
       status, create_time, modify_time, 
@@ -120,7 +120,7 @@
       #{lastLoginTime,jdbcType=TIMESTAMP}, #{sex,jdbcType=CHAR}, #{icon,jdbcType=VARCHAR}, 
       #{desciption,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.oldx.mbg.pojo.MoliUser">
+  <insert id="insertSelective" parameterType="com.oldx.mbg.domain.MoliUser">
     insert into moli_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -205,7 +205,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.oldx.mbg.pojo.MoliUserExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.oldx.mbg.domain.MoliUserExample" resultType="java.lang.Long">
     select count(*) from moli_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -277,7 +277,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.oldx.mbg.pojo.MoliUser">
+  <update id="updateByPrimaryKeySelective" parameterType="com.oldx.mbg.domain.MoliUser">
     update moli_user
     <set>
       <if test="username != null">
@@ -319,7 +319,7 @@
     </set>
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.oldx.mbg.pojo.MoliUser">
+  <update id="updateByPrimaryKey" parameterType="com.oldx.mbg.domain.MoliUser">
     update moli_user
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},

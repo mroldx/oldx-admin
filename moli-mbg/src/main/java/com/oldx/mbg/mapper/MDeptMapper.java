@@ -1,7 +1,7 @@
 package com.oldx.mbg.mapper;
 
-import com.oldx.mbg.pojo.MDept;
-import com.oldx.mbg.pojo.MDeptExample;
+import com.oldx.mbg.domain.MDept;
+import com.oldx.mbg.domain.MDeptExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

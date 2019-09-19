@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.oldx.mbg.mapper.MUserLogMapper">
-  <resultMap id="BaseResultMap" type="com.oldx.mbg.pojo.MUserLog">
+  <resultMap id="BaseResultMap" type="com.oldx.mbg.domain.MUserLog">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="time" jdbcType="DECIMAL" property="time" />
@@ -9,7 +9,7 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="city" jdbcType="VARCHAR" property="city" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.oldx.mbg.pojo.MUserLog">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.oldx.mbg.domain.MUserLog">
     <result column="operation" jdbcType="LONGVARCHAR" property="operation" />
     <result column="method" jdbcType="LONGVARCHAR" property="method" />
     <result column="params" jdbcType="LONGVARCHAR" property="params" />
@@ -78,7 +78,7 @@
   <sql id="Blob_Column_List">
     operation, method, params
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.oldx.mbg.pojo.MUserLogExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="com.oldx.mbg.domain.MUserLogExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -94,7 +94,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.oldx.mbg.pojo.MUserLogExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.oldx.mbg.domain.MUserLogExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -120,13 +120,13 @@
     delete from m_user_log
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.oldx.mbg.pojo.MUserLogExample">
+  <delete id="deleteByExample" parameterType="com.oldx.mbg.domain.MUserLogExample">
     delete from m_user_log
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.oldx.mbg.pojo.MUserLog">
+  <insert id="insert" parameterType="com.oldx.mbg.domain.MUserLog">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -137,7 +137,7 @@
       #{createTime,jdbcType=TIMESTAMP}, #{city,jdbcType=VARCHAR}, #{operation,jdbcType=LONGVARCHAR}, 
       #{method,jdbcType=LONGVARCHAR}, #{params,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.oldx.mbg.pojo.MUserLog">
+  <insert id="insertSelective" parameterType="com.oldx.mbg.domain.MUserLog">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -195,7 +195,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.oldx.mbg.pojo.MUserLogExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.oldx.mbg.domain.MUserLogExample" resultType="java.lang.Long">
     select count(*) from m_user_log
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -263,7 +263,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.oldx.mbg.pojo.MUserLog">
+  <update id="updateByPrimaryKeySelective" parameterType="com.oldx.mbg.domain.MUserLog">
     update m_user_log
     <set>
       <if test="username != null">
@@ -293,7 +293,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.oldx.mbg.pojo.MUserLog">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.oldx.mbg.domain.MUserLog">
     update m_user_log
     set username = #{username,jdbcType=VARCHAR},
       time = #{time,jdbcType=DECIMAL},
@@ -305,7 +305,7 @@
       params = #{params,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.oldx.mbg.pojo.MUserLog">
+  <update id="updateByPrimaryKey" parameterType="com.oldx.mbg.domain.MUserLog">
     update m_user_log
     set username = #{username,jdbcType=VARCHAR},
       time = #{time,jdbcType=DECIMAL},

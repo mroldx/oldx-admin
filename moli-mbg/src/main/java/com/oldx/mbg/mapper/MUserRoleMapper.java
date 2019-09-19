@@ -1,7 +1,7 @@
 package com.oldx.mbg.mapper;
 
-import com.oldx.mbg.pojo.MUserRole;
-import com.oldx.mbg.pojo.MUserRoleExample;
+import com.oldx.mbg.domain.MUserRole;
+import com.oldx.mbg.domain.MUserRoleExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

@@ -1,4 +1,4 @@
-package com.oldx.mbg.pojo;
+package com.oldx.mbg.domain;
 
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;

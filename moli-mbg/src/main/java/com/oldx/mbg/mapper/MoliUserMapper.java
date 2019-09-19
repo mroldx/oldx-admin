@@ -1,7 +1,7 @@
 package com.oldx.mbg.mapper;
 
-import com.oldx.mbg.pojo.MoliUser;
-import com.oldx.mbg.pojo.MoliUserExample;
+import com.oldx.mbg.domain.MoliUser;
+import com.oldx.mbg.domain.MoliUserExample;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

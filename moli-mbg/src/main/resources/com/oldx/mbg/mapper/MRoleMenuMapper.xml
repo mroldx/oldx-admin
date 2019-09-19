@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.oldx.mbg.mapper.MRoleMenuMapper">
-  <resultMap id="BaseResultMap" type="com.oldx.mbg.pojo.MRoleMenu">
+  <resultMap id="BaseResultMap" type="com.oldx.mbg.domain.MRoleMenu">
     <result column="role_id" jdbcType="BIGINT" property="roleId" />
     <result column="permission_id" jdbcType="BIGINT" property="permissionId" />
   </resultMap>
@@ -66,7 +66,7 @@
   <sql id="Base_Column_List">
     role_id, permission_id
   </sql>
-  <select id="selectByExample" parameterType="com.oldx.mbg.pojo.MRoleMenuExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.oldx.mbg.domain.MRoleMenuExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -80,17 +80,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.oldx.mbg.pojo.MRoleMenuExample">
+  <delete id="deleteByExample" parameterType="com.oldx.mbg.domain.MRoleMenuExample">
     delete from m_role_menu
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.oldx.mbg.pojo.MRoleMenu">
+  <insert id="insert" parameterType="com.oldx.mbg.domain.MRoleMenu">
     insert into m_role_menu (role_id, permission_id)
     values (#{roleId,jdbcType=BIGINT}, #{permissionId,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.oldx.mbg.pojo.MRoleMenu">
+  <insert id="insertSelective" parameterType="com.oldx.mbg.domain.MRoleMenu">
     insert into m_role_menu
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="roleId != null">
@@ -109,7 +109,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.oldx.mbg.pojo.MRoleMenuExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.oldx.mbg.domain.MRoleMenuExample" resultType="java.lang.Long">
     select count(*) from m_role_menu
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

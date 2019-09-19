@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.oldx.mbg.mapper.MRoleMapper">
-  <resultMap id="BaseResultMap" type="com.oldx.mbg.pojo.MRole">
+  <resultMap id="BaseResultMap" type="com.oldx.mbg.domain.MRole">
     <id column="role_id" jdbcType="BIGINT" property="roleId" />
     <result column="role_name" jdbcType="VARCHAR" property="roleName" />
     <result column="description" jdbcType="VARCHAR" property="description" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List">
     role_id, role_name, description, create_time, modify_time
   </sql>
-  <select id="selectByExample" parameterType="com.oldx.mbg.pojo.MRoleExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.oldx.mbg.domain.MRoleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -93,19 +93,19 @@
     delete from m_role
     where role_id = #{roleId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.oldx.mbg.pojo.MRoleExample">
+  <delete id="deleteByExample" parameterType="com.oldx.mbg.domain.MRoleExample">
     delete from m_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.oldx.mbg.pojo.MRole">
+  <insert id="insert" parameterType="com.oldx.mbg.domain.MRole">
     insert into m_role (role_id, role_name, description, 
       create_time, modify_time)
     values (#{roleId,jdbcType=BIGINT}, #{roleName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.oldx.mbg.pojo.MRole">
+  <insert id="insertSelective" parameterType="com.oldx.mbg.domain.MRole">
     insert into m_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="roleId != null">
@@ -142,7 +142,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.oldx.mbg.pojo.MRoleExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.oldx.mbg.domain.MRoleExample" resultType="java.lang.Long">
     select count(*) from m_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -182,7 +182,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.oldx.mbg.pojo.MRole">
+  <update id="updateByPrimaryKeySelective" parameterType="com.oldx.mbg.domain.MRole">
     update m_role
     <set>
       <if test="roleName != null">
@@ -200,7 +200,7 @@
     </set>
     where role_id = #{roleId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.oldx.mbg.pojo.MRole">
+  <update id="updateByPrimaryKey" parameterType="com.oldx.mbg.domain.MRole">
     update m_role
     set role_name = #{roleName,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},

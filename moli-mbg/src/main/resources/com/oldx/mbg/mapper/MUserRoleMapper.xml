@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.oldx.mbg.mapper.MUserRoleMapper">
-  <resultMap id="BaseResultMap" type="com.oldx.mbg.pojo.MUserRole">
+  <resultMap id="BaseResultMap" type="com.oldx.mbg.domain.MUserRole">
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="role_id" jdbcType="INTEGER" property="roleId" />
   </resultMap>
@@ -66,7 +66,7 @@
   <sql id="Base_Column_List">
     user_id, role_id
   </sql>
-  <select id="selectByExample" parameterType="com.oldx.mbg.pojo.MUserRoleExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.oldx.mbg.domain.MUserRoleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -80,17 +80,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.oldx.mbg.pojo.MUserRoleExample">
+  <delete id="deleteByExample" parameterType="com.oldx.mbg.domain.MUserRoleExample">
     delete from m_user_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.oldx.mbg.pojo.MUserRole">
+  <insert id="insert" parameterType="com.oldx.mbg.domain.MUserRole">
     insert into m_user_role (user_id, role_id)
     values (#{userId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.oldx.mbg.pojo.MUserRole">
+  <insert id="insertSelective" parameterType="com.oldx.mbg.domain.MUserRole">
     insert into m_user_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -109,7 +109,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.oldx.mbg.pojo.MUserRoleExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.oldx.mbg.domain.MUserRoleExample" resultType="java.lang.Long">
     select count(*) from m_user_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
