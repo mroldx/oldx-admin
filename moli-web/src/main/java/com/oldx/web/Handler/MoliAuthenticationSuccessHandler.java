@@ -42,7 +42,7 @@ public class MoliAuthenticationSuccessHandler implements AuthenticationSuccessHa
                                         HttpServletResponse response,
                                         Authentication authentication)
             throws IOException, ServletException {
-        log.info("登录成功了你牛逼");
+        log.info("登录成功了你牛逼a");
         WebAuthenticationDetails details = (WebAuthenticationDetails) authentication.getDetails();
         String remoteAddress = details.getRemoteAddress();
 
