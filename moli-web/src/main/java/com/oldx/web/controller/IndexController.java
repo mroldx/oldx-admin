@@ -81,6 +81,6 @@ public class IndexController {
             String redirectUrl = savedRequest.getRedirectUrl();
             log.info("引发跳转的请求是：{}", redirectUrl);
         }
-        return "login";
+        return "2";
     }
 }

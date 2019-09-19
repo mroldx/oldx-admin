@@ -43,7 +43,7 @@ public class MoLiUserDetailsService implements UserDetailsService {
             userDetails.setLoginTime(DateUtil.getDateFormat(new Date(), DateUtil.FULL_DATE_FORMAT));
             return userDetails;
         }else {
-            throw new UsernameNotFoundException("用诨名不纯在");
+            throw new UsernameNotFoundException("用户名或密码错误");
         }
     }
 }
