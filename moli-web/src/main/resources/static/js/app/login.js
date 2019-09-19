@@ -73,11 +73,11 @@ function formLogin() {
 
     $.ajax({
         type: "post",
-        url: ctx + "form/login",
+        url: ctx + "authentication/form",
         data: $form.serialize(),
         dataType: "json",
         success: function (r) {
-            if (r.code === 0) {
+            if (r.code === 200) {
                 $form[0].reset();
                 location.href = ctx + 'index';
             } else {
