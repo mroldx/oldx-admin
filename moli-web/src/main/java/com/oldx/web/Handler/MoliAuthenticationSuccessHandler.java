@@ -5,14 +5,9 @@ import com.oldx.common.api.CommonResult;
 import com.oldx.common.domain.LoginType;
 import com.oldx.common.domain.MoliConstant;
 import com.oldx.web.bo.MoLiUserDetails;
-import com.oldx.web.properties.MoliSecurityProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.session.SessionRegistry;
-import org.springframework.security.web.DefaultRedirectStrategy;
-import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Component;
@@ -29,11 +24,6 @@ import java.io.IOException;
 public class MoliAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     private ObjectMapper mapper = new ObjectMapper();
 
-    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-
-    private SessionRegistry sessionRegistry;
-    @Autowired
-    private MoliSecurityProperties moliSecurityProperties;
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -45,7 +35,6 @@ public class MoliAuthenticationSuccessHandler implements AuthenticationSuccessHa
         log.info("登录成功了你牛逼a");
         WebAuthenticationDetails details = (WebAuthenticationDetails) authentication.getDetails();
         String remoteAddress = details.getRemoteAddress();
-
         LoginType loginType = LoginType.normal;
         Object principal = authentication.getPrincipal();
         if (principal instanceof MoLiUserDetails) {
@@ -54,6 +43,7 @@ public class MoliAuthenticationSuccessHandler implements AuthenticationSuccessHa
             loginType = userDetails.getLoginType();
         }
         response.setContentType(MoliConstant.JSON_UTF8);
-        response.getWriter().write(mapper.writeValueAsString(CommonResult.success("null")));
+        response.getWriter().write(mapper.writeValueAsString(CommonResult.success(details,"成功")));
+
     }
 }

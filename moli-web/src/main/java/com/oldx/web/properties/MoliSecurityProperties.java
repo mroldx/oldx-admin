@@ -1,11 +1,8 @@
 package com.oldx.web.properties;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-@Getter
-@Setter
+
 @Component
 @ConfigurationProperties(prefix = "moli.security")
 public class MoliSecurityProperties {
@@ -20,6 +17,64 @@ public class MoliSecurityProperties {
     // 主页 URL
     private String indexUrl;
 
+    private ValidateCodeProperties code = new ValidateCodeProperties();
+
     private SessionProperties session = new SessionProperties();
+
+    public String getLoginUrl() {
+        return loginUrl;
+    }
+
+    public void setLoginUrl(String loginUrl) {
+        this.loginUrl = loginUrl;
+    }
+
+    public String getAnonResourcesUrl() {
+        return anonResourcesUrl;
+    }
+
+    public void setAnonResourcesUrl(String anonResourcesUrl) {
+        this.anonResourcesUrl = anonResourcesUrl;
+    }
+
+    public ValidateCodeProperties getCode() {
+        return code;
+    }
+
+    public void setCode(ValidateCodeProperties code) {
+        this.code = code;
+    }
+
+    public int getRememberMeTimeout() {
+        return rememberMeTimeout;
+    }
+
+    public void setRememberMeTimeout(int rememberMeTimeout) {
+        this.rememberMeTimeout = rememberMeTimeout;
+    }
+
+    public String getLogoutUrl() {
+        return logoutUrl;
+    }
+
+    public void setLogoutUrl(String logoutUrl) {
+        this.logoutUrl = logoutUrl;
+    }
+
+    public SessionProperties getSession() {
+        return session;
+    }
+
+    public void setSession(SessionProperties session) {
+        this.session = session;
+    }
+
+    public String getIndexUrl() {
+        return indexUrl;
+    }
+
+    public void setIndexUrl(String indexUrl) {
+        this.indexUrl = indexUrl;
+    }
 
 }

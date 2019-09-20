@@ -81,9 +81,9 @@ function formLogin() {
                 $form[0].reset();
                 location.href = ctx + 'index';
             } else {
-                if (r.msg !== '验证码不能为空！') reloadCode();
-                $MB.n_warning(r.msg);
-                $loginButton.html("登录");
+               /* if (r.msg !== '验证码不能为空！') reloadCode();*/
+                $MB.n_warning('用户名或密码错误');
+              /*  $loginButton.html("登录");*/
             }
         }
     });

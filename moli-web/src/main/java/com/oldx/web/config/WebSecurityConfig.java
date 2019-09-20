@@ -2,6 +2,9 @@ package com.oldx.web.config;
 
 
 import com.oldx.web.Handler.*;
+import com.oldx.web.img.ImageCodeFilter;
+import com.oldx.web.img.ImageCodeGenerator;
+import com.oldx.web.img.ValidateCodeGenerator;
 import com.oldx.web.properties.MoliSecurityProperties;
 import com.oldx.web.service.MoLiUserDetailsService;
 import com.oldx.web.service.UserService;
@@ -9,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +25,7 @@ import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.session.InvalidSessionStrategy;
 
@@ -49,11 +54,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
+
         String[] anonResourcesUrl = StringUtils.splitByWholeSeparatorPreserveAllTokens(moliSecurityProperties.getAnonResourcesUrl(), ",");
+
+        ImageCodeFilter imageCodeFilter = new ImageCodeFilter();
+        imageCodeFilter.setAuthenticationFailureHandler(moliAuthenticationFailHandler);
+        imageCodeFilter.setSecurityProperties(moliSecurityProperties);
+        imageCodeFilter.afterPropertiesSet();
 
         log.info("开始执行securityConfig");
         httpSecurity.exceptionHandling().accessDeniedHandler(accessDeniedHandler()).
                 and()
+                .addFilterBefore(imageCodeFilter, UsernamePasswordAuthenticationFilter.class) // 添加图形证码校验过滤器
                 .formLogin()
                 .loginPage(moliSecurityProperties.getLoginUrl())   // 未认证跳转 URL
                 .loginProcessingUrl("/authentication/form")
@@ -67,16 +79,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionRegistry(sessionRegistry()) // 配置 session注册中心
                 .and()
                 .and()
-                .logout()
+                .logout()//登出处理
                 .addLogoutHandler(logoutHandler())
                 .logoutUrl(moliSecurityProperties.getLogoutUrl())
                 .logoutSuccessUrl("/")
                 .deleteCookies("JSESSIONID")
                 .and()
-                .userDetailsService(moLiUserDetailsService)
+                .userDetailsService(moLiUserDetailsService)//处理用户逻辑
                 .authorizeRequests()
                 .antMatchers(anonResourcesUrl).permitAll()
-                .antMatchers(moliSecurityProperties.getLoginUrl(),
+                .antMatchers(
+                        moliSecurityProperties.getLoginUrl(),
+                        moliSecurityProperties.getCode().getImage().getCreateUrl(),
                         "/image/code1").permitAll()
                 .anyRequest()
                 .authenticated()
@@ -114,4 +128,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return febsInvalidSessionStrategy;
     }
 
+    @Bean
+    @ConditionalOnMissingBean(name = "imageCodeGenerator")
+    public ValidateCodeGenerator imageCodeGenerator() {
+        ImageCodeGenerator imageCodeGenerator = new ImageCodeGenerator();
+        imageCodeGenerator.setSecurityProperties(moliSecurityProperties);
+        return imageCodeGenerator;
+    }
 }

@@ -33,9 +33,9 @@ public class MoliConstant {
     // 返回 html
     public static final String HTML_UTF8 = "text/html;charset=utf-8";
     // 用户注册 URL
-    public static final String FEBS_REGIST_URL = "/user/regist";
+    public static final String MoLi_REGIST_URL = "/user/regist";
     // 权限不足 URL
-    public static final String FEBS_ACCESS_DENY_URL = "/access/deny/403";
+    public static final String MoLi_ACCESS_DENY_URL = "/exception/403";
     // 社交账号绑定成功 URL
     public static final String SOCIAL_BIND_SUCCESS_URL = "/social/bind/success";
     // 社交账号解绑成功 URL

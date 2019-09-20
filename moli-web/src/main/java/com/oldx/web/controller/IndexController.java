@@ -9,12 +9,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -93,6 +95,12 @@ public class IndexController {
             String redirectUrl = savedRequest.getRedirectUrl();
             log.info("引发跳转的请求是：{}", redirectUrl);
         }
-        return "2";
+        return "login";
+    }
+    @GetMapping("index")
+    public String index(Authentication authentication, Model model) {
+        model.addAttribute("user",authentication.getPrincipal());
+        System.out.println(authentication.getPrincipal());
+        return "index";
     }
 }
