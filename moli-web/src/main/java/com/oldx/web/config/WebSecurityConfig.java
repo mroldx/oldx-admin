@@ -3,8 +3,8 @@ package com.oldx.web.config;
 
 import com.oldx.web.Handler.*;
 import com.oldx.web.img.ImageCodeFilter;
-import com.oldx.web.img.ImageCodeGenerator;
-import com.oldx.web.img.ValidateCodeGenerator;
+import com.oldx.web.service.impl.ImageCodeServiceImpl;
+import com.oldx.web.service.ImgCodeService;
 import com.oldx.web.properties.MoliSecurityProperties;
 import com.oldx.web.service.MoLiUserDetailsService;
 import com.oldx.web.service.UserService;
@@ -130,8 +130,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     @ConditionalOnMissingBean(name = "imageCodeGenerator")
-    public ValidateCodeGenerator imageCodeGenerator() {
-        ImageCodeGenerator imageCodeGenerator = new ImageCodeGenerator();
+    public ImgCodeService imageCodeGenerator() {
+        ImageCodeServiceImpl imageCodeGenerator = new ImageCodeServiceImpl();
         imageCodeGenerator.setSecurityProperties(moliSecurityProperties);
         return imageCodeGenerator;
     }

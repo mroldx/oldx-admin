@@ -3,7 +3,7 @@ package com.oldx.web.controller;
 
 import com.oldx.common.domain.MoliConstant;
 import com.oldx.web.img.ImageCode;
-import com.oldx.web.img.ValidateCodeGenerator;
+import com.oldx.web.service.ImgCodeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +27,14 @@ public class ValidateCodeController {
     private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
 
     @Autowired
-    private ValidateCodeGenerator imageCodeGenerator;
+    private ImgCodeService imgCodeService;
 
 
 
 
     @GetMapping("/image/code")
     public void createCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        ImageCode imageCode = (ImageCode) imageCodeGenerator.createCode();
+        ImageCode imageCode = (ImageCode) imgCodeService.createCode();
         BufferedImage image = imageCode.getImage();
         imageCode.setImage(null);
         sessionStrategy.setAttribute(new ServletWebRequest(request), MoliConstant.SESSION_KEY_IMAGE_CODE, imageCode);
