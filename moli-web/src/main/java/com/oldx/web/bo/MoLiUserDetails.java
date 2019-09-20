@@ -17,12 +17,6 @@ public class MoLiUserDetails extends User {
 
     private LoginType loginType = LoginType.normal;
 
-    private String theme;
-
-    private String avatar;
-
-    private Long userId;
-
     private String email;
 
     private String mobile;
@@ -30,8 +24,6 @@ public class MoLiUserDetails extends User {
     private String sex;
 
     private String password;
-
-    private String loginTime;
 
     public MoLiUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);

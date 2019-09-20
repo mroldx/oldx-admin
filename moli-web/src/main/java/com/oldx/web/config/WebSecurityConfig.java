@@ -3,17 +3,15 @@ package com.oldx.web.config;
 
 import com.oldx.web.Handler.*;
 import com.oldx.web.img.ImageCodeFilter;
-import com.oldx.web.service.impl.ImageCodeServiceImpl;
-import com.oldx.web.service.ImgCodeService;
 import com.oldx.web.properties.MoliSecurityProperties;
+import com.oldx.web.service.ImgCodeService;
 import com.oldx.web.service.MoLiUserDetailsService;
-import com.oldx.web.service.UserService;
+import com.oldx.web.service.impl.ImageCodeServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -25,7 +23,6 @@ import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.session.InvalidSessionStrategy;
 
@@ -37,10 +34,6 @@ import org.springframework.security.web.session.InvalidSessionStrategy;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private SecurityProperties securityProperties;
     @Autowired
     private MoliSecurityProperties moliSecurityProperties;
     @Autowired
@@ -65,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         log.info("开始执行securityConfig");
         httpSecurity.exceptionHandling().accessDeniedHandler(accessDeniedHandler()).
                 and()
-                .addFilterBefore(imageCodeFilter, UsernamePasswordAuthenticationFilter.class) // 添加图形证码校验过滤器
+                /*.addFilterBefore(imageCodeFilter, UsernamePasswordAuthenticationFilter.class) // 添加图形证码校验过滤器*/
                 .formLogin()
                 .loginPage(moliSecurityProperties.getLoginUrl())   // 未认证跳转 URL
                 .loginProcessingUrl("/authentication/form")

@@ -1,6 +1,5 @@
 package com.oldx.web.service;
 
-import com.oldx.common.utils.DateUtil;
 import com.oldx.mbg.domain.MoliUser;
 import com.oldx.web.bo.MoLiUserDetails;
 import org.slf4j.Logger;
@@ -11,8 +10,6 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-import java.util.Date;
 
 /**
  * 处理用户信息获取逻辑
@@ -38,9 +35,7 @@ public class MoLiUserDetailsService implements UserDetailsService {
             userDetails.setEmail(user.getEmail());
             userDetails.setMobile(user.getMobile());
             userDetails.setSex(user.getSex());
-            userDetails.setUserId(user.getUserId());
             userDetails.setPassword(user.getPassword());
-            userDetails.setLoginTime(DateUtil.getDateFormat(new Date(), DateUtil.FULL_DATE_FORMAT));
             return userDetails;
         }else {
             throw new UsernameNotFoundException("用户名或密码错误");
