@@ -7,6 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface MMenuMapper {
+
+    List<MMenu> findUserPermissions(String userName);
+
     long countByExample(MMenuExample example);
 
     int deleteByExample(MMenuExample example);

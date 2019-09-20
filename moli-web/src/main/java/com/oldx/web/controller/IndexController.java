@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
@@ -63,14 +64,25 @@ public class IndexController {
         return CommonResult.success(user);
     }
 
-    @PostMapping("insertUser")
+    @RequestMapping(value = "/userlist",method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult user(MoliUser moliUser) {
-        MoliUser user = userService.insertUser(moliUser);
+    @PreAuthorize("hasAuthority('user:list')")
+    public CommonResult user() {
+        MoliUser user = userService.getUserList();
         if (user == null) {
-            return CommonResult.failed("用户名已存在添加失败");
+            return CommonResult.failed("发生错误");
         }
-        log.info("添加用户成功");
+        log.info("查找用户");
+        return CommonResult.success(user);
+    }
+    @RequestMapping(value = "/userlist1",method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult user111() {
+        MoliUser user = userService.getUserList();
+        if (user == null) {
+            return CommonResult.failed("发生错误");
+        }
+        log.info("查找用户");
         return CommonResult.success(user);
     }
 

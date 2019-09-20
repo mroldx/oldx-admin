@@ -20,4 +20,6 @@ public class MoliSecurityProperties {
     // 主页 URL
     private String indexUrl;
 
+    private SessionProperties session = new SessionProperties();
+
 }

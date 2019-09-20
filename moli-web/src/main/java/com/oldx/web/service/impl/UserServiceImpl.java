@@ -57,4 +57,10 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public MoliUser getUserList() {
+        MoliUser moliUser = userMapper.selectByPrimaryKey(2l);
+        return moliUser;
+    }
 }
