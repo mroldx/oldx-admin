@@ -3,6 +3,7 @@ package com.oldx.web.service.impl;
 import com.oldx.mbg.domain.MoliUser;
 import com.oldx.mbg.domain.MoliUserExample;
 import com.oldx.mbg.mapper.MoliUserMapper;
+import com.oldx.web.dao.MoLiUserDao;
 import com.oldx.web.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     public MoliUserMapper userMapper;
-
+    @Autowired
+    private MoLiUserDao moLiUserDao;
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
     @Override
@@ -28,9 +30,7 @@ public class UserServiceImpl implements UserService {
         user.setCreateTime(new Date());
         user.setModifyTime(new Date());
         user.setLastLoginTime(new Date());
-      /*  user.setSex("");
-        user.setIcon("");
-        user.setDesciption("");*/
+        user.setSex("0");
         MoliUserExample userExample=new MoliUserExample();
         userExample.createCriteria().andUsernameEqualTo(user.getUsername());
         List<MoliUser> users=userMapper.selectByExample(userExample);
@@ -41,8 +41,6 @@ public class UserServiceImpl implements UserService {
         BCryptPasswordEncoder bCrypt= new BCryptPasswordEncoder();
         String encodePassword=bCrypt.encode(user.getPassword());
         user.setPassword(encodePassword);
-        boolean matches = bCrypt.matches("123456", encodePassword);
-        System.out.println(matches);
         userMapper.insert(user);
         return user;
     }
@@ -62,5 +60,19 @@ public class UserServiceImpl implements UserService {
     public MoliUser getUserList() {
         MoliUser moliUser = userMapper.selectByPrimaryKey(2l);
         return moliUser;
+    }
+
+    @Override
+    public void updateMUser(MoliUser user, Long[] rolesSelect) {
+
+    }
+
+    @Override
+    public List<MoliUser> findAllMUserWithDept(MoliUser user) {
+        List<MoliUser> users = moLiUserDao.findUserWithDept(user);
+        if (users!=null){
+            System.out.println(users);
+        }
+        return users;
     }
 }

@@ -40,7 +40,16 @@ public class MoliUser implements Serializable {
 
     @ApiModelProperty(value = "头像")
     private String icon;
+    /**
+     * 性别
+     */
+    public static final String SEX_MALE = "0";
 
+    public static final String SEX_FEMALE = "1";
+
+    public static final String STATUS_VALID = "1";
+
+    public static final String STATUS_LOCK = "0";
     @ApiModelProperty(value = "备注")
     private String desciption;
 

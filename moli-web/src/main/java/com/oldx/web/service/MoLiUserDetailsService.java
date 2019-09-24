@@ -30,8 +30,6 @@ public class MoLiUserDetailsService implements UserDetailsService {
             String permissionList = mMenuService.getPermissionList(user.getUsername());
             MoLiUserDetails userDetails=new MoLiUserDetails(user.getUsername(),user.getPassword(),
                     true,true,true,true,AuthorityUtils.commaSeparatedStringToAuthorityList(permissionList));
-           /* userDetails.setTheme("");
-            userDetails.setAvatar("");*/
             userDetails.setEmail(user.getEmail());
             userDetails.setMobile(user.getMobile());
             userDetails.setSex(user.getSex());

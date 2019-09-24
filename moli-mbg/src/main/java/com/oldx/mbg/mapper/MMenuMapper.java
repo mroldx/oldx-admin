@@ -3,9 +3,10 @@ package com.oldx.mbg.mapper;
 import com.oldx.mbg.domain.MMenu;
 import com.oldx.mbg.domain.MMenuExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 public interface MMenuMapper {
 
     List<MMenu> findUserPermissions(String userName);

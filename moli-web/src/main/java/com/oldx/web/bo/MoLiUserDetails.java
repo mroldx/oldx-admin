@@ -11,7 +11,7 @@ import java.util.Collection;
 @Setter
 public class MoLiUserDetails extends User {
 
-    private static final long serialVersionUID = 2017845963758421135L;
+    private static final long serialVersionUID = 20178453758421135L;
 
     private String remoteAddress;
 

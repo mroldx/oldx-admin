@@ -1,4 +1,4 @@
-package com.oldx.web.controller;
+package com.oldx.web.controller.system;
 
 import com.oldx.common.api.CommonResult;
 import org.apache.commons.lang3.StringUtils;

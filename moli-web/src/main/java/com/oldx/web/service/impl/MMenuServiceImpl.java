@@ -9,15 +9,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 @Service("mMenuService")
 public class MMenuServiceImpl implements MMenuService {
     @Autowired
-    private MMenuMapper mMenuMapper;
+    public MMenuMapper mMenuMapper;
 
     @Override
     public String getPermissionList(String username) {
         List<MMenu> mMenuList = this.mMenuMapper.findUserPermissions(username);
         System.out.println( mMenuList.stream().map(MMenu::getPerms).collect(Collectors.joining(",")));
-        return null;
+        return mMenuList.stream().map(MMenu::getPerms).collect(Collectors.joining(","));
     }
 }
