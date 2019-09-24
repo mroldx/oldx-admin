@@ -73,17 +73,4 @@ moli:
         # 对应图形验证码登录页面 form表单的 action属性
         login-processing-url: /authentication/form
 
-      # 短信验证码相关配置
-      sms:
-        # 短信验证码字符位数
-        length: 4
-        # 短信验证码的有效时间，单位为秒
-        expire-in: 120
-        # 以下资源需要短信验证码验证
-        url: /mobile/bind,/mobile/unbind,/test/sms/code
-        # 生成短信验证码的请求 url
-        create-url: /sms/code
-        # 对应短信验证码登录页面 form表单的 action属性
-        login-processing-url: /mobile/login
-
 

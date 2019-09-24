@@ -9,7 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
@@ -17,7 +19,10 @@ import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -65,10 +70,9 @@ public class IndexController {
         log.info("添加用户成功");
         return CommonResult.success(user);
     }
-
-    @RequestMapping(value = "/userlist",method = RequestMethod.GET)
-    @ResponseBody
     @PreAuthorize("hasAuthority('user:list')")
+    @RequestMapping(value = "/userlist", method = RequestMethod.GET)
+    @ResponseBody
     public CommonResult user() {
         MoliUser user = userService.getUserList();
         if (user == null) {
@@ -77,7 +81,8 @@ public class IndexController {
         log.info("查找用户");
         return CommonResult.success(user);
     }
-    @RequestMapping(value = "/userlist1",method = RequestMethod.GET)
+
+    @RequestMapping(value = "/userlist1", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult user111() {
         MoliUser user = userService.getUserList();
@@ -95,11 +100,17 @@ public class IndexController {
             String redirectUrl = savedRequest.getRedirectUrl();
             log.info("引发跳转的请求是：{}", redirectUrl);
         }
-        return "login";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth instanceof AnonymousAuthenticationToken) {
+            return "login";
+        } else {
+            return "index";
+        }
     }
+
     @GetMapping("index")
     public String index(Authentication authentication, Model model) {
-        model.addAttribute("user",authentication.getPrincipal());
+        model.addAttribute("user", authentication.getPrincipal());
         System.out.println(authentication.getPrincipal());
         return "index";
     }
