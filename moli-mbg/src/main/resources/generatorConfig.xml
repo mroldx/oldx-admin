@@ -30,9 +30,9 @@
             <property name="nullCatalogMeansCurrent" value="true" />
         </jdbcConnection>
 
-        <javaModelGenerator targetPackage="com.oldx.mbg.domain" targetProject="moli-mbg\src\main\java"/>
+        <javaModelGenerator targetPackage="com.oldx.mbg.test_domain" targetProject="moli-mbg\src\main\java"/>
 
-        <sqlMapGenerator targetPackage="com.oldx.mbg.mapper" targetProject="moli-mbg\src\main\resources"/>
+        <sqlMapGenerator targetPackage="com.oldx.mbg.mapper.test_mapper" targetProject="moli-mbg\src\main\resources"/>
 
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.oldx.mbg.mapper"
                              targetProject="moli-mbg\src\main\java"/>

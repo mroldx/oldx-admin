@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="edge" />
-    <title>沫离后台权限管理系统</title>
+    <title>产品后台管理系统</title>
     <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}" />
     <link rel="stylesheet" th:href="@{css/login.css}" type="text/css">
     <link rel="stylesheet" th:href="@{css/iCheck/minimal/green.css}" type="text/css">
@@ -33,14 +33,6 @@
                 <div class="form-group type1">
                     <label>密码</label>
                     <input type="password" name="password" />
-                </div>
-                <div class="form-group type1" style="display:inline-block">
-                    <label>验证码</label>
-                    <input type="text" name="imageCode" style="width:50%; display:inline-block" />
-                    <img data-th-src="@{/image/code}" id="validateCodeImg" onclick="reloadCode()" style="display:inline-block;margin-left:.2rem" />
-                </div>
-                <div class="form-group" style="margin: 0;">
-                    <p class="type1"><input type="checkbox"  name="remember-me" />&nbsp;&nbsp;记住我</p>
                 </div>
                 <div class="form-group">
                     <button class="type1" onclick="formLogin()" id="form-login-button" type="submit">登录</button>

@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oldx.mbg.mapper.CanpingMapper">
+  <resultMap id="BaseResultMap" type="com.oldx.mbg.test_domain.Canping">
+    <result column="sku_id" jdbcType="VARCHAR" property="skuId" />
+    <result column="product_category" jdbcType="VARCHAR" property="productCategory" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="brand" jdbcType="VARCHAR" property="brand" />
+    <result column="supplier" jdbcType="VARCHAR" property="supplier" />
+    <result column="battery_condition" jdbcType="VARCHAR" property="batteryCondition" />
+    <result column="is_magnetic" jdbcType="VARCHAR" property="isMagnetic" />
+    <result column="length" jdbcType="INTEGER" property="length" />
+    <result column="width" jdbcType="INTEGER" property="width" />
+    <result column="high" jdbcType="INTEGER" property="high" />
+    <result column="bubble_weight" jdbcType="VARCHAR" property="bubbleWeight" />
+    <result column="product_original_package_weight" jdbcType="VARCHAR" property="productOriginalPackageWeight" />
+    <result column="actual_delivery_weight" jdbcType="VARCHAR" property="actualDeliveryWeight" />
+    <result column="international_shipping_rmb" jdbcType="VARCHAR" property="internationalShippingRmb" />
+    <result column="domestic_freight_rmb" jdbcType="VARCHAR" property="domesticFreightRmb" />
+    <result column="purchase_cost_rmb" jdbcType="VARCHAR" property="purchaseCostRmb" />
+    <result column="official_retail_price_rmb" jdbcType="VARCHAR" property="officialRetailPriceRmb" />
+    <result column="official_retail_price_usd" jdbcType="VARCHAR" property="officialRetailPriceUsd" />
+    <result column="ali3c_price_usd" jdbcType="VARCHAR" property="ali3cPriceUsd" />
+    <result column="ali3c_retail_price_usd" jdbcType="VARCHAR" property="ali3cRetailPriceUsd" />
+    <result column="ali3c_activity_price_usd" jdbcType="VARCHAR" property="ali3cActivityPriceUsd" />
+    <result column="ali3c_lowest_usd" jdbcType="VARCHAR" property="ali3cLowestUsd" />
+    <result column="alitoy_price_usd" jdbcType="VARCHAR" property="alitoyPriceUsd" />
+    <result column="alitoy_retail_price_usd" jdbcType="VARCHAR" property="alitoyRetailPriceUsd" />
+    <result column="alitoy_activity_usd" jdbcType="VARCHAR" property="alitoyActivityUsd" />
+    <result column="alitoy_lowest_usd" jdbcType="VARCHAR" property="alitoyLowestUsd" />
+    <result column="tb_price_rmb" jdbcType="VARCHAR" property="tbPriceRmb" />
+    <result column="tb_retail_price_rmb" jdbcType="VARCHAR" property="tbRetailPriceRmb" />
+    <result column="tb_activity_rmb" jdbcType="VARCHAR" property="tbActivityRmb" />
+    <result column="tb_lowest_rmb" jdbcType="VARCHAR" property="tbLowestRmb" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sku_id, product_category, product_name, brand, supplier, battery_condition, is_magnetic, 
+    length, width, high, bubble_weight, product_original_package_weight, actual_delivery_weight, 
+    international_shipping_rmb, domestic_freight_rmb, purchase_cost_rmb, official_retail_price_rmb, 
+    official_retail_price_usd, ali3c_price_usd, ali3c_retail_price_usd, ali3c_activity_price_usd, 
+    ali3c_lowest_usd, alitoy_price_usd, alitoy_retail_price_usd, alitoy_activity_usd, 
+    alitoy_lowest_usd, tb_price_rmb, tb_retail_price_rmb, tb_activity_rmb, tb_lowest_rmb
+  </sql>
+  <select id="selectByExample" parameterType="com.oldx.mbg.test_domain.CanpingExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from canping
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.oldx.mbg.test_domain.CanpingExample">
+    delete from canping
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.oldx.mbg.test_domain.Canping">
+    insert into canping (sku_id, product_category, product_name, 
+      brand, supplier, battery_condition, 
+      is_magnetic, length, width, 
+      high, bubble_weight, product_original_package_weight, 
+      actual_delivery_weight, international_shipping_rmb, 
+      domestic_freight_rmb, purchase_cost_rmb, official_retail_price_rmb, 
+      official_retail_price_usd, ali3c_price_usd, 
+      ali3c_retail_price_usd, ali3c_activity_price_usd, 
+      ali3c_lowest_usd, alitoy_price_usd, alitoy_retail_price_usd, 
+      alitoy_activity_usd, alitoy_lowest_usd, tb_price_rmb, 
+      tb_retail_price_rmb, tb_activity_rmb, tb_lowest_rmb
+      )
+    values (#{skuId,jdbcType=VARCHAR}, #{productCategory,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+      #{brand,jdbcType=VARCHAR}, #{supplier,jdbcType=VARCHAR}, #{batteryCondition,jdbcType=VARCHAR}, 
+      #{isMagnetic,jdbcType=VARCHAR}, #{length,jdbcType=INTEGER}, #{width,jdbcType=INTEGER}, 
+      #{high,jdbcType=INTEGER}, #{bubbleWeight,jdbcType=VARCHAR}, #{productOriginalPackageWeight,jdbcType=VARCHAR}, 
+      #{actualDeliveryWeight,jdbcType=VARCHAR}, #{internationalShippingRmb,jdbcType=VARCHAR}, 
+      #{domesticFreightRmb,jdbcType=VARCHAR}, #{purchaseCostRmb,jdbcType=VARCHAR}, #{officialRetailPriceRmb,jdbcType=VARCHAR}, 
+      #{officialRetailPriceUsd,jdbcType=VARCHAR}, #{ali3cPriceUsd,jdbcType=VARCHAR}, 
+      #{ali3cRetailPriceUsd,jdbcType=VARCHAR}, #{ali3cActivityPriceUsd,jdbcType=VARCHAR}, 
+      #{ali3cLowestUsd,jdbcType=VARCHAR}, #{alitoyPriceUsd,jdbcType=VARCHAR}, #{alitoyRetailPriceUsd,jdbcType=VARCHAR}, 
+      #{alitoyActivityUsd,jdbcType=VARCHAR}, #{alitoyLowestUsd,jdbcType=VARCHAR}, #{tbPriceRmb,jdbcType=VARCHAR}, 
+      #{tbRetailPriceRmb,jdbcType=VARCHAR}, #{tbActivityRmb,jdbcType=VARCHAR}, #{tbLowestRmb,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.oldx.mbg.test_domain.Canping">
+    insert into canping
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="productCategory != null">
+        product_category,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="brand != null">
+        brand,
+      </if>
+      <if test="supplier != null">
+        supplier,
+      </if>
+      <if test="batteryCondition != null">
+        battery_condition,
+      </if>
+      <if test="isMagnetic != null">
+        is_magnetic,
+      </if>
+      <if test="length != null">
+        length,
+      </if>
+      <if test="width != null">
+        width,
+      </if>
+      <if test="high != null">
+        high,
+      </if>
+      <if test="bubbleWeight != null">
+        bubble_weight,
+      </if>
+      <if test="productOriginalPackageWeight != null">
+        product_original_package_weight,
+      </if>
+      <if test="actualDeliveryWeight != null">
+        actual_delivery_weight,
+      </if>
+      <if test="internationalShippingRmb != null">
+        international_shipping_rmb,
+      </if>
+      <if test="domesticFreightRmb != null">
+        domestic_freight_rmb,
+      </if>
+      <if test="purchaseCostRmb != null">
+        purchase_cost_rmb,
+      </if>
+      <if test="officialRetailPriceRmb != null">
+        official_retail_price_rmb,
+      </if>
+      <if test="officialRetailPriceUsd != null">
+        official_retail_price_usd,
+      </if>
+      <if test="ali3cPriceUsd != null">
+        ali3c_price_usd,
+      </if>
+      <if test="ali3cRetailPriceUsd != null">
+        ali3c_retail_price_usd,
+      </if>
+      <if test="ali3cActivityPriceUsd != null">
+        ali3c_activity_price_usd,
+      </if>
+      <if test="ali3cLowestUsd != null">
+        ali3c_lowest_usd,
+      </if>
+      <if test="alitoyPriceUsd != null">
+        alitoy_price_usd,
+      </if>
+      <if test="alitoyRetailPriceUsd != null">
+        alitoy_retail_price_usd,
+      </if>
+      <if test="alitoyActivityUsd != null">
+        alitoy_activity_usd,
+      </if>
+      <if test="alitoyLowestUsd != null">
+        alitoy_lowest_usd,
+      </if>
+      <if test="tbPriceRmb != null">
+        tb_price_rmb,
+      </if>
+      <if test="tbRetailPriceRmb != null">
+        tb_retail_price_rmb,
+      </if>
+      <if test="tbActivityRmb != null">
+        tb_activity_rmb,
+      </if>
+      <if test="tbLowestRmb != null">
+        tb_lowest_rmb,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuId != null">
+        #{skuId,jdbcType=VARCHAR},
+      </if>
+      <if test="productCategory != null">
+        #{productCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="supplier != null">
+        #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="batteryCondition != null">
+        #{batteryCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="isMagnetic != null">
+        #{isMagnetic,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null">
+        #{length,jdbcType=INTEGER},
+      </if>
+      <if test="width != null">
+        #{width,jdbcType=INTEGER},
+      </if>
+      <if test="high != null">
+        #{high,jdbcType=INTEGER},
+      </if>
+      <if test="bubbleWeight != null">
+        #{bubbleWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="productOriginalPackageWeight != null">
+        #{productOriginalPackageWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="actualDeliveryWeight != null">
+        #{actualDeliveryWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="internationalShippingRmb != null">
+        #{internationalShippingRmb,jdbcType=VARCHAR},
+      </if>
+      <if test="domesticFreightRmb != null">
+        #{domesticFreightRmb,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseCostRmb != null">
+        #{purchaseCostRmb,jdbcType=VARCHAR},
+      </if>
+      <if test="officialRetailPriceRmb != null">
+        #{officialRetailPriceRmb,jdbcType=VARCHAR},
+      </if>
+      <if test="officialRetailPriceUsd != null">
+        #{officialRetailPriceUsd,jdbcType=VARCHAR},
+      </if>
+      <if test="ali3cPriceUsd != null">
+        #{ali3cPriceUsd,jdbcType=VARCHAR},
+      </if>
+      <if test="ali3cRetailPriceUsd != null">
+        #{ali3cRetailPriceUsd,jdbcType=VARCHAR},
+      </if>
+      <if test="ali3cActivityPriceUsd != null">
+        #{ali3cActivityPriceUsd,jdbcType=VARCHAR},
+      </if>
+      <if test="ali3cLowestUsd != null">
+        #{ali3cLowestUsd,jdbcType=VARCHAR},
+      </if>
+      <if test="alitoyPriceUsd != null">
+        #{alitoyPriceUsd,jdbcType=VARCHAR},
+      </if>
+      <if test="alitoyRetailPriceUsd != null">
+        #{alitoyRetailPriceUsd,jdbcType=VARCHAR},
+      </if>
+      <if test="alitoyActivityUsd != null">
+        #{alitoyActivityUsd,jdbcType=VARCHAR},
+      </if>
+      <if test="alitoyLowestUsd != null">
+        #{alitoyLowestUsd,jdbcType=VARCHAR},
+      </if>
+      <if test="tbPriceRmb != null">
+        #{tbPriceRmb,jdbcType=VARCHAR},
+      </if>
+      <if test="tbRetailPriceRmb != null">
+        #{tbRetailPriceRmb,jdbcType=VARCHAR},
+      </if>
+      <if test="tbActivityRmb != null">
+        #{tbActivityRmb,jdbcType=VARCHAR},
+      </if>
+      <if test="tbLowestRmb != null">
+        #{tbLowestRmb,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.oldx.mbg.test_domain.CanpingExample" resultType="java.lang.Long">
+    select count(*) from canping
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update canping
+    <set>
+      <if test="record.skuId != null">
+        sku_id = #{record.skuId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productCategory != null">
+        product_category = #{record.productCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null">
+        product_name = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brand != null">
+        brand = #{record.brand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplier != null">
+        supplier = #{record.supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batteryCondition != null">
+        battery_condition = #{record.batteryCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isMagnetic != null">
+        is_magnetic = #{record.isMagnetic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.length != null">
+        length = #{record.length,jdbcType=INTEGER},
+      </if>
+      <if test="record.width != null">
+        width = #{record.width,jdbcType=INTEGER},
+      </if>
+      <if test="record.high != null">
+        high = #{record.high,jdbcType=INTEGER},
+      </if>
+      <if test="record.bubbleWeight != null">
+        bubble_weight = #{record.bubbleWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productOriginalPackageWeight != null">
+        product_original_package_weight = #{record.productOriginalPackageWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actualDeliveryWeight != null">
+        actual_delivery_weight = #{record.actualDeliveryWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.internationalShippingRmb != null">
+        international_shipping_rmb = #{record.internationalShippingRmb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.domesticFreightRmb != null">
+        domestic_freight_rmb = #{record.domesticFreightRmb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchaseCostRmb != null">
+        purchase_cost_rmb = #{record.purchaseCostRmb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.officialRetailPriceRmb != null">
+        official_retail_price_rmb = #{record.officialRetailPriceRmb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.officialRetailPriceUsd != null">
+        official_retail_price_usd = #{record.officialRetailPriceUsd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ali3cPriceUsd != null">
+        ali3c_price_usd = #{record.ali3cPriceUsd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ali3cRetailPriceUsd != null">
+        ali3c_retail_price_usd = #{record.ali3cRetailPriceUsd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ali3cActivityPriceUsd != null">
+        ali3c_activity_price_usd = #{record.ali3cActivityPriceUsd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ali3cLowestUsd != null">
+        ali3c_lowest_usd = #{record.ali3cLowestUsd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alitoyPriceUsd != null">
+        alitoy_price_usd = #{record.alitoyPriceUsd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alitoyRetailPriceUsd != null">
+        alitoy_retail_price_usd = #{record.alitoyRetailPriceUsd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alitoyActivityUsd != null">
+        alitoy_activity_usd = #{record.alitoyActivityUsd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alitoyLowestUsd != null">
+        alitoy_lowest_usd = #{record.alitoyLowestUsd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbPriceRmb != null">
+        tb_price_rmb = #{record.tbPriceRmb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbRetailPriceRmb != null">
+        tb_retail_price_rmb = #{record.tbRetailPriceRmb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbActivityRmb != null">
+        tb_activity_rmb = #{record.tbActivityRmb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbLowestRmb != null">
+        tb_lowest_rmb = #{record.tbLowestRmb,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update canping
+    set sku_id = #{record.skuId,jdbcType=VARCHAR},
+      product_category = #{record.productCategory,jdbcType=VARCHAR},
+      product_name = #{record.productName,jdbcType=VARCHAR},
+      brand = #{record.brand,jdbcType=VARCHAR},
+      supplier = #{record.supplier,jdbcType=VARCHAR},
+      battery_condition = #{record.batteryCondition,jdbcType=VARCHAR},
+      is_magnetic = #{record.isMagnetic,jdbcType=VARCHAR},
+      length = #{record.length,jdbcType=INTEGER},
+      width = #{record.width,jdbcType=INTEGER},
+      high = #{record.high,jdbcType=INTEGER},
+      bubble_weight = #{record.bubbleWeight,jdbcType=VARCHAR},
+      product_original_package_weight = #{record.productOriginalPackageWeight,jdbcType=VARCHAR},
+      actual_delivery_weight = #{record.actualDeliveryWeight,jdbcType=VARCHAR},
+      international_shipping_rmb = #{record.internationalShippingRmb,jdbcType=VARCHAR},
+      domestic_freight_rmb = #{record.domesticFreightRmb,jdbcType=VARCHAR},
+      purchase_cost_rmb = #{record.purchaseCostRmb,jdbcType=VARCHAR},
+      official_retail_price_rmb = #{record.officialRetailPriceRmb,jdbcType=VARCHAR},
+      official_retail_price_usd = #{record.officialRetailPriceUsd,jdbcType=VARCHAR},
+      ali3c_price_usd = #{record.ali3cPriceUsd,jdbcType=VARCHAR},
+      ali3c_retail_price_usd = #{record.ali3cRetailPriceUsd,jdbcType=VARCHAR},
+      ali3c_activity_price_usd = #{record.ali3cActivityPriceUsd,jdbcType=VARCHAR},
+      ali3c_lowest_usd = #{record.ali3cLowestUsd,jdbcType=VARCHAR},
+      alitoy_price_usd = #{record.alitoyPriceUsd,jdbcType=VARCHAR},
+      alitoy_retail_price_usd = #{record.alitoyRetailPriceUsd,jdbcType=VARCHAR},
+      alitoy_activity_usd = #{record.alitoyActivityUsd,jdbcType=VARCHAR},
+      alitoy_lowest_usd = #{record.alitoyLowestUsd,jdbcType=VARCHAR},
+      tb_price_rmb = #{record.tbPriceRmb,jdbcType=VARCHAR},
+      tb_retail_price_rmb = #{record.tbRetailPriceRmb,jdbcType=VARCHAR},
+      tb_activity_rmb = #{record.tbActivityRmb,jdbcType=VARCHAR},
+      tb_lowest_rmb = #{record.tbLowestRmb,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

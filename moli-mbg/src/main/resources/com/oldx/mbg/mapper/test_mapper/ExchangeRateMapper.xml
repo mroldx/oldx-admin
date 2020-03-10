@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oldx.mbg.mapper.ExchangeRateMapper">
+  <resultMap id="BaseResultMap" type="com.oldx.mbg.test_domain.ExchangeRate">
+    <result column="meiyuan_huilv" jdbcType="VARCHAR" property="meiyuanHuilv" />
+    <result column="ali3c_lingshou_maolilv" jdbcType="VARCHAR" property="ali3cLingshouMaolilv" />
+    <result column="ali3c_huodongjia_maolilv" jdbcType="VARCHAR" property="ali3cHuodongjiaMaolilv" />
+    <result column="ali3c_zuidijia_maolilv" jdbcType="VARCHAR" property="ali3cZuidijiaMaolilv" />
+    <result column="alitoy_lingshoujia_maolilv" jdbcType="VARCHAR" property="alitoyLingshoujiaMaolilv" />
+    <result column="tb_lingshoujia_maolilv" jdbcType="VARCHAR" property="tbLingshoujiaMaolilv" />
+    <result column="tb_huodongjia_maolilv" jdbcType="VARCHAR" property="tbHuodongjiaMaolilv" />
+    <result column="tb_zuidishoujia_maolilv" jdbcType="VARCHAR" property="tbZuidishoujiaMaolilv" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    meiyuan_huilv, ali3c_lingshou_maolilv, ali3c_huodongjia_maolilv, ali3c_zuidijia_maolilv, 
+    alitoy_lingshoujia_maolilv, tb_lingshoujia_maolilv, tb_huodongjia_maolilv, tb_zuidishoujia_maolilv
+  </sql>
+  <select id="selectByExample" parameterType="com.oldx.mbg.test_domain.ExchangeRateExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from exchange_rate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.oldx.mbg.test_domain.ExchangeRateExample">
+    delete from exchange_rate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.oldx.mbg.test_domain.ExchangeRate">
+    insert into exchange_rate (meiyuan_huilv, ali3c_lingshou_maolilv, 
+      ali3c_huodongjia_maolilv, ali3c_zuidijia_maolilv, 
+      alitoy_lingshoujia_maolilv, tb_lingshoujia_maolilv, 
+      tb_huodongjia_maolilv, tb_zuidishoujia_maolilv
+      )
+    values (#{meiyuanHuilv,jdbcType=VARCHAR}, #{ali3cLingshouMaolilv,jdbcType=VARCHAR}, 
+      #{ali3cHuodongjiaMaolilv,jdbcType=VARCHAR}, #{ali3cZuidijiaMaolilv,jdbcType=VARCHAR}, 
+      #{alitoyLingshoujiaMaolilv,jdbcType=VARCHAR}, #{tbLingshoujiaMaolilv,jdbcType=VARCHAR}, 
+      #{tbHuodongjiaMaolilv,jdbcType=VARCHAR}, #{tbZuidishoujiaMaolilv,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.oldx.mbg.test_domain.ExchangeRate">
+    insert into exchange_rate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="meiyuanHuilv != null">
+        meiyuan_huilv,
+      </if>
+      <if test="ali3cLingshouMaolilv != null">
+        ali3c_lingshou_maolilv,
+      </if>
+      <if test="ali3cHuodongjiaMaolilv != null">
+        ali3c_huodongjia_maolilv,
+      </if>
+      <if test="ali3cZuidijiaMaolilv != null">
+        ali3c_zuidijia_maolilv,
+      </if>
+      <if test="alitoyLingshoujiaMaolilv != null">
+        alitoy_lingshoujia_maolilv,
+      </if>
+      <if test="tbLingshoujiaMaolilv != null">
+        tb_lingshoujia_maolilv,
+      </if>
+      <if test="tbHuodongjiaMaolilv != null">
+        tb_huodongjia_maolilv,
+      </if>
+      <if test="tbZuidishoujiaMaolilv != null">
+        tb_zuidishoujia_maolilv,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="meiyuanHuilv != null">
+        #{meiyuanHuilv,jdbcType=VARCHAR},
+      </if>
+      <if test="ali3cLingshouMaolilv != null">
+        #{ali3cLingshouMaolilv,jdbcType=VARCHAR},
+      </if>
+      <if test="ali3cHuodongjiaMaolilv != null">
+        #{ali3cHuodongjiaMaolilv,jdbcType=VARCHAR},
+      </if>
+      <if test="ali3cZuidijiaMaolilv != null">
+        #{ali3cZuidijiaMaolilv,jdbcType=VARCHAR},
+      </if>
+      <if test="alitoyLingshoujiaMaolilv != null">
+        #{alitoyLingshoujiaMaolilv,jdbcType=VARCHAR},
+      </if>
+      <if test="tbLingshoujiaMaolilv != null">
+        #{tbLingshoujiaMaolilv,jdbcType=VARCHAR},
+      </if>
+      <if test="tbHuodongjiaMaolilv != null">
+        #{tbHuodongjiaMaolilv,jdbcType=VARCHAR},
+      </if>
+      <if test="tbZuidishoujiaMaolilv != null">
+        #{tbZuidishoujiaMaolilv,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.oldx.mbg.test_domain.ExchangeRateExample" resultType="java.lang.Long">
+    select count(*) from exchange_rate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update exchange_rate
+    <set>
+      <if test="record.meiyuanHuilv != null">
+        meiyuan_huilv = #{record.meiyuanHuilv,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ali3cLingshouMaolilv != null">
+        ali3c_lingshou_maolilv = #{record.ali3cLingshouMaolilv,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ali3cHuodongjiaMaolilv != null">
+        ali3c_huodongjia_maolilv = #{record.ali3cHuodongjiaMaolilv,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ali3cZuidijiaMaolilv != null">
+        ali3c_zuidijia_maolilv = #{record.ali3cZuidijiaMaolilv,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alitoyLingshoujiaMaolilv != null">
+        alitoy_lingshoujia_maolilv = #{record.alitoyLingshoujiaMaolilv,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbLingshoujiaMaolilv != null">
+        tb_lingshoujia_maolilv = #{record.tbLingshoujiaMaolilv,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbHuodongjiaMaolilv != null">
+        tb_huodongjia_maolilv = #{record.tbHuodongjiaMaolilv,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbZuidishoujiaMaolilv != null">
+        tb_zuidishoujia_maolilv = #{record.tbZuidishoujiaMaolilv,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update exchange_rate
+    set meiyuan_huilv = #{record.meiyuanHuilv,jdbcType=VARCHAR},
+      ali3c_lingshou_maolilv = #{record.ali3cLingshouMaolilv,jdbcType=VARCHAR},
+      ali3c_huodongjia_maolilv = #{record.ali3cHuodongjiaMaolilv,jdbcType=VARCHAR},
+      ali3c_zuidijia_maolilv = #{record.ali3cZuidijiaMaolilv,jdbcType=VARCHAR},
+      alitoy_lingshoujia_maolilv = #{record.alitoyLingshoujiaMaolilv,jdbcType=VARCHAR},
+      tb_lingshoujia_maolilv = #{record.tbLingshoujiaMaolilv,jdbcType=VARCHAR},
+      tb_huodongjia_maolilv = #{record.tbHuodongjiaMaolilv,jdbcType=VARCHAR},
+      tb_zuidishoujia_maolilv = #{record.tbZuidishoujiaMaolilv,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -20,17 +20,6 @@ spring:
   devtools:
     restart:
       enabled: true
-  redis:
-    host: 127.0.0.1
-    port: 6379
-    password:
-    jedis:
-      pool:
-        min-idle: 8
-        max-idle: 500
-        max-active: 2000
-        max-wait: 10000
-    timeout: 5000
   thymeleaf:
     cache: false
 logging:
@@ -47,24 +36,6 @@ moli:
     index-url: /index
     # 免认证静态资源路径
     anon-resources-url: /css/**,/js/**,/fonts/**,/img/**
-    # 记住我有效时间，单位为秒
-    remember-me-timeout: 3600
-    # 验证码相关配置
-    code:
-      # 图形验证码相关配置
-      image:
-        # 图形验证码由字符位数
-        length: 4
-        # 图形验证码图片长度，单位 px
-        width: 148
-        # 图形验证码高度，单位 px
-        height: 36
-        # 图形验证码失效时间
-        expire-in: 60
-        # 生成图形验证码的请求 url
-        create-url: /image/code
-        # 对应图形验证码登录页面 form表单的 action属性
-        login-processing-url: /authentication/form
 
 
 

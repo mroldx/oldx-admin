@@ -2,16 +2,12 @@ package com.oldx.web.config;
 
 
 import com.oldx.web.Handler.*;
-import com.oldx.web.img.ImageCodeFilter;
 import com.oldx.web.properties.MoliSecurityProperties;
-import com.oldx.web.service.ImgCodeService;
 import com.oldx.web.service.MoLiUserDetailsService;
-import com.oldx.web.service.impl.ImageCodeServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -27,7 +23,7 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.session.InvalidSessionStrategy;
 
 /**
- * @www.codesheep.cn 20190312
+ * @974751082@qq.com
  */
 @Configuration
 @EnableWebSecurity
@@ -50,15 +46,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         String[] anonResourcesUrl = StringUtils.splitByWholeSeparatorPreserveAllTokens(moliSecurityProperties.getAnonResourcesUrl(), ",");
 
-        ImageCodeFilter imageCodeFilter = new ImageCodeFilter();
-        imageCodeFilter.setAuthenticationFailureHandler(moliAuthenticationFailHandler);
-        imageCodeFilter.setSecurityProperties(moliSecurityProperties);
-        imageCodeFilter.afterPropertiesSet();
-
         log.info("开始执行securityConfig");
         httpSecurity.exceptionHandling().accessDeniedHandler(accessDeniedHandler()).
                 and()
-                /*.addFilterBefore(imageCodeFilter, UsernamePasswordAuthenticationFilter.class) // 添加图形证码校验过滤器*/
                 .formLogin()
                 .loginPage(moliSecurityProperties.getLoginUrl())   // 未认证跳转 URL
                 .loginProcessingUrl("/authentication/form")
@@ -82,9 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(anonResourcesUrl).permitAll()
                 .antMatchers(
-                        moliSecurityProperties.getLoginUrl(),
-                        moliSecurityProperties.getCode().getImage().getCreateUrl(),
-                        "/image/code1").permitAll()
+                        moliSecurityProperties.getLoginUrl()).permitAll()
                 .anyRequest()
                 .authenticated()
                 .and().csrf().disable();
@@ -119,13 +107,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         FebsInvalidSessionStrategy febsInvalidSessionStrategy = new FebsInvalidSessionStrategy();
         febsInvalidSessionStrategy.setSecurityProperties(moliSecurityProperties);
         return febsInvalidSessionStrategy;
-    }
-
-    @Bean
-    @ConditionalOnMissingBean(name = "imageCodeGenerator")
-    public ImgCodeService imageCodeGenerator() {
-        ImageCodeServiceImpl imageCodeGenerator = new ImageCodeServiceImpl();
-        imageCodeGenerator.setSecurityProperties(moliSecurityProperties);
-        return imageCodeGenerator;
     }
 }
