@@ -5,8 +5,6 @@ oldx-admin是一款后台通用脚手架。基于Springboot+Springsecurity+jwt+r
 
 ### 演示地址
 
-![](C:\Users\lx\Pictures\afc19815537fe0f59420c220419cb3e1.jpg)
-
 演示环境帐号密码
 
 | **帐号** | **密码** |   **权限**    |

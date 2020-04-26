@@ -38,6 +38,7 @@ public class AuthController {
         }
         return CommonResult.success(sysUser);
     }
+    
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public CommonResult login(@RequestBody OSysUserParam oSysUserParam){
         String token=OadminService.login(oSysUserParam.getUsername(),oSysUserParam.getPassword());
