@@ -27,71 +27,71 @@ public class GlobalExceptionHandler
     private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     /**
-     * 基础异常
+     * 基础异常的实现
      */
     @ExceptionHandler(BaseException.class)
-    public AjaxResult baseException(BaseException e)
+    public CommonResult baseException(BaseException e)
     {
-        return AjaxResult.error(e.getMessage());
+        return CommonResult.error(e.getMessage());
     }
 
     /**
      * 业务异常
      */
     @ExceptionHandler(CustomException.class)
-    public AjaxResult businessException(CustomException e)
+    public CommonResult businessException(CustomException e)
     {
         if (StringUtils.isNull(e.getCode()))
         {
-            return AjaxResult.error(e.getMessage());
+            return CommonResult.error(e.getMessage());
         }
-        return AjaxResult.error(e.getCode(), e.getMessage());
+        return CommonResult.error(e.getCode(), e.getMessage());
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)
-    public AjaxResult handlerNoFoundException(Exception e)
+    public CommonResult handlerNoFoundException(Exception e)
     {
         log.error(e.getMessage(), e);
-        return AjaxResult.error(HttpStatus.NOT_FOUND, "路径不存在，请检查路径是否正确");
+        return CommonResult.error(HttpStatus.NOT_FOUND, "路径不存在，请检查路径是否正确");
     }
 
     @ExceptionHandler(AccessDeniedException.class)
-    public AjaxResult handleAuthorizationException(AccessDeniedException e)
+    public CommonResult handleAuthorizationException(AccessDeniedException e)
     {
         log.error(e.getMessage());
-        return AjaxResult.error(HttpStatus.FORBIDDEN, "没有权限，请联系管理员授权");
+        return CommonResult.error(HttpStatus.FORBIDDEN, "没有权限，请联系管理员授权");
     }
 
     @ExceptionHandler(AccountExpiredException.class)
-    public AjaxResult handleAccountExpiredException(AccountExpiredException e)
+    public CommonResult handleAccountExpiredException(AccountExpiredException e)
     {
         log.error(e.getMessage(), e);
-        return AjaxResult.error(e.getMessage());
+        return CommonResult.error(e.getMessage());
     }
 
     @ExceptionHandler(UsernameNotFoundException.class)
-    public AjaxResult handleUsernameNotFoundException(UsernameNotFoundException e)
+    public CommonResult handleUsernameNotFoundException(UsernameNotFoundException e)
     {
         log.error(e.getMessage(), e);
-        return AjaxResult.error(e.getMessage());
+        return CommonResult.error(e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
-    public AjaxResult handleException(Exception e)
+    public CommonResult handleException(Exception e)
     {
         log.error(e.getMessage(), e);
-        return AjaxResult.error(e.getMessage());
+        return CommonResult.error(e.getMessage());
     }
 
     /**
      * 自定义验证异常
      */
     @ExceptionHandler(BindException.class)
-    public AjaxResult validatedBindException(BindException e)
+    public CommonResult validatedBindException(BindException e)
     {
         log.error(e.getMessage(), e);
         String message = e.getAllErrors().get(0).getDefaultMessage();
-        return AjaxResult.error(message);
+        return CommonResult.error(message);
     }
 
     /**
@@ -102,7 +102,7 @@ public class GlobalExceptionHandler
     {
         log.error(e.getMessage(), e);
         String message = e.getBindingResult().getFieldError().getDefaultMessage();
-        return AjaxResult.error(message);
+        return CommonResult.error(message);
     }
 
     /**
