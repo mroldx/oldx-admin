@@ -5,9 +5,12 @@ import cc.oldx.mbg.domain.OSysUserExample;
 import cc.oldx.mbg.mapper.OSysUserMapper;
 import cc.oldx.modules.security.utils.JwtTokenUtil;
 import cc.oldx.modules.system.dto.OSysUserParam;
-import cc.oldx.modules.system.service.OAdminService;
+import cc.oldx.modules.system.dto.UserAdminParam;
+import cc.oldx.modules.system.service.SysAdminService;
+import com.github.pagehelper.PageHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -21,6 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -33,8 +37,8 @@ import java.util.List;
  */
 @Service("OadminService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class OAdminServiceImpl implements OAdminService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(OAdminServiceImpl.class);
+public class SysAdminServiceImpl implements SysAdminService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SysAdminServiceImpl.class);
     @Autowired
     private OSysUserMapper userMapper;
     @Autowired
@@ -82,7 +86,7 @@ public class OAdminServiceImpl implements OAdminService {
         String token = null;
         try {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-            if(!passwordEncoder.matches(password,userDetails.getPassword())){
+            if (!passwordEncoder.matches(password, userDetails.getPassword())) {
                 throw new BadCredentialsException("用户名或密码不对");
             }
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
@@ -98,26 +102,85 @@ public class OAdminServiceImpl implements OAdminService {
 
     @Override
     public String refreshToken(String oldToken) {
+        String token = oldToken.substring(tokenHead.length());
+        if (jwtTokenUtil.canRefresh(token)) {
+            return jwtTokenUtil.refreshToken(token);
+        }
         return null;
     }
 
     @Override
     public OSysUser getItem(Long id) {
-        return null;
+
+        return userMapper.selectByPrimaryKey(id);
     }
 
     @Override
     public List<OSysUser> list(String name, Integer pageSize, Integer pageNum) {
-        return null;
+        PageHelper.startPage(pageNum, pageSize);
+        OSysUserExample example = new OSysUserExample();
+        OSysUserExample.Criteria criteria = example.createCriteria();
+        if (!StringUtils.isEmpty(name)) {
+            criteria.andUsernameLike("%" + name + "%");
+        }
+        return userMapper.selectByExample(example);
     }
 
     @Override
-    public int update(Long id, OSysUser admin) {
-        return 0;
+    public int update(Long id, UserAdminParam admin) {
+        OSysUser o = new OSysUser();
+        BeanUtils.copyProperties(admin, o);
+        o.setUserId(id);
+        return userMapper.updateByPrimaryKey(o);
     }
 
     @Override
     public int delete(Long id) {
+
         return 0;
+    }
+
+    @Override
+    public int updateLoginTime(long id) {
+        return 0;
+    }
+
+    @Override
+    public int updateUserStatus(OSysUser user) {
+        return 0;
+    }
+
+    @Override
+    public boolean updateUserAvatar(String userName, String avatar) {
+        return false;
+    }
+
+    @Override
+    public int deleteUserByIds(Long[] userIds) {
+        return 0;
+    }
+
+    @Override
+    public String importUser(List<OSysUser> userList, Boolean isUpdateSupport, String operName) {
+        return null;
+    }
+
+    @Override
+    public boolean resetPassword(String username, String oldpassword, String newpassword, String confirmpassword) {
+        return false;
+    }
+
+    @Override
+    public boolean changePassword(OSysUser oSysUser) {
+
+        BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
+        String encodePassword = bCrypt.encode(oSysUser.getPassword());
+
+        oSysUser.setPassword(encodePassword);
+        int i = userMapper.updateByPrimaryKey(oSysUser);
+        if (i == 1) {
+            return true;
+        }
+        return false;
     }
 }

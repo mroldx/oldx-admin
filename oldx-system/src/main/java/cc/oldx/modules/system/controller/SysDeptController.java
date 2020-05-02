@@ -1,9 +1,9 @@
 package cc.oldx.modules.system.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @Author: moli
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @qq: 974751082
  * @Date: 2020/3/17 4:35
  */
-@Controller
-public class DeptController {
+@RestController
+public class SysDeptController {
     // 测试普通权限
     @PreAuthorize("hasAuthority('user:add')")
     @RequestMapping( value="/normal/test", method = RequestMethod.GET )

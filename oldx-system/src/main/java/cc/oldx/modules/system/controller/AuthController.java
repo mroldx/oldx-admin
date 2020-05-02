@@ -3,7 +3,7 @@ package cc.oldx.modules.system.controller;
 import cc.oldx.common.api.CommonResult;
 import cc.oldx.mbg.domain.OSysUser;
 import cc.oldx.modules.system.dto.OSysUserParam;
-import cc.oldx.modules.system.service.OAdminService;
+import cc.oldx.modules.system.service.SysAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +24,7 @@ import java.util.Map;
 @RequestMapping("/auth")
 public class AuthController {
      @Autowired
-    private OAdminService OadminService;
+    private SysAdminService oadminService;
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
@@ -32,7 +32,7 @@ public class AuthController {
 
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     public CommonResult<OSysUser> register(@RequestBody OSysUserParam oSysUserParam){
-        OSysUser sysUser = OadminService.register(oSysUserParam);
+        OSysUser sysUser = oadminService.register(oSysUserParam);
         if(sysUser==null){
           return CommonResult.failed("用户名已存在，请重试");
         }
@@ -40,7 +40,7 @@ public class AuthController {
     }
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public CommonResult login(@RequestBody OSysUserParam oSysUserParam){
-        String token=OadminService.login(oSysUserParam.getUsername(),oSysUserParam.getPassword());
+        String token= oadminService.login(oSysUserParam.getUsername(),oSysUserParam.getPassword());
         if(token==null){
             return CommonResult.validateFailed("用户名或密码错误");
         }
