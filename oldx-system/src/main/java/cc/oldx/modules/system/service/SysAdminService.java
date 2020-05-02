@@ -80,7 +80,7 @@ public interface SysAdminService {
      * @param avatar 头像地址
      * @return 结果
      */
-    public boolean updateUserAvatar(String userName, String avatar);
+    public int updateUserAvatar(String userName, String avatar);
 
     /**
      * 批量删除用户信息

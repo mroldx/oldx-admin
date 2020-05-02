@@ -131,7 +131,7 @@ public class SysAdminServiceImpl implements SysAdminService {
         OSysUser o = new OSysUser();
         BeanUtils.copyProperties(admin, o);
         o.setUserId(id);
-        return userMapper.updateByPrimaryKey(o);
+        return userMapper.updateByPrimaryKeySelective(o);
     }
 
     @Override
@@ -142,17 +142,27 @@ public class SysAdminServiceImpl implements SysAdminService {
 
     @Override
     public int updateLoginTime(long id) {
-        return 0;
+        OSysUser sysUser = new OSysUser();
+        sysUser.setLastLoginTime(new Date());
+        OSysUserExample oSysUserExample = new OSysUserExample();
+        oSysUserExample.createCriteria().andUserIdEqualTo(id);
+        return userMapper.updateByExampleSelective(sysUser, oSysUserExample);
     }
 
     @Override
     public int updateUserStatus(OSysUser user) {
-        return 0;
+        OSysUserExample oSysUserExample = new OSysUserExample();
+        oSysUserExample.createCriteria().andUserIdEqualTo(user.getUserId());
+        return userMapper.updateByExampleSelective(user, oSysUserExample);
     }
 
     @Override
-    public boolean updateUserAvatar(String userName, String avatar) {
-        return false;
+    public int updateUserAvatar(String userName, String avatar) {
+        OSysUser oSysUser = new OSysUser();
+        oSysUser.setAvatar(avatar);
+        OSysUserExample oSysUserExample = new OSysUserExample();
+        oSysUserExample.createCriteria().andUsernameEqualTo(userName);
+        return userMapper.updateByExampleSelective(oSysUser, oSysUserExample);
     }
 
     @Override

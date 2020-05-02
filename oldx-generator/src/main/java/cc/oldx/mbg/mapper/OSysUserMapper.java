@@ -2,8 +2,9 @@ package cc.oldx.mbg.mapper;
 
 import cc.oldx.mbg.domain.OSysUser;
 import cc.oldx.mbg.domain.OSysUserExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface OSysUserMapper {
     long countByExample(OSysUserExample example);
@@ -27,4 +28,6 @@ public interface OSysUserMapper {
     int updateByPrimaryKeySelective(OSysUser record);
 
     int updateByPrimaryKey(OSysUser record);
+
+
 }

@@ -22,4 +22,5 @@ public class IndexController {
     public String trweqwee(){
         return "dasdasdasdsad";
     }
+
 }
