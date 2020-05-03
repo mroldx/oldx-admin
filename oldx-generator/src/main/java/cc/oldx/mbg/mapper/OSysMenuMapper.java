@@ -36,9 +36,26 @@ public interface OSysMenuMapper {
     int updateByPrimaryKey(OSysMenu record);
 
     /**
-     * 查询某个人所有权限菜单
+     * 查询某个人所有权限
      * @param userName
      * @return
      */
     List<OSysMenu> findUserPermissions(String userName);
+
+
+    /**
+     * 查询系统菜单列表
+     *
+     * @param 用户ID
+     * @return 菜单列表
+     */
+    public List<OSysMenu> selectMenuList(Long userId);
+
+    /**
+     * 根据用户查询系统菜单列表
+     *
+     * @param menu 菜单信息
+     * @return 菜单列表
+     */
+    public List<OSysMenu> selectMenuListByUserId(OSysMenu menu);
 }

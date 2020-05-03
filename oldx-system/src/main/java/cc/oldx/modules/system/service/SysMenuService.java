@@ -26,7 +26,7 @@ public interface SysMenuService {
      * @param menu 菜单信息
      * @return 菜单列表
      */
-    public List<OSysMenu> selectMenuList(OSysMenu menu);
+    public List<OSysMenu> selectMenuList(Long userId);
 
     /**
      * 根据用户查询系统菜单列表

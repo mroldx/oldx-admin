@@ -2,8 +2,9 @@ package cc.oldx.mbg.mapper;
 
 import cc.oldx.mbg.domain.OSysRole;
 import cc.oldx.mbg.domain.OSysRoleExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface OSysRoleMapper {
     long countByExample(OSysRoleExample example);
@@ -27,4 +28,6 @@ public interface OSysRoleMapper {
     int updateByPrimaryKeySelective(OSysRole record);
 
     int updateByPrimaryKey(OSysRole record);
+
+    String selectRoleNameByUserId(String userId);
 }

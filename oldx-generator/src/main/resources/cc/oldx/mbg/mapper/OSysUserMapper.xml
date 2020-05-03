@@ -109,7 +109,13 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cc.oldx.mbg.domain.OSysUser">
+  <delete id="deleteUserByIds" parameterType="Long">
+    delete from o_sys_user where user_id in
+    <foreach collection="array" item="userId" open="(" separator="," close=")">
+      #{userId}
+    </foreach>
+  </delete>
+    <insert id="insert" parameterType="cc.oldx.mbg.domain.OSysUser">
     insert into o_sys_user (user_id, username, password, 
       dept_id, job_id, email, 
       moble, status, create_time, 

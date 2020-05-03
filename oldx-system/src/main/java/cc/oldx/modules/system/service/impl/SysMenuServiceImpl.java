@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +27,6 @@ public class SysMenuServiceImpl implements SysMenuService {
     @Autowired
     private OSysMenuMapper oSysMenuMapper;
 
-
     @Override
     public String findUserPermissions(String userName) {
         List<OSysMenu> permissions = this.oSysMenuMapper.findUserPermissions(userName);
@@ -32,8 +34,83 @@ public class SysMenuServiceImpl implements SysMenuService {
     }
 
     @Override
-    public List<OSysMenu> selectMenuList(OSysMenu menu) {
-        return null;
+    public List<OSysMenu> selectMenuList(Long userId) {
+
+        //String roleName = sysRoleMapper.selectRoleNameByUserId(userId.toString());
+        List<OSysMenu> oSysMenus = oSysMenuMapper.selectMenuList(userId);
+        return getChildPerms(oSysMenus,0);
+    }
+    /**
+     * 根据父节点的ID获取所有子节点
+     *
+     * @param list 分类表
+     * @param parentId 传入的父节点ID
+     * @return String
+     */
+    public List<OSysMenu> getChildPerms(List<OSysMenu> list, int parentId)
+    {
+        List<OSysMenu> returnList = new ArrayList<OSysMenu>();
+        for (Iterator<OSysMenu> iterator = list.iterator(); iterator.hasNext();)
+        {
+            OSysMenu t = (OSysMenu) iterator.next();
+            // 一、根据传入的某个父节点ID,遍历该父节点的所有子节点
+            if (t.getParentId() == parentId)
+            {
+                recursionFn(list, t);
+                returnList.add(t);
+            }
+        }
+        return returnList;
+    }
+    /**
+     * 递归列表
+     *
+     * @param list
+     * @param t
+     */
+    private void recursionFn(List<OSysMenu> list, OSysMenu t)
+    {
+        // 得到子节点列表
+        List<OSysMenu> childList = getChildList(list, t);
+        t.setChildren(childList);
+        for (OSysMenu tChild : childList)
+        {
+            if (hasChild(list, tChild))
+            {
+                // 判断是否有子节点
+                Iterator<OSysMenu> it = childList.iterator();
+                while (it.hasNext())
+                {
+                    OSysMenu n = (OSysMenu) it.next();
+                    recursionFn(list, n);
+                }
+            }
+        }
+    }
+    /**
+     * 得到子节点列表
+     */
+    private List<OSysMenu> getChildList(List<OSysMenu> list, OSysMenu t)
+    {
+        List<OSysMenu> tlist = new ArrayList<OSysMenu>();
+        Iterator<OSysMenu> it = list.iterator();
+        while (it.hasNext())
+        {
+            OSysMenu n = (OSysMenu) it.next();
+            if (n.getParentId().longValue() == t.getMenuId().longValue())
+            {
+                tlist.add(n);
+            }
+        }
+        return tlist;
+    }
+
+    /**
+     * 判断是否有子节点
+     */
+    private boolean hasChild(List<OSysMenu> list, OSysMenu t)
+    {
+        return getChildList(list, t).size() > 0 ? true : false;
     }
 
     @Override
@@ -73,17 +150,27 @@ public class SysMenuServiceImpl implements SysMenuService {
 
     @Override
     public int insertMenu(OSysMenu menu) {
-        return 0;
+        menu.setCreateTime(new Date());
+
+        return oSysMenuMapper.insert(menu);
     }
 
     @Override
     public int updateMenu(OSysMenu menu) {
-        return 0;
+        menu.setModifyTime(new Date());
+        this.setMenu(menu);
+        return oSysMenuMapper.updateByPrimaryKeySelective(menu);
     }
-
+    private void setMenu(OSysMenu menu) {
+        if (menu.getParentId() == null)
+            menu.setParentId(0L);
+        if ("1".equals(menu.getType())) {
+            menu.setUrl(null);
+        }
+    }
     @Override
     public int deleteMenuById(Long menuId) {
-        return 0;
+        return oSysMenuMapper.deleteByPrimaryKey(menuId);
     }
 
     @Override

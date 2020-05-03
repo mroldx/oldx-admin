@@ -110,7 +110,7 @@ public class SysAdminServiceImpl implements SysAdminService {
     }
 
     @Override
-    public OSysUser getItem(Long id) {
+    public OSysUser getUserInfo(Long id) {
 
         return userMapper.selectByPrimaryKey(id);
     }
@@ -137,7 +137,7 @@ public class SysAdminServiceImpl implements SysAdminService {
     @Override
     public int delete(Long id) {
 
-        return 0;
+        return userMapper.deleteByPrimaryKey(id);
     }
 
     @Override
@@ -167,7 +167,8 @@ public class SysAdminServiceImpl implements SysAdminService {
 
     @Override
     public int deleteUserByIds(Long[] userIds) {
-        return 0;
+
+        return userMapper.deleteUserByIds(userIds);
     }
 
     @Override

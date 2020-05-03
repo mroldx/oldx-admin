@@ -1,8 +1,11 @@
 package cc.oldx.mbg.domain;
 
 import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class OSysMenu implements Serializable {
     @ApiModelProperty(value = "菜单/按钮ID")
@@ -31,6 +34,9 @@ public class OSysMenu implements Serializable {
 
     @ApiModelProperty(value = "权限标识")
     private String perms;
+
+    /** 子菜单 */
+    private List<OSysMenu> children = new ArrayList<OSysMenu>();
 
     private static final long serialVersionUID = 1L;
 
@@ -104,6 +110,14 @@ public class OSysMenu implements Serializable {
 
     public void setPerms(String perms) {
         this.perms = perms;
+    }
+
+    public List<OSysMenu> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<OSysMenu> children) {
+        this.children = children;
     }
 
     @Override

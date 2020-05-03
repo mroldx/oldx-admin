@@ -43,7 +43,7 @@ public interface SysAdminService {
     /**
      * 根据用户id获取用户
      */
-    OSysUser getItem(Long id);
+    OSysUser getUserInfo(Long id);
 
     /**
      * 根据用户名或昵称分页查询用户
