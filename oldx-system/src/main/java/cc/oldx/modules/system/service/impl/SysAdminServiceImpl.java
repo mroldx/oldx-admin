@@ -35,7 +35,7 @@ import java.util.List;
  * @qq: 974751082
  * @Date: 2020/3/16 15:55
  */
-@Service("OadminService")
+@Service("sysAdminService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class SysAdminServiceImpl implements SysAdminService {
     private static final Logger LOGGER = LoggerFactory.getLogger(SysAdminServiceImpl.class);
@@ -67,7 +67,7 @@ public class SysAdminServiceImpl implements SysAdminService {
         user.setUsername(OSysUserParam.getUsername());
         user.setStatus("1");
         user.setCreateTime(new Date());
-        user.setDescription("管理员");
+        user.setDescription("");
         OSysUserExample userExample = new OSysUserExample();
         userExample.createCriteria().andUsernameEqualTo(OSysUserParam.getUsername());
         List<OSysUser> userList = userMapper.selectByExample(userExample);
@@ -167,7 +167,9 @@ public class SysAdminServiceImpl implements SysAdminService {
 
     @Override
     public int deleteUserByIds(Long[] userIds) {
-
+//        OSysUserExample oSysUserExample = new OSysUserExample();
+//        oSysUserExample.createCriteria().andUserIdIn(Arrays.asList(userIds));
+    //    return userMapper.deleteByExample(oSysUserExample);
         return userMapper.deleteUserByIds(userIds);
     }
 

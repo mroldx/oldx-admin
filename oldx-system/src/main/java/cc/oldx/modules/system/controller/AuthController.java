@@ -24,7 +24,7 @@ import java.util.Map;
 @RequestMapping("/auth")
 public class AuthController {
      @Autowired
-    private SysAdminService oadminService;
+    private SysAdminService sysAdminService;
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
@@ -32,7 +32,7 @@ public class AuthController {
 
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     public CommonResult<OSysUser> register(@RequestBody OSysUserParam oSysUserParam){
-        OSysUser sysUser = oadminService.register(oSysUserParam);
+        OSysUser sysUser = sysAdminService.register(oSysUserParam);
         if(sysUser==null){
           return CommonResult.failed("用户名已存在，请重试");
         }
@@ -40,7 +40,7 @@ public class AuthController {
     }
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public CommonResult login(@RequestBody OSysUserParam oSysUserParam){
-        String token= oadminService.login(oSysUserParam.getUsername(),oSysUserParam.getPassword());
+        String token= sysAdminService.login(oSysUserParam.getUsername(),oSysUserParam.getPassword());
         if(token==null){
             return CommonResult.validateFailed("用户名或密码错误");
         }

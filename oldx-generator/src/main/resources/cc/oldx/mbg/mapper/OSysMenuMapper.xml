@@ -215,9 +215,9 @@
         </if>
     </select>
 
-    <select id="selectMenuList" resultType="cc.oldx.mbg.domain.OSysMenu" parameterType="string">
+    <select id="selectMenuList" resultMap="BaseResultMap" parameterType="long">
 SELECT
-	o_sys_menu.menu_id AS m,
+	o_sys_menu.menu_id ,
 	o_sys_menu.parent_id,
 	o_sys_menu.menu_name,
 	o_sys_menu.url,
@@ -236,7 +236,7 @@ FROM
 		),
 	o_sys_menu
 WHERE
-	u.user_id =#{userId,jdbcType=VARCHAR}
+	u.user_id =#{userId,jdbcType=BIGINT}
     </select>
 
     <update id="updateByExampleSelective" parameterType="map">

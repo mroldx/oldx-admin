@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  * @qq: 974751082
  * @Date: 2020/3/16 18:06
  */
-@Service("OsMenuService")
+@Service("sysMenuService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class SysMenuServiceImpl implements SysMenuService {
     @Autowired
