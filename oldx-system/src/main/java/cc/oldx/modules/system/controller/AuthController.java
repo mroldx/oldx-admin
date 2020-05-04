@@ -2,6 +2,7 @@ package cc.oldx.modules.system.controller;
 
 import cc.oldx.common.api.CommonResult;
 import cc.oldx.mbg.domain.OSysUser;
+import cc.oldx.modules.security.utils.JwtTokenUtil;
 import cc.oldx.modules.system.dto.OSysUserParam;
 import cc.oldx.modules.system.service.SysAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,30 +24,44 @@ import java.util.Map;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-     @Autowired
+    @Autowired
     private SysAdminService sysAdminService;
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
+    private JwtTokenUtil jwtTokenUtil;
 
-    @RequestMapping(value = "/register",method = RequestMethod.POST)
-    public CommonResult<OSysUser> register(@RequestBody OSysUserParam oSysUserParam){
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public CommonResult<OSysUser> register(@RequestBody OSysUserParam oSysUserParam) {
         OSysUser sysUser = sysAdminService.register(oSysUserParam);
-        if(sysUser==null){
-          return CommonResult.failed("用户名已存在，请重试");
+        if (sysUser == null) {
+            return CommonResult.failed("用户名已存在，请重试");
         }
         return CommonResult.success(sysUser);
     }
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public CommonResult login(@RequestBody OSysUserParam oSysUserParam){
-        String token= sysAdminService.login(oSysUserParam.getUsername(),oSysUserParam.getPassword());
-        if(token==null){
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public CommonResult login(@RequestBody OSysUserParam oSysUserParam) {
+        String token = sysAdminService.login(oSysUserParam.getUsername(), oSysUserParam.getPassword());
+        if (token == null) {
             return CommonResult.validateFailed("用户名或密码错误");
         }
         Map<String, String> tokenMap = new HashMap<>();
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
         return CommonResult.success(tokenMap);
+    }
+
+    @RequestMapping(value = "/refresh/token", method = RequestMethod.POST)
+    public CommonResult refresh(HttpServletRequest request) {
+        String authHeader = request.getHeader(this.tokenHeader);
+        if (authHeader != null && authHeader.startsWith(this.tokenHead)) {
+            // 得到token
+            String authToken = authHeader.substring(this.tokenHead.length());
+            jwtTokenUtil.refreshToken(authToken);
+            return CommonResult.success("刷新token成功");
+        }
+        return CommonResult.failed("刷新token失败");
     }
 }

@@ -1,7 +1,9 @@
 package cc.oldx.modules.system.dto;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -12,8 +14,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * <p>
  * 用户登录参数
  */
-@Getter
-@Setter
+@Data
 public class OSysUserParam {
     @ApiModelProperty(value = "用户名", required = true)
     @NotEmpty(message = "用户名不能为空")
