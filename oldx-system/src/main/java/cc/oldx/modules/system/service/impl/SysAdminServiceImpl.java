@@ -196,4 +196,9 @@ public class SysAdminServiceImpl implements SysAdminService {
         }
         return false;
     }
+
+    @Override
+    public void getAdminMenuList() {
+
+    }
 }

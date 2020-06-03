@@ -118,4 +118,6 @@ public interface SysAdminService {
      * @return
      */
     public boolean changePassword(OSysUser oSysUser);
+
+    void getAdminMenuList();
 }

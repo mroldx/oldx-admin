@@ -35,5 +35,7 @@ public interface ODeptMapper {
      * @param dept 部门信息
      * @return 部门信息集合
      */
-    public List<ODept> selectDeptList(ODept dept);
+    public List<ODept> selectDeptList(@Param("dept") ODept dept);
+
+
 }

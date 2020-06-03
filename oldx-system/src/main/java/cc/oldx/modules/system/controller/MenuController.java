@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class MenuController {
+
+
     @RequestMapping("/menu/listAll")
     @PreAuthorize("hasAuthority('menu:list')")
     public CommonResult getMenuList(){
