@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cc.oldx.modules.system.dao.OSysRoleDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cc.oldx.mbg.domain.OSysRoleEntity" id="oSysRoleMap">
+        <result property="id" column="id"/>
+        <result property="roleName" column="role_name"/>
+        <result property="roleCode" column="role_code"/>
+        <result property="description" column="description"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <select id="selectRoleNameByUserId" resultType="java.lang.String">
+        SELECT r.role_name from o_sys_role r
+                                    LEFT JOIN o_sys_user u on(u.user_id=r.id)
+        where u.user_id=#{userId,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

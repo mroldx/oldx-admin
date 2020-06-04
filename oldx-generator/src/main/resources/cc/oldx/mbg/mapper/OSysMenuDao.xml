@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cc.oldx.modules.system.dao.OSysMenuDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cc.oldx.mbg.domain.OSysMenuEntity" id="oSysMenuMap">
+        <result property="menuId" column="menu_id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="menuName" column="menu_name"/>
+        <result property="url" column="url"/>
+        <result property="perms" column="perms"/>
+        <result property="type" column="type"/>
+        <result property="orderbyNum" column="orderby_num"/>
+        <result property="createTime" column="create_time"/>
+        <result property="modifyTime" column="modify_time"/>
+    </resultMap>
+
+    <select id="findUserPermissions" resultMap="oSysMenuMap">
+        SELECT m.perms from o_sys_role r
+                                LEFT JOIN	o_sys_user_role osur on(r.id=osur.role_id)
+                                LEFT JOIN o_sys_user ou on(ou.user_id=osur.user_id)
+                                LEFT JOIN o_sys_menu_role osm on(osm.role_id=r.id)
+                                LEFT JOIN o_sys_menu m on(m.menu_id=osm.menu_id)
+        where ou.username=#{userName} and  m.perms is not null and m.perms &lt;&gt; ''
+    </select>
+
+    <select id="selectMenuList" resultMap="oSysMenuMap" parameterType="long">
+        SELECT
+            o_sys_menu.menu_id ,
+            o_sys_menu.parent_id,
+            o_sys_menu.menu_name,
+            o_sys_menu.url,
+            o_sys_menu.perms,
+            o_sys_menu.type,
+            o_sys_menu.orderby_num,
+            o_sys_menu.modify_time,
+            o_sys_menu.create_time
+        FROM
+            o_sys_role AS r
+                LEFT JOIN
+            o_sys_user AS u
+            ON
+                (
+                    u.user_id = r.id
+                    ),
+            o_sys_menu
+        WHERE
+            u.user_id =#{userId,jdbcType=BIGINT}
+    </select>
+</mapper>

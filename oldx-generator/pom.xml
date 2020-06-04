@@ -30,11 +30,10 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.7.0</version>
         </dependency>
-        <!--Hutool Java工具包-->
         <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>4.5.7</version>
+            <groupId>cc.mroldx</groupId>
+            <artifactId>oldx-common</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 
