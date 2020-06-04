@@ -1,20 +1,18 @@
 package cc.oldx.modules.system.controller;
 
+import cc.oldx.common.utils.CommonResult;
+import cc.oldx.common.utils.PageUtils;
+import cc.oldx.mbg.domain.OSysMenuEntity;
+import cc.oldx.modules.system.service.OSysMenuService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import cc.oldx.mbg.domain.OSysMenuEntity;
-import cc.oldx.modules.system.service.OSysMenuService;
-import cc.oldx.common.utils.PageUtils;
-import cc.oldx.common.utils.CommonResult;
 
 
 
@@ -42,6 +40,12 @@ public class OSysMenuController {
         return CommonResult.ok().put("page", page);
     }
 
+    @RequestMapping("/listTree")
+    @PreAuthorize("hasAuthority('menu:list')")
+    public CommonResult getMenu(Long userId){
+        List<OSysMenuEntity> sysMenuList = oSysMenuService.selectMenuList(userId);
+        return CommonResult.ok("获取菜单列表成功").put("菜单列表",sysMenuList);
+    }
 
     /**
      * 信息

@@ -1,15 +1,16 @@
 package cc.oldx.modules.system.service.impl;
-import org.springframework.stereotype.Service;
-import java.util.Map;
+import cc.oldx.common.utils.PageUtils;
+import cc.oldx.common.utils.Query;
+import cc.oldx.mbg.domain.ODeptEntity;
+import cc.oldx.mbg.mapper.ODeptDao;
+import cc.oldx.modules.system.service.ODeptService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cc.oldx.common.utils.PageUtils;
-import cc.oldx.common.utils.Query;
+import org.springframework.stereotype.Service;
 
-import cc.oldx.mbg.mapper.ODeptDao;
-import cc.oldx.mbg.domain.ODeptEntity;
-import cc.oldx.modules.system.service.ODeptService;
+import java.util.List;
+import java.util.Map;
 
 @Service("oDeptService")
 public class ODeptServiceImpl extends ServiceImpl<ODeptDao, ODeptEntity> implements ODeptService {
@@ -22,6 +23,26 @@ public class ODeptServiceImpl extends ServiceImpl<ODeptDao, ODeptEntity> impleme
         );
 
         return new PageUtils(page);
+    }
+
+    @Override
+    public List<ODeptEntity> selectDeptList(ODeptEntity dept) {
+        return null;
+    }
+
+    @Override
+    public int updateDept(ODeptEntity dept) {
+        return 0;
+    }
+
+    @Override
+    public int deleteDeptById(Long deptId) {
+        return 0;
+    }
+
+    @Override
+    public int insertDept(ODeptEntity dept) {
+        return 0;
     }
 
 }
