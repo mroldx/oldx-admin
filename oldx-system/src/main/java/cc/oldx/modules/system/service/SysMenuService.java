@@ -115,4 +115,9 @@ public interface SysMenuService {
      * @return 结果
      */
     public OSysMenu checkMenuNameUnique(@Param("menuName") String menuName, @Param("parentId") Long parentId);
+
+    /**
+     * 查询出所有菜单
+     */
+    public List<OSysMenu> selectTreeTest(Long id);
 }

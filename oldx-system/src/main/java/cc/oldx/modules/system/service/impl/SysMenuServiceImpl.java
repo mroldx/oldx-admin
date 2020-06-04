@@ -1,7 +1,6 @@
 package cc.oldx.modules.system.service.impl;
 
 import cc.oldx.mbg.domain.OSysMenu;
-import cc.oldx.mbg.mapper.OSysMenuMapper;
 import cc.oldx.modules.system.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,67 +37,60 @@ public class SysMenuServiceImpl implements SysMenuService {
 
         //String roleName = sysRoleMapper.selectRoleNameByUserId(userId.toString());
         List<OSysMenu> oSysMenus = oSysMenuMapper.selectMenuList(userId);
-        return getChildPerms(oSysMenus,0);
+        return getChildPerms(oSysMenus, 0);
     }
+
     /**
      * 根据父节点的ID获取所有子节点
      *
-     * @param list 分类表
+     * @param list     分类表
      * @param parentId 传入的父节点ID
      * @return String
      */
-    public List<OSysMenu> getChildPerms(List<OSysMenu> list, int parentId)
-    {
+    public List<OSysMenu> getChildPerms(List<OSysMenu> list, int parentId) {
         List<OSysMenu> returnList = new ArrayList<OSysMenu>();
-        for (Iterator<OSysMenu> iterator = list.iterator(); iterator.hasNext();)
-        {
+        for (Iterator<OSysMenu> iterator = list.iterator(); iterator.hasNext(); ) {
             OSysMenu t = (OSysMenu) iterator.next();
             // 一、根据传入的某个父节点ID,遍历该父节点的所有子节点
-            if (t.getParentId() == parentId)
-            {
+            if (t.getParentId() == parentId) {
                 recursionFn(list, t);
                 returnList.add(t);
             }
         }
         return returnList;
     }
+
     /**
      * 递归列表
      *
      * @param list
      * @param t
      */
-    private void recursionFn(List<OSysMenu> list, OSysMenu t)
-    {
+    private void recursionFn(List<OSysMenu> list, OSysMenu t) {
         // 得到子节点列表
         List<OSysMenu> childList = getChildList(list, t);
         t.setChildren(childList);
-        for (OSysMenu tChild : childList)
-        {
-            if (hasChild(list, tChild))
-            {
+        for (OSysMenu tChild : childList) {
+            if (hasChild(list, tChild)) {
                 // 判断是否有子节点
                 Iterator<OSysMenu> it = childList.iterator();
-                while (it.hasNext())
-                {
+                while (it.hasNext()) {
                     OSysMenu n = (OSysMenu) it.next();
                     recursionFn(list, n);
                 }
             }
         }
     }
+
     /**
      * 得到子节点列表
      */
-    private List<OSysMenu> getChildList(List<OSysMenu> list, OSysMenu t)
-    {
+    private List<OSysMenu> getChildList(List<OSysMenu> list, OSysMenu t) {
         List<OSysMenu> tlist = new ArrayList<OSysMenu>();
         Iterator<OSysMenu> it = list.iterator();
-        while (it.hasNext())
-        {
+        while (it.hasNext()) {
             OSysMenu n = (OSysMenu) it.next();
-            if (n.getParentId().longValue() == t.getMenuId().longValue())
-            {
+            if (n.getParentId().longValue() == t.getMenuId().longValue()) {
                 tlist.add(n);
             }
         }
@@ -108,8 +100,7 @@ public class SysMenuServiceImpl implements SysMenuService {
     /**
      * 判断是否有子节点
      */
-    private boolean hasChild(List<OSysMenu> list, OSysMenu t)
-    {
+    private boolean hasChild(List<OSysMenu> list, OSysMenu t) {
         return getChildList(list, t).size() > 0 ? true : false;
     }
 
@@ -161,6 +152,7 @@ public class SysMenuServiceImpl implements SysMenuService {
         this.setMenu(menu);
         return oSysMenuMapper.updateByPrimaryKeySelective(menu);
     }
+
     private void setMenu(OSysMenu menu) {
         if (menu.getParentId() == null)
             menu.setParentId(0L);
@@ -168,6 +160,7 @@ public class SysMenuServiceImpl implements SysMenuService {
             menu.setUrl(null);
         }
     }
+
     @Override
     public int deleteMenuById(Long menuId) {
         return oSysMenuMapper.deleteByPrimaryKey(menuId);
@@ -176,5 +169,26 @@ public class SysMenuServiceImpl implements SysMenuService {
     @Override
     public OSysMenu checkMenuNameUnique(String menuName, Long parentId) {
         return null;
+    }
+
+    @Override
+    public List<OSysMenu> selectTreeTest(Long id) {
+        List<OSysMenu> oSysMenusList = oSysMenuMapper.selectMenuList(id);
+        oSysMenusList.stream().filter(oSysMenu -> oSysMenu.getParentId() == 0
+        ).map((menu) -> {
+            menu.setCharten(getCha(menu,oSysMenusList));
+            return menu;
+        }).collect(Collectors.toList());
+        return oSysMenusList;
+    }
+
+    private List<OSysMenu> getCha(OSysMenu root, List<OSysMenu> all) {
+        List<OSysMenu> oSysMenus = all.stream().filter(oSysMenu -> {
+            return oSysMenu.getParentId() == root.getMenuId();
+        }).map(oSysMenu -> {
+            oSysMenu.setCharten(getCha(oSysMenu, all));
+            return oSysMenu;
+        }).collect(Collectors.toList());
+        return oSysMenus;
     }
 }

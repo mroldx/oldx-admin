@@ -2,7 +2,6 @@ package cc.oldx.modules.system.service.impl;
 
 import cc.oldx.mbg.domain.ODept;
 import cc.oldx.mbg.domain.ODeptExample;
-import cc.oldx.mbg.mapper.ODeptMapper;
 import cc.oldx.modules.system.service.SysDeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

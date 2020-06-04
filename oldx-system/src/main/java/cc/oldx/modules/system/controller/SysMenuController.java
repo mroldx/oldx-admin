@@ -27,4 +27,10 @@ public class SysMenuController {
         List<OSysMenu> sysMenuList = sysMenuService.selectMenuList(userId);
         return CommonResult.success(sysMenuList,"获取菜单列表成功");
     }
+    @RequestMapping("/getMenu")
+    @PreAuthorize("hasAuthority('menu:list')")
+    public CommonResult getMenu(Long userId){
+        List<OSysMenu> sysMenuList = sysMenuService.selectTreeTest(userId);
+        return CommonResult.success(sysMenuList,"获取菜单列表成功");
+    }
 }

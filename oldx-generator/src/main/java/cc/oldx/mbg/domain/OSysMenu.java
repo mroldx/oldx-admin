@@ -35,6 +35,17 @@ public class OSysMenu implements Serializable {
     @ApiModelProperty(value = "权限标识")
     private String perms;
 
+
+    private List<OSysMenu> charten;
+
+    public List<OSysMenu> getCharten() {
+        return charten;
+    }
+
+    public void setCharten(List<OSysMenu> charten) {
+        this.charten = charten;
+    }
+
     /** 子菜单 */
     private List<OSysMenu> children = new ArrayList<OSysMenu>();
 

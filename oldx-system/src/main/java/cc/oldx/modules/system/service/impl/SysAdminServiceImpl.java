@@ -2,7 +2,7 @@ package cc.oldx.modules.system.service.impl;
 
 import cc.oldx.mbg.domain.OSysUser;
 import cc.oldx.mbg.domain.OSysUserExample;
-import cc.oldx.mbg.mapper.OSysUserMapper;
+import cc.oldx.mbg.mapper.OSysUserDao;
 import cc.oldx.modules.security.utils.JwtTokenUtil;
 import cc.oldx.modules.system.dto.OSysUserParam;
 import cc.oldx.modules.system.dto.UserAdminParam;
@@ -40,7 +40,7 @@ import java.util.List;
 public class SysAdminServiceImpl implements SysAdminService {
     private static final Logger LOGGER = LoggerFactory.getLogger(SysAdminServiceImpl.class);
     @Autowired
-    private OSysUserMapper userMapper;
+    private OSysUserDao userDao;
     @Autowired
     private UserDetailsService userDetailsService;
     @Autowired
@@ -52,9 +52,7 @@ public class SysAdminServiceImpl implements SysAdminService {
 
     @Override
     public OSysUser getAdminByUsername(String username) {
-        OSysUserExample userExample = new OSysUserExample();
-        userExample.createCriteria().andUsernameEqualTo(username);
-        List<OSysUser> userList = userMapper.selectByExample(userExample);
+       userDao.select
         if (userList != null && userList.size() > 0) {
             return userList.get(0);
         }

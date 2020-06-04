@@ -1,7 +1,6 @@
 package cc.oldx.modules.system.service.impl;
 
 import cc.oldx.mbg.domain.OSysUser;
-import cc.oldx.mbg.mapper.OSysUserMapper;
 import junit.framework.TestCase;
 
 import javax.annotation.Resource;
