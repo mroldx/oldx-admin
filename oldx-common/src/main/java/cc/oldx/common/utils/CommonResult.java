@@ -10,7 +10,6 @@ import java.util.Map;
  * 
  * @author MrOldx
  * @email 974751082@qq.com
- * @date 2019年10月27日 下午9:59:27
  */
 public class CommonResult extends HashMap<String, Object> {
 	private static final long serialVersionUID = 1L;

@@ -65,10 +65,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //跨域前先进行options
                 .antMatchers(HttpMethod.OPTIONS)
                 .permitAll()
-                .antMatchers("/hello5").access("hasAuthority('user:add')")
-                /* //测试时全部运行访问
+                 //测试时全部运行访问
                  .antMatchers("/**")
-                 .permitAll()*/
+                 .permitAll()
                 .anyRequest()// 除上面外的所有请求全部需要鉴权认证
                 .authenticated();
         // 禁用缓存

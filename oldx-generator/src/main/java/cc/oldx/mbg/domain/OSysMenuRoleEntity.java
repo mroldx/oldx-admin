@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
 
+import javax.validation.constraints.NotEmpty;
+
 /**
  * 
  * 
@@ -23,10 +25,12 @@ public class OSysMenuRoleEntity implements Serializable {
 	 * 角色ID
 	 */
 	@TableId
+	@NotEmpty
 	private Long roleId;
 	/**
 	 * 权限ID
 	 */
+	@NotEmpty
 	private Long menuId;
 
 }

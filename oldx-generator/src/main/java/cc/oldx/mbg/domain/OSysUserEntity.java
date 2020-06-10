@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
 
+import javax.validation.constraints.NotEmpty;
+
 /**
  * 
  * 
@@ -27,10 +29,12 @@ public class OSysUserEntity implements Serializable {
 	/**
 	 * 用户名
 	 */
+	@NotEmpty
 	private String username;
 	/**
 	 * 密码
 	 */
+	@NotEmpty
 	private String password;
 	/**
 	 * 部门ID

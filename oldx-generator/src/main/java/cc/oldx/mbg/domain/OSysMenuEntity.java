@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -27,22 +28,27 @@ public class OSysMenuEntity implements Serializable {
     /**
      * 上级菜单ID
      */
+    @NotEmpty
     private Long parentId;
     /**
      * 菜单/按钮名称
      */
+    @NotEmpty
     private String menuName;
     /**
      * 菜单URL
      */
+    @NotEmpty
     private String url;
     /**
      * 权限标识
      */
+    @NotEmpty
     private String perms;
     /**
      * 类型 0菜单 1按钮
      */
+    @NotEmpty
     private String type;
     /**
      * 排序

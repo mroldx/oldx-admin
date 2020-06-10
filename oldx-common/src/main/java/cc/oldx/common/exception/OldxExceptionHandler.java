@@ -17,14 +17,14 @@ import org.springframework.web.servlet.NoHandlerFoundException;
  * @author MrOldx
  */
 @RestControllerAdvice
-public class RRExceptionHandler {
+public class OldxExceptionHandler {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	/**
 	 * 处理自定义异常
 	 */
-	@ExceptionHandler(RRException.class)
-	public CommonResult handleRRException(RRException e){
+	@ExceptionHandler(GlobaException.class)
+	public CommonResult handleRRException(GlobaException e){
 		CommonResult r = new CommonResult();
 		r.put("code", e.getCode());
 		r.put("msg", e.getMessage());

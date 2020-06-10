@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
 
+import javax.validation.constraints.NotEmpty;
+
 /**
  * 
  * 
@@ -28,30 +30,37 @@ public class OSysLogEntity implements Serializable {
 	/**
 	 * 操作用户
 	 */
+	@NotEmpty
 	private String username;
 	/**
 	 * 操作内容
 	 */
+	@NotEmpty
 	private String operation;
 	/**
 	 * 耗时
 	 */
+	@NotEmpty
 	private BigDecimal time;
 	/**
 	 * 操作方法
 	 */
+	@NotEmpty
 	private String method;
 	/**
 	 * 方法参数
 	 */
+	@NotEmpty
 	private String params;
 	/**
 	 * 操作者IP
 	 */
+	@NotEmpty
 	private String ip;
 	/**
 	 * 创建时间
 	 */
+	@NotEmpty
 	private Date createTime;
 	/**
 	 * 操作地点

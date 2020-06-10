@@ -1,6 +1,7 @@
 package cc.oldx.modules.security.handler;
 
 import cc.oldx.common.api.CommonResult;
+import cc.oldx.common.api.IErrorCode;
 import cn.hutool.json.JSONUtil;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;

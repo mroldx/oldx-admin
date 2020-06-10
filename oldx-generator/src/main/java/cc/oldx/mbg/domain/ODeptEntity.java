@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
 
+import javax.validation.constraints.NotEmpty;
+
 /**
  * 
  * 
@@ -27,18 +29,22 @@ public class ODeptEntity implements Serializable {
 	/**
 	 * 上级部门ID
 	 */
+	@NotEmpty
 	private Long parentId;
 	/**
 	 * 部门名称
 	 */
+	@NotEmpty
 	private String deptName;
 	/**
 	 * 排序
 	 */
+	@NotEmpty
 	private Long orderMun;
 	/**
 	 * 创建时间
 	 */
+	@NotEmpty
 	private Date createTime;
 
 }

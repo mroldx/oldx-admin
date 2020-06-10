@@ -1,10 +1,12 @@
 package cc.oldx.modules.system.controller;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,7 @@ import cc.oldx.modules.system.service.OSysUserService;
 import cc.oldx.common.utils.PageUtils;
 import cc.oldx.common.utils.CommonResult;
 
+import javax.validation.Valid;
 
 
 /**
@@ -30,7 +33,6 @@ import cc.oldx.common.utils.CommonResult;
 public class OSysUserController {
     @Autowired
     private OSysUserService oSysUserService;
-
     /**
      * 列表
      */
@@ -59,7 +61,18 @@ public class OSysUserController {
      */
     @RequestMapping("/save")
     //@RequiresPermissions("system:osysuser:save")
-    public CommonResult save(@RequestBody OSysUserEntity oSysUser){
+    public CommonResult save(@Valid @RequestBody OSysUserEntity oSysUser, BindingResult result){
+        if(result.hasErrors()){
+            Map<Object, Object> map = new HashMap<>();
+            result.getFieldErrors().forEach((item)->{
+                String message = item.getDefaultMessage();
+                String field = item.getField();
+                map.put(message,field);
+            });
+            return CommonResult.error("出现错误").put("data",map);
+        }else {
+
+        }
 		oSysUserService.save(oSysUser);
 
         return CommonResult.ok();

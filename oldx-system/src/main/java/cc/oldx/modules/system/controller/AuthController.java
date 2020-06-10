@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +33,7 @@ public class AuthController {
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
+    @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -62,8 +64,9 @@ public class AuthController {
         if (authHeader != null && authHeader.startsWith(this.tokenHead)) {
             // 得到token
             String authToken = authHeader.substring(this.tokenHead.length());
-            jwtTokenUtil.refreshToken(authToken);
-            return CommonResult.ok("刷新token成功");
+            String refreshToken = jwtTokenUtil.refreshToken(authToken);
+            Date dateFromToken = jwtTokenUtil.getExpiredDateFromToken(refreshToken);
+            return CommonResult.ok("刷新token成功").put("刷新后的token",refreshToken).put("过期时间为",dateFromToken);
         }
         return CommonResult.error("刷新token失败");
     }

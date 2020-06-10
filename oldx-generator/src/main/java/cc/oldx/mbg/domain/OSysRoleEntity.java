@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
 
+import javax.validation.constraints.NotEmpty;
+
 /**
  * 角色表
  * 
@@ -27,18 +29,22 @@ public class OSysRoleEntity implements Serializable {
 	/**
 	 * 角色名称
 	 */
+	@NotEmpty
 	private String roleName;
 	/**
 	 * 角色编码
 	 */
+	@NotEmpty
 	private String roleCode;
 	/**
 	 * 描述
 	 */
+	@NotEmpty
 	private String description;
 	/**
 	 * 创建人
 	 */
+	@NotEmpty
 	private String createBy;
 	/**
 	 * 创建时间
