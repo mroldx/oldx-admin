@@ -1,9 +1,9 @@
 package cc.oldx.modules.security.service;
 
-import cc.oldx.mbg.domain.OSysUser;
+import cc.oldx.mbg.domain.OSysUserEntity;
 import cc.oldx.modules.security.bo.OSysUserDetails;
-import cc.oldx.modules.system.service.SysAdminService;
-import cc.oldx.modules.system.service.SysMenuService;
+import cc.oldx.modules.system.service.OSysMenuService;
+import cc.oldx.modules.system.service.OSysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -21,16 +21,16 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 public class OSysUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private SysAdminService oadminService;
+    private OSysUserService oSysUserService;
 
     @Autowired
-    private SysMenuService SysMenuService;
+   private OSysMenuService oSysMenuService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        OSysUser user = this.oadminService.getAdminByUsername(username);
+        OSysUserEntity user = this.oSysUserService.getAdminByUsername(username);
         if (user != null) {
-            String userPermissions = this.SysMenuService.findUserPermissions(username);
+            String userPermissions = this.oSysMenuService.findUserPermissions(username);
           //  boolean notLocked = false;
 /*            //判断帐号有效性
             if(StringUtils.equals(OSysUser.STATUS_VALID, user.getStatus()))

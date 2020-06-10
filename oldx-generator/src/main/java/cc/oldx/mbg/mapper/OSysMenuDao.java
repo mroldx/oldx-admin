@@ -1,7 +1,6 @@
 package cc.oldx.mbg.mapper;
 
 
-import cc.oldx.mbg.domain.OSysMenu;
 import cc.oldx.mbg.domain.OSysMenuEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -23,7 +22,7 @@ public interface OSysMenuDao extends BaseMapper<OSysMenuEntity> {
      * @param userName
      * @return
      */
-    List<OSysMenu> findUserPermissions(@Param("userName") String userName);
+    List<OSysMenuEntity> findUserPermissions(@Param("userName") String userName);
 
 
     /**
@@ -32,7 +31,7 @@ public interface OSysMenuDao extends BaseMapper<OSysMenuEntity> {
      * @param 用户ID
      * @return 菜单列表
      */
-    public List<OSysMenu> selectMenuList(Long userId);
+     List<OSysMenuEntity> selectMenuList(Long userId);
 
     /**
      * 根据用户查询系统菜单列表
@@ -40,5 +39,5 @@ public interface OSysMenuDao extends BaseMapper<OSysMenuEntity> {
      * @param menu 菜单信息
      * @return 菜单列表
      */
-    public List<OSysMenu> selectMenuListByUserId(OSysMenu menu);
+    public List<OSysMenuEntity> selectMenuListByUserId(OSysMenuEntity menu);
 }
