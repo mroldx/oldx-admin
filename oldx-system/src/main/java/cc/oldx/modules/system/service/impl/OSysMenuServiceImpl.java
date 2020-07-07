@@ -27,6 +27,7 @@ public class OSysMenuServiceImpl extends ServiceImpl<OSysMenuDao, OSysMenuEntity
 
         return new PageUtils(page);
     }
+
     @Override
     public String findUserPermissions(String userName) {
         List<OSysMenuEntity> permissions = this.baseMapper.findUserPermissions(userName);
@@ -38,7 +39,7 @@ public class OSysMenuServiceImpl extends ServiceImpl<OSysMenuDao, OSysMenuEntity
         List<OSysMenuEntity> oSysMenusList = this.baseMapper.selectMenuList(userId);
         oSysMenusList.stream().filter(oSysMenu -> oSysMenu.getParentId() == 0
         ).map((menu) -> {
-            menu.setCharten(getCha(menu,oSysMenusList));
+            menu.setCharten(getCha(menu, oSysMenusList));
             return menu;
         }).collect(Collectors.toList());
         return oSysMenusList;

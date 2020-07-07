@@ -1,5 +1,5 @@
 # oldx-admin后台管理系统
-## 项目简介
+## 项目简介    
 
 oldx-admin是一款后台通用脚手架。基于Springboot+Springsecurity+jwt+redis+vue的前后端分离脚手架适合开发者快速上手，封装后台常用工具，私活开发脚手架或者权限系统学习都是一个不错的选择，易上手，系统会陆续更新。
 
