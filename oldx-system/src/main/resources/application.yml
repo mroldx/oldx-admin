@@ -12,12 +12,13 @@ spring:
       connection-test-query: select 1
       max-lifetime: 1800000
       connection-timeout: 30000
-      pool-name: FebsHikariCP
+      pool-name: MrOldxHikariCP
 jwt:
   tokenHeader: Authorization #JWT存储的请求头
   secret: oldx #JWT加解密使用的密钥
   expiration: 604800 #JWT的超期限时间(60*60*24)
   tokenHead: Bearer  #JWT负载中拿到开头
+
 
 #mybatis
 mybatis-plus:
@@ -38,5 +39,19 @@ mybatis-plus:
     cache-enabled: false
     call-setters-on-nulls: true
     jdbc-type-for-null: 'null'
+
+  #redis 配置
+  redis:
+    database: 0
+    host: 127.0.0.1
+    lettuce:
+      pool:
+        max-active: 8   #最大连接数据库连接数,设 0 为没有限制
+        max-idle: 8     #最大等待连接中的数量,设 0 为没有限制
+        max-wait: -1ms  #最大建立连接等待时间。如果超过此时间将接到异常。设为-1表示无限制。
+        min-idle: 0     #最小等待连接中的数量,设 0 为没有限制
+      shutdown-timeout: 100ms
+    password: ''
+    port: 6379
 
 
