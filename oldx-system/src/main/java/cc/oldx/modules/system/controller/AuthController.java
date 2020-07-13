@@ -1,6 +1,7 @@
 package cc.oldx.modules.system.controller;
 
 import cc.oldx.common.utils.CommonResult;
+import cc.oldx.common.utils.RedisUtil;
 import cc.oldx.mbg.domain.OSysUserEntity;
 import cc.oldx.modules.security.utils.JwtTokenUtil;
 import cc.oldx.modules.system.dto.OSysUserParam;
@@ -26,6 +27,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
+    @Autowired
+    private RedisUtil redisUti;
     @Autowired
     private OSysUserService sysUserService;
     @Value("${jwt.tokenHeader}")
@@ -53,6 +56,7 @@ public class AuthController {
         Map<String, Object> tokenMap = new HashMap<>();
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
+        redisUti.set("moli_token",token,3600);
         return CommonResult.ok(tokenMap);
     }
 
