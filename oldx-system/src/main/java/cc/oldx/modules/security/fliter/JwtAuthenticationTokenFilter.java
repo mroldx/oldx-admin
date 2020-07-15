@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -54,7 +53,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
                 //验证token
                 //todo
-                if (redisUtil.get("moli_token") != null) {
+             //   if (redisUtil.get("moli_token") != null) {
                     System.out.println("redis中的token为"+redisUtil.get("moli_token"));
                     if (jwtTokenUtil.validateToken(authToken, userDetails)) {
                         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
@@ -62,7 +61,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                         LOGGER.info("authenticated user:{}", username);
                         SecurityContextHolder.getContext().setAuthentication(authentication);
                     }
-                }
+              //  }
             }
         }
         chain.doFilter(request, response);
