@@ -95,6 +95,7 @@ public class OSysUserServiceImpl extends ServiceImpl<OSysUserDao, OSysUserEntity
             }
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
+
             //生成token
             token = jwtTokenUtil.generateToken(userDetails);
 
