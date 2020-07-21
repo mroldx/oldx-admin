@@ -90,12 +90,13 @@ public class OSysMenuServiceImpl extends ServiceImpl<OSysMenuDao, OSysMenuEntity
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteMeuns(String[] menuIds) {
+        //todo
      this.deleteMeuns(menuIds);
     }
 
     private List<OSysMenuEntity> getCha(OSysMenuEntity root, List<OSysMenuEntity> all) {
         List<OSysMenuEntity> oSysMenus = all.stream().filter(oSysMenu -> {
-            return oSysMenu.getParentId().equals( root.getMenuId());
+            return oSysMenu.getParentId().equals(root.getMenuId());
         }).map(oSysMenu -> {
             oSysMenu.setCharten(getCha(oSysMenu, all));
             return oSysMenu;

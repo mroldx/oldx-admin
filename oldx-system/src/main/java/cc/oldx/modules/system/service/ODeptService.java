@@ -33,7 +33,7 @@ public interface ODeptService extends IService<ODeptEntity> {
      * @param dept 部门信息
      * @return 结果
      */
-    public int updateDept(ODeptEntity dept);
+    public void updateDept(ODeptEntity dept);
 
     /**
      * 删除部门管理信息
@@ -41,7 +41,7 @@ public interface ODeptService extends IService<ODeptEntity> {
      * @param deptId 部门ID
      * @return 结果
      */
-    public int deleteDeptById(Long deptId);
+    public void deleteDeptById(Long[] deptIds);
 
     /**
      * 新增部门信息
@@ -49,6 +49,6 @@ public interface ODeptService extends IService<ODeptEntity> {
      * @param dept 部门信息
      * @return 结果
      */
-    public int insertDept(ODeptEntity dept);
+    public void insertDept(ODeptEntity dept);
 }
 
