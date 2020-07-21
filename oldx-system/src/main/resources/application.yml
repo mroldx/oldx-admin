@@ -19,7 +19,8 @@ jwt:
   expiration: 604800 #JWT的超期限时间(60*60*24)
   tokenHead: Bearer  #JWT负载中拿到开头
 
-
+oldx:
+  showsql: true
 #mybatis
 mybatis-plus:
   mapper-locations: classpath*:/cc/oldx/mbg/mapper/**/*.xml
