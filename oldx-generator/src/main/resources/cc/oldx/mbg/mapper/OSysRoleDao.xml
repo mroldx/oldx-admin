@@ -3,7 +3,7 @@
 
 <mapper namespace="cc.oldx.mbg.mapper.OSysRoleDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="cc.oldx.mbg.domain.OSysRoleEntity" id="oSysRoleMap">
         <result property="id" column="id"/>
         <result property="roleName" column="role_name"/>
@@ -13,10 +13,10 @@
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
     </resultMap>
-    <select id="selectRoleNameByUserId" resultType="java.lang.String">
-        SELECT r.role_name from o_sys_role r
-                                    LEFT JOIN o_sys_user u on(u.user_id=r.id)
-        where u.user_id=#{userId,jdbcType=VARCHAR}
+    <select id="findUserRoleByUserName" resultType="cc.oldx.mbg.domain.OSysRoleEntity">
+SELECT r.* from o_sys_role r
+                LEFT JOIN o_sys_user u on(u.user_id=r.id)
+        where u.username=#{username,jdbcType=VARCHAR}
     </select>
 
 </mapper>

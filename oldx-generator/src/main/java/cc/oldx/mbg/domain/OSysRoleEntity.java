@@ -2,10 +2,10 @@ package cc.oldx.mbg.domain;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 角色表
@@ -49,4 +49,5 @@ public class OSysRoleEntity implements Serializable {
 	 */
 	private Date updateTime;
 
+	private transient String menuIds;
 }

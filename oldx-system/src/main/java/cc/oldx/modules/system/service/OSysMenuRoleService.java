@@ -16,5 +16,20 @@ import java.util.Map;
 public interface OSysMenuRoleService extends IService<OSysMenuRoleEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+
+    /**
+     * 删除角色菜单关联数据
+     *
+     * @param roleIds 角色id
+     */
+    void deleteRoleMenusByRoleId(String[] roleIds);
+
+    /**
+     * 删除角色菜单关联数据
+     *
+     * @param menuIds 菜单id
+     */
+    void deleteRoleMenusByMenuId(String[] menuIds);
 }
 

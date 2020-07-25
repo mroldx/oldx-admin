@@ -2,7 +2,6 @@ package cc.oldx.modules.system.service;
 
 import cc.oldx.common.utils.PageUtils;
 import cc.oldx.mbg.domain.OSysRoleEntity;
-import cc.oldx.mbg.domain.OSysUserEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -19,27 +18,47 @@ public interface OSysRoleService extends IService<OSysRoleEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
 
-
-    /**
-     * 添加用户和用户角色关系
-     * @param user
-     * @param roles
-     */
-    public void addUserWithRole(OSysUserEntity user, String roles);
-
-
-    /**
-     * 修改用户和用户角色关系
-     * @param user
-     * @param roles
-     */
-    public void editUserWithRole(OSysUserEntity user,String roles);
-
     /**
      * 获取用户的授权角色
      * @param username
      * @return
      */
-    public List<String> getRole(String username);
+    public List<OSysRoleEntity> getRoleByUserName(String username);
+
+    /**
+     * 获取所有角色
+     *
+     * @return 角色列表
+     */
+    List<OSysRoleEntity> findAllRoles();
+
+    /**
+     * 通过名称获取角色
+     *
+     * @param roleName 角色名称
+     * @return 角色
+     */
+    OSysRoleEntity findByName(String roleName);
+
+    /**
+     * 创建角色
+     *
+     * @param role role
+     */
+    void createRole(OSysRoleEntity role);
+
+    /**
+     * 删除角色
+     *
+     * @param roleIds 角色id数组
+     */
+    void deleteRoles(String[] roleIds);
+
+    /**
+     * 更新角色
+     *
+     * @param role role
+     */
+    void updateRole(OSysRoleEntity role);
 }
 

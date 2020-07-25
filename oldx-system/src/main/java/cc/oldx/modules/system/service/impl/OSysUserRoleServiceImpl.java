@@ -1,17 +1,20 @@
 package cc.oldx.modules.system.service.impl;
 
+import cc.oldx.common.utils.PageUtils;
+import cc.oldx.common.utils.Query;
+import cc.oldx.mbg.domain.OSysUserEntity;
 import cc.oldx.mbg.domain.OSysUserRoleEntity;
 import cc.oldx.mbg.mapper.OSysUserRoleDao;
-import org.springframework.stereotype.Service;
-import java.util.Map;
+import cc.oldx.modules.system.service.OSysUserRoleService;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cc.oldx.common.utils.PageUtils;
-import cc.oldx.common.utils.Query;
+import org.springframework.stereotype.Service;
 
-
-import cc.oldx.modules.system.service.OSysUserRoleService;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 
 @Service("oSysUserRoleService")
@@ -27,4 +30,30 @@ public class OSysUserRoleServiceImpl extends ServiceImpl<OSysUserRoleDao, OSysUs
         return new PageUtils(page);
     }
 
+    @Override
+    public void addUserWithRole(OSysUserEntity user, String roles) {
+        Long userId = user.getUserId();
+        OSysUserRoleEntity oSysRoleEntity=new OSysUserRoleEntity();
+        oSysRoleEntity.setUserId(userId);
+        oSysRoleEntity.setRoleId(Long.valueOf(roles));
+        this.baseMapper.insert(oSysRoleEntity);
+
+    }
+
+    @Override
+    public void editUserWithRole(OSysUserEntity user, String roles) {
+
+    }
+
+    @Override
+    public void deleteUserRolesByRoleId(String[] roleIds) {
+        List<String> list = Arrays.asList(roleIds);
+        this.baseMapper.delete(new LambdaQueryWrapper<OSysUserRoleEntity>().in(OSysUserRoleEntity::getRoleId,list));
+    }
+
+    @Override
+    public void deleteUserRolesByUserId(String[] userIds) {
+        List<String> list = Arrays.asList(userIds);
+        this.baseMapper.delete(new LambdaQueryWrapper<OSysUserRoleEntity>().in(OSysUserRoleEntity::getUserId, list));
+    }
 }
