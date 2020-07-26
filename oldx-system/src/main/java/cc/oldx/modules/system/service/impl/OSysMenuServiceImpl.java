@@ -6,16 +6,16 @@ import cc.oldx.common.utils.Query;
 import cc.oldx.mbg.domain.OSysMenuEntity;
 import cc.oldx.mbg.mapper.OSysMenuDao;
 import cc.oldx.modules.system.service.OSysMenuService;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -63,10 +63,10 @@ public class OSysMenuServiceImpl extends ServiceImpl<OSysMenuDao, OSysMenuEntity
     @Transactional(rollbackFor = Exception.class)
     public void createMenu(OSysMenuEntity menu) {
         menu.setCreateTime(new Date());
-        if(menu.getParentId()==null){
+        if (menu.getParentId() == null) {
             menu.setParentId(0L);
         }
-        if("1".equals(menu.getType())){
+        if ("1".equals(menu.getType())) {
             menu.setUrl(null);
             menu.setOrderbyNum(null);
         }
@@ -76,10 +76,10 @@ public class OSysMenuServiceImpl extends ServiceImpl<OSysMenuDao, OSysMenuEntity
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void updateMenu(OSysMenuEntity menu) {
-        if(menu.getParentId()==null){
+        if (menu.getParentId() == null) {
             menu.setParentId(0L);
         }
-        if("1".equals(menu.getType())){
+        if ("1".equals(menu.getType())) {
             menu.setUrl(null);
             menu.setOrderbyNum(null);
         }
@@ -90,9 +90,23 @@ public class OSysMenuServiceImpl extends ServiceImpl<OSysMenuDao, OSysMenuEntity
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteMeuns(String[] menuIds) {
-        //todo
-     this.deleteMeuns(menuIds);
+        this.delete(Arrays.asList(menuIds));
     }
+
+    private void delete(List<String> menuIds) {
+        removeByIds(menuIds);
+        LambdaQueryWrapper<OSysMenuEntity> oSysMenuEntitymapper = new LambdaQueryWrapper<>();
+        oSysMenuEntitymapper.in(OSysMenuEntity::getParentId, menuIds);
+        List<OSysMenuEntity> menuEntities = baseMapper.selectList(oSysMenuEntitymapper);
+        if (CollectionUtils.isNotEmpty(menuEntities)) {
+            List<String> list = new ArrayList<>();
+            menuEntities.forEach(
+                    m -> list.add(String.valueOf(m.getMenuId()))
+            );
+            this.delete(list);
+        }
+    }
+
 
     private List<OSysMenuEntity> getCha(OSysMenuEntity root, List<OSysMenuEntity> all) {
         List<OSysMenuEntity> oSysMenus = all.stream().filter(oSysMenu -> {
