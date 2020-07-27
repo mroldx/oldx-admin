@@ -16,5 +16,7 @@ import java.util.Map;
 public interface OSysLogService extends IService<OSysLogEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+
 }
 
