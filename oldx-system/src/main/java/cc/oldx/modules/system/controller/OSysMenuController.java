@@ -1,5 +1,7 @@
 package cc.oldx.modules.system.controller;
 
+import cc.oldx.common.annotation.MoliAspectLog;
+import cc.oldx.common.constant.OldxConstant;
 import cc.oldx.common.utils.CommonResult;
 import cc.oldx.common.utils.PageUtils;
 import cc.oldx.mbg.domain.OSysMenuEntity;
@@ -32,6 +34,7 @@ public class OSysMenuController {
     /**
      * 列表
      */
+    @MoliAspectLog(operModul = OldxConstant.MENU_MODUL,operType = "条件查询菜单",operDesc = "查询菜单列表")
     @RequestMapping("/list")
     //@RequiresPermissions("system:osysmenu:list")
     public CommonResult list(@RequestParam Map<String, Object> params){
@@ -39,7 +42,7 @@ public class OSysMenuController {
 
         return CommonResult.ok().put("page", page);
     }
-
+    @MoliAspectLog(operModul = OldxConstant.MENU_MODUL,operType = "获取菜单树结构",operDesc = "菜单树结构列表")
     @RequestMapping("/listTree")
     @PreAuthorize("hasAuthority('menu:list')")
     public CommonResult getMenu(Long userId){
@@ -50,6 +53,7 @@ public class OSysMenuController {
     /**
      * 信息
      */
+    @MoliAspectLog(operModul = OldxConstant.MENU_MODUL,operType = "条件查询菜单",operDesc = "查询菜单列表")
     @RequestMapping("/info/{menuId}")
     //@RequiresPermissions("system:osysmenu:info")
     public CommonResult info(@PathVariable("menuId") Long menuId){
@@ -61,6 +65,7 @@ public class OSysMenuController {
     /**
      * 保存
      */
+    @MoliAspectLog(operModul = OldxConstant.MENU_MODUL,operType = "新增菜单",operDesc = "新增菜单列表")
     @RequestMapping("/save")
     //@RequiresPermissions("system:osysmenu:save")
     public CommonResult save(@RequestBody OSysMenuEntity oSysMenu){
@@ -72,6 +77,7 @@ public class OSysMenuController {
     /**
      * 修改
      */
+    @MoliAspectLog(operModul = OldxConstant.MENU_MODUL,operType = "修改菜单",operDesc = "修改菜单列表")
     @RequestMapping("/update")
     //@RequiresPermissions("system:osysmenu:update")
     public CommonResult update(@RequestBody OSysMenuEntity oSysMenu){
@@ -83,6 +89,7 @@ public class OSysMenuController {
     /**
      * 删除
      */
+    @MoliAspectLog(operModul = OldxConstant.MENU_MODUL,operType = "批量删除菜单",operDesc = "删除菜单列表")
     @RequestMapping("/delete")
     //@RequiresPermissions("system:osysmenu:delete")
     public CommonResult delete(@RequestBody Long[] menuIds){

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cc.oldx.mbg.mapper.OSystemLogDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cc.oldx.mbg.domain.OSystemLogEntity" id="oSystemLogMap">
+        <result property="id" column="id"/>
+        <result property="modul" column="modul"/>
+        <result property="type" column="type"/>
+        <result property="o_desc" column="o_desc"/>
+        <result property="requestParam" column="request_param"/>
+        <result property="userId" column="user_id"/>
+        <result property="username" column="username"/>
+        <result property="method" column="method"/>
+        <result property="uri" column="uri"/>
+        <result property="ip" column="ip"/>
+        <result property="createTime" column="create_time"/>
+        <result property="version" column="version"/>
+    </resultMap>
+
+
+</mapper>

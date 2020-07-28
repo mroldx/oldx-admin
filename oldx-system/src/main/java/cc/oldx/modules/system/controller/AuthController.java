@@ -1,5 +1,7 @@
 package cc.oldx.modules.system.controller;
 
+import cc.oldx.common.annotation.MoliAspectLog;
+import cc.oldx.common.constant.OldxConstant;
 import cc.oldx.common.utils.CommonResult;
 import cc.oldx.common.utils.RedisUtil;
 import cc.oldx.mbg.domain.OSysUserEntity;
@@ -36,7 +38,7 @@ public class AuthController {
     @Value("${jwt.tokenHead}")
     private String tokenHead;
     private JwtTokenUtil jwtTokenUtil;
-
+    @MoliAspectLog(operModul = OldxConstant.USER_MODUL,operType = "用户注册",operDesc = "用户注册接口")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public CommonResult register(@RequestBody OSysUserParam oSysUserParam) {
         OSysUserEntity sysUser = sysUserService.register(oSysUserParam);
@@ -44,9 +46,10 @@ public class AuthController {
             return CommonResult.error("用户名已存在，请重试");
         }
         sysUserService.save(sysUser);
-        return CommonResult.ok("添加成功").put("user", sysUser);
-    }
 
+        return CommonResult.ok("注册成功");
+    }
+    @MoliAspectLog(operModul = OldxConstant.USER_MODUL,operType = "用户登录",operDesc = "用户登录接口")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public CommonResult login(@RequestBody OSysUserParam oSysUserParam) {
         String token = sysUserService.login(oSysUserParam.getUsername(), oSysUserParam.getPassword());
@@ -59,7 +62,7 @@ public class AuthController {
      //   redisUti.set("moli_token",token,3600);
         return CommonResult.ok(tokenMap);
     }
-
+    @MoliAspectLog(operModul = OldxConstant.USER_MODUL,operType = "token刷新",operDesc = "token刷新接口")
     @RequestMapping(value = "/refresh/token", method = RequestMethod.POST)
     public CommonResult refresh(HttpServletRequest request) {
         String authHeader = request.getHeader(this.tokenHeader);

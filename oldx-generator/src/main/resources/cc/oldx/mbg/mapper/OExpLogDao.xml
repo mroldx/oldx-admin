@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cc.oldx.mbg.mapper.OExpLogDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cc.oldx.mbg.domain.OExpLogEntity" id="oExpLogMap">
+        <result property="id" column="id"/>
+        <result property="requestParam" column="request_param"/>
+        <result property="expName" column="exp_name"/>
+        <result property="expMessage" column="exp_message"/>
+        <result property="expUserId" column="exp_user_id"/>
+        <result property="username" column="username"/>
+        <result property="method" column="method"/>
+        <result property="uri" column="uri"/>
+        <result property="ip" column="ip"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+
+</mapper>

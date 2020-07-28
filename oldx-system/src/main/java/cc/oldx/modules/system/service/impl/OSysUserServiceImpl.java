@@ -72,7 +72,7 @@ public class OSysUserServiceImpl extends ServiceImpl<OSysUserDao, OSysUserEntity
         user.setDescription("");
 
         QueryWrapper<OSysUserEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("username");
+        queryWrapper.eq("username",OSysUserParam.getUsername());
 
         List<OSysUserEntity> userEntityList = this.baseMapper.selectList(queryWrapper);
         if (userEntityList.size() > 0) {

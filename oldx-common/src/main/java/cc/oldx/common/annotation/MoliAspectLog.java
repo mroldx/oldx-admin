@@ -12,30 +12,11 @@ import java.lang.annotation.*;
 @Documented//文档生成时，该注解将被包含在javadoc中，可去掉
 @Inherited
 public @interface MoliAspectLog {
-    /**
-     * 操作描述 业务名称business
-     *
-     * @return
-     */
-    String description() default "";
+    String operModul() default ""; // 操作模块
 
 
+    String operType() default "";  // 操作类型
 
-    /**
-     * 主键入参参数名称，入参中的哪个参数为主键
-     *
-     * @return
-     */
-    String primaryKeyName() default "";
 
-    /**
-     * 主键在参数中的顺序，从0开始，默认0
-     */
-    int primaryKeySort() default 0;
-
-    /**
-     * 业务类型
-     * @return
-     */
-    String business() default "";
+    String operDesc() default "";  // 操作说明
 }
