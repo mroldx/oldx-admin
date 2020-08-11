@@ -4,6 +4,8 @@ import cc.oldx.common.utils.CommonResult;
 import cc.oldx.common.utils.PageUtils;
 import cc.oldx.mbg.domain.OExpLogEntity;
 import cc.oldx.modules.system.service.OExpLogService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +25,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("ware/oexplog")
+@Api("全局日志")
 public class OExpLogController {
     @Autowired
     private OExpLogService oExpLogService;
@@ -43,6 +46,7 @@ public class OExpLogController {
      * 信息
      */
     @RequestMapping("/info/{id}")
+    @ApiOperation("查询日志ID")
     //@RequiresPermissions("ware:oexplog:info")
     public CommonResult info(@PathVariable("id") String id){
 		OExpLogEntity oExpLog = oExpLogService.getById(id);

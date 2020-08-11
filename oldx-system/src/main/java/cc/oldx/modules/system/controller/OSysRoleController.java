@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +29,7 @@ import cc.oldx.common.utils.CommonResult;
  */
 @RestController
 @RequestMapping("system/osysrole")
+@Api("角色-sysrole")
 public class OSysRoleController {
     @Autowired
     private OSysRoleService oSysRoleService;
@@ -36,6 +39,7 @@ public class OSysRoleController {
      */
     @RequestMapping("/list")
     //@RequiresPermissions("system:osysrole:list")
+    @ApiOperation("条件查询列表")
     public CommonResult list(@RequestParam Map<String, Object> params){
         PageUtils page = oSysRoleService.queryPage(params);
 
@@ -47,6 +51,7 @@ public class OSysRoleController {
      * 信息
      */
     @RequestMapping("/info/{id}")
+    @ApiOperation("查询某个角色")
     //@RequiresPermissions("system:osysrole:info")
     public CommonResult info(@PathVariable("id") Long id){
 		OSysRoleEntity oSysRole = oSysRoleService.getById(id);
@@ -58,6 +63,7 @@ public class OSysRoleController {
      * 保存
      */
     @RequestMapping("/save")
+    @ApiOperation("新增一个角色")
     //@RequiresPermissions("system:osysrole:save")
     public CommonResult save(@RequestBody OSysRoleEntity oSysRole){
 		oSysRoleService.save(oSysRole);
@@ -69,6 +75,7 @@ public class OSysRoleController {
      * 修改
      */
     @RequestMapping("/update")
+    @ApiOperation("修改一个角色的属性")
     //@RequiresPermissions("system:osysrole:update")
     public CommonResult update(@RequestBody OSysRoleEntity oSysRole){
 		oSysRoleService.updateById(oSysRole);
@@ -80,6 +87,7 @@ public class OSysRoleController {
      * 删除
      */
     @RequestMapping("/delete")
+    @ApiOperation("删除一个角色")
     //@RequiresPermissions("system:osysrole:delete")
     public CommonResult delete(@RequestBody Long[] ids){
 		oSysRoleService.removeByIds(Arrays.asList(ids));

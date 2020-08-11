@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +29,7 @@ import cc.oldx.common.utils.CommonResult;
  */
 @RestController
 @RequestMapping("system/osysuser")
+@Api("用户-sysuser")
 public class OSysUserController {
     @Autowired
     private OSysUserService oSysUserService;
@@ -35,6 +38,7 @@ public class OSysUserController {
      * 列表
      */
     @RequestMapping("/list")
+    @ApiOperation("条件查询用户列表")
     //@RequiresPermissions("system:osysuser:list")
     public CommonResult list(@RequestParam Map<String, Object> params){
         PageUtils page = oSysUserService.queryPage(params);
@@ -47,28 +51,18 @@ public class OSysUserController {
      * 信息
      */
     @RequestMapping("/info/{userId}")
+    @ApiOperation("查询某个用户")
     //@RequiresPermissions("system:osysuser:info")
     public CommonResult info(@PathVariable("userId") Long userId){
 		OSysUserEntity oSysUser = oSysUserService.getById(userId);
 
         return CommonResult.ok().put("oSysUser", oSysUser);
     }
-
-    /**
-     * 保存
-     */
-    @RequestMapping("/save")
-    //@RequiresPermissions("system:osysuser:save")
-    public CommonResult save(@RequestBody OSysUserEntity oSysUser){
-		oSysUserService.save(oSysUser);
-
-        return CommonResult.ok();
-    }
-
     /**
      * 修改
      */
     @RequestMapping("/update")
+    @ApiOperation("修改某个用户")
     //@RequiresPermissions("system:osysuser:update")
     public CommonResult update(@RequestBody OSysUserEntity oSysUser){
 		oSysUserService.updateById(oSysUser);
@@ -79,6 +73,7 @@ public class OSysUserController {
     /**
      * 删除
      */
+    @ApiOperation("删除某个用户")
     @RequestMapping("/delete")
     //@RequiresPermissions("system:osysuser:delete")
     public CommonResult delete(@RequestBody Long[] userIds){

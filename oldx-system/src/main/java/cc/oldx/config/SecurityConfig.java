@@ -57,6 +57,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.html",
                         "/**/*.css",
                         "/**/*.js",
+                        "/swagger-ui.html",
+                        "/v2/api-docs", // swagger api json
+                        "/swagger-resources/configuration/ui", // 用来获取支持的动作
+                        "/swagger-resources", // 用来获取api-docs的URI
+                        "/swagger-resources/configuration/security", // 安全选项
                         "/swagger-resources/**"
                 ).permitAll()
                 //登录注册
@@ -71,6 +76,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                  .permitAll()
                 .anyRequest()// 除上面外的所有请求全部需要鉴权认证
                 .authenticated();
+        //允许访问静态资源
+        httpSecurity.headers().frameOptions().sameOrigin();
         // 禁用缓存
         httpSecurity.headers().cacheControl();
         //添加JWT过滤器

@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +28,7 @@ import cc.oldx.common.utils.CommonResult;
  * @date 2020-06-04 14:11:58
  */
 @RestController
+@Api("角色权限-role")
 @RequestMapping("system/osysmenurole")
 public class OSysMenuRoleController {
     @Autowired
@@ -35,6 +38,7 @@ public class OSysMenuRoleController {
      * 列表
      */
     @RequestMapping("/list")
+    @ApiOperation("角色菜单列表")
     //@RequiresPermissions("system:osysmenurole:list")
     public CommonResult list(@RequestParam Map<String, Object> params){
         PageUtils page = oSysMenuRoleService.queryPage(params);
@@ -46,6 +50,7 @@ public class OSysMenuRoleController {
     /**
      * 信息
      */
+    @ApiOperation("查询某个角色对应的权限")
     @RequestMapping("/info/{roleId}")
     //@RequiresPermissions("system:osysmenurole:info")
     public CommonResult info(@PathVariable("roleId") Long roleId){
@@ -57,6 +62,7 @@ public class OSysMenuRoleController {
     /**
      * 保存
      */
+    @ApiOperation("新增角色与所对应的菜单权限")
     @RequestMapping("/save")
     //@RequiresPermissions("system:osysmenurole:save")
     public CommonResult save(@RequestBody OSysMenuRoleEntity oSysMenuRole){
@@ -69,6 +75,7 @@ public class OSysMenuRoleController {
      * 修改
      */
     @RequestMapping("/update")
+    @ApiOperation("修改某个角色与权限")
     //@RequiresPermissions("system:osysmenurole:update")
     public CommonResult update(@RequestBody OSysMenuRoleEntity oSysMenuRole){
 		oSysMenuRoleService.updateById(oSysMenuRole);
@@ -80,6 +87,7 @@ public class OSysMenuRoleController {
      * 删除
      */
     @RequestMapping("/delete")
+    @ApiOperation("删除某个角色对应的权限")
     //@RequiresPermissions("system:osysmenurole:delete")
     public CommonResult delete(@RequestBody Long[] roleIds){
 		oSysMenuRoleService.removeByIds(Arrays.asList(roleIds));

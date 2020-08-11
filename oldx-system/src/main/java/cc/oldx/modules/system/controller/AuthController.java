@@ -8,6 +8,8 @@ import cc.oldx.mbg.domain.OSysUserEntity;
 import cc.oldx.modules.security.utils.JwtTokenUtil;
 import cc.oldx.modules.system.dto.OSysUserParam;
 import cc.oldx.modules.system.service.OSysUserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +29,7 @@ import java.util.Map;
  * @Date: 2020/3/16 14:42
  */
 @RestController
+@Api("认证服务相关api")
 @RequestMapping("/auth")
 public class AuthController {
     @Autowired
@@ -38,8 +41,10 @@ public class AuthController {
     @Value("${jwt.tokenHead}")
     private String tokenHead;
     private JwtTokenUtil jwtTokenUtil;
-    @MoliAspectLog(operModul = OldxConstant.USER_MODUL,operType = "用户注册",operDesc = "用户注册接口")
+
+    @MoliAspectLog(operModul = OldxConstant.USER_MODUL, operType = "用户注册", operDesc = "用户注册接口")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @ApiOperation("注册用户")
     public CommonResult register(@RequestBody OSysUserParam oSysUserParam) {
         OSysUserEntity sysUser = sysUserService.register(oSysUserParam);
         if (sysUser == null) {
@@ -49,8 +54,10 @@ public class AuthController {
 
         return CommonResult.ok("注册成功");
     }
-    @MoliAspectLog(operModul = OldxConstant.USER_MODUL,operType = "用户登录",operDesc = "用户登录接口")
+
+    @MoliAspectLog(operModul = OldxConstant.USER_MODUL, operType = "用户登录", operDesc = "用户登录接口")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ApiOperation("系统登录")
     public CommonResult login(@RequestBody OSysUserParam oSysUserParam) {
         String token = sysUserService.login(oSysUserParam.getUsername(), oSysUserParam.getPassword());
         if (token == null) {
@@ -59,11 +66,13 @@ public class AuthController {
         Map<String, Object> tokenMap = new HashMap<>();
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
-     //   redisUti.set("moli_token",token,3600);
+        //   redisUti.set("moli_token",token,3600);
         return CommonResult.ok(tokenMap);
     }
-    @MoliAspectLog(operModul = OldxConstant.USER_MODUL,operType = "token刷新",operDesc = "token刷新接口")
+
+    @MoliAspectLog(operModul = OldxConstant.USER_MODUL, operType = "token刷新", operDesc = "token刷新接口")
     @RequestMapping(value = "/refresh/token", method = RequestMethod.POST)
+    @ApiOperation("token刷新")
     public CommonResult refresh(HttpServletRequest request) {
         String authHeader = request.getHeader(this.tokenHeader);
         if (authHeader != null && authHeader.startsWith(this.tokenHead)) {

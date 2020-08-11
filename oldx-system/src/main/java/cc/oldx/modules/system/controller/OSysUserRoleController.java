@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +28,7 @@ import cc.oldx.common.utils.CommonResult;
  * @date 2020-06-04 14:11:58
  */
 @RestController
+@Api("用户角色关联-userrole")
 @RequestMapping("system/osysuserrole")
 public class OSysUserRoleController {
     @Autowired
@@ -35,6 +38,7 @@ public class OSysUserRoleController {
      * 列表
      */
     @RequestMapping("/list")
+    @ApiOperation("查询用户角色对应列表")
     //@RequiresPermissions("system:osysuserrole:list")
     public CommonResult list(@RequestParam Map<String, Object> params){
         PageUtils page = oSysUserRoleService.queryPage(params);
@@ -47,6 +51,7 @@ public class OSysUserRoleController {
      * 信息
      */
     @RequestMapping("/info/{userId}")
+    @ApiOperation("查询某个用户对应的权限")
     //@RequiresPermissions("system:osysuserrole:info")
     public CommonResult info(@PathVariable("userId") Long userId){
 		OSysUserRoleEntity oSysUserRole = oSysUserRoleService.getById(userId);
@@ -57,6 +62,7 @@ public class OSysUserRoleController {
     /**
      * 保存
      */
+    @ApiOperation("新增用户与对应的角色")
     @RequestMapping("/save")
     //@RequiresPermissions("system:osysuserrole:save")
     public CommonResult save(@RequestBody OSysUserRoleEntity oSysUserRole){

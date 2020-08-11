@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +28,7 @@ import cc.oldx.common.utils.CommonResult;
  */
 @RestController
 @RequestMapping("system/osyslog")
+@Api("log")
 public class OSysLogController {
     @Autowired
     private OSysLogService oSysLogService;

@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +28,7 @@ import cc.oldx.common.utils.CommonResult;
  * @date 2020-06-04 14:11:58
  */
 @RestController
+@Api("定时任务-ojob")
 @RequestMapping("system/ojob")
 public class OJobController {
     @Autowired
@@ -35,6 +38,7 @@ public class OJobController {
      * 列表
      */
     @RequestMapping("/list")
+    @ApiOperation("定时任务列表")
     //@RequiresPermissions("system:ojob:list")
     public CommonResult list(@RequestParam Map<String, Object> params){
         PageUtils page = oJobService.queryPage(params);
@@ -47,6 +51,7 @@ public class OJobController {
      * 信息
      */
     @RequestMapping("/info/{id}")
+    @ApiOperation("查询某个定时任务")
     //@RequiresPermissions("system:ojob:info")
     public CommonResult info(@PathVariable("id") Long id){
 		OJobEntity oJob = oJobService.getById(id);
@@ -58,6 +63,7 @@ public class OJobController {
      * 保存
      */
     @RequestMapping("/save")
+    @ApiOperation("新增定时任务")
     //@RequiresPermissions("system:ojob:save")
     public CommonResult save(@RequestBody OJobEntity oJob){
 		oJobService.save(oJob);
@@ -69,6 +75,7 @@ public class OJobController {
      * 修改
      */
     @RequestMapping("/update")
+    @ApiOperation("更新定时任务")
     //@RequiresPermissions("system:ojob:update")
     public CommonResult update(@RequestBody OJobEntity oJob){
 		oJobService.updateById(oJob);
@@ -80,6 +87,7 @@ public class OJobController {
      * 删除
      */
     @RequestMapping("/delete")
+    @ApiOperation("删除定时任务")
     //@RequiresPermissions("system:ojob:delete")
     public CommonResult delete(@RequestBody Long[] ids){
 		oJobService.removeByIds(Arrays.asList(ids));

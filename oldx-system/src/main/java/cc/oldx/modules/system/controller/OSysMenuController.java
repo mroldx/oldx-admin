@@ -6,6 +6,8 @@ import cc.oldx.common.utils.CommonResult;
 import cc.oldx.common.utils.PageUtils;
 import cc.oldx.mbg.domain.OSysMenuEntity;
 import cc.oldx.modules.system.service.OSysMenuService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +28,7 @@ import java.util.Map;
  * @date 2020-06-04 14:11:58
  */
 @RestController
+@Api("系统菜单")
 @RequestMapping("system/osysmenu")
 public class OSysMenuController {
     @Autowired
@@ -36,6 +39,7 @@ public class OSysMenuController {
      */
     @MoliAspectLog(operModul = OldxConstant.MENU_MODUL,operType = "条件查询菜单",operDesc = "查询菜单列表")
     @RequestMapping("/list")
+    @ApiOperation("系统菜单列表")
     //@RequiresPermissions("system:osysmenu:list")
     public CommonResult list(@RequestParam Map<String, Object> params){
         PageUtils page = oSysMenuService.queryPage(params);
@@ -44,6 +48,7 @@ public class OSysMenuController {
     }
     @MoliAspectLog(operModul = OldxConstant.MENU_MODUL,operType = "获取菜单树结构",operDesc = "菜单树结构列表")
     @RequestMapping("/listTree")
+    @ApiOperation("获取菜单树形结构")
     @PreAuthorize("hasAuthority('menu:list')")
     public CommonResult getMenu(Long userId){
         List<OSysMenuEntity> sysMenuList = oSysMenuService.selectMenuList(userId);
@@ -53,6 +58,7 @@ public class OSysMenuController {
     /**
      * 信息
      */
+    @ApiOperation("查询指定菜单列表")
     @MoliAspectLog(operModul = OldxConstant.MENU_MODUL,operType = "条件查询菜单",operDesc = "查询菜单列表")
     @RequestMapping("/info/{menuId}")
     //@RequiresPermissions("system:osysmenu:info")
@@ -65,6 +71,7 @@ public class OSysMenuController {
     /**
      * 保存
      */
+    @ApiOperation("新增菜单")
     @MoliAspectLog(operModul = OldxConstant.MENU_MODUL,operType = "新增菜单",operDesc = "新增菜单列表")
     @RequestMapping("/save")
     //@RequiresPermissions("system:osysmenu:save")
@@ -79,6 +86,7 @@ public class OSysMenuController {
      */
     @MoliAspectLog(operModul = OldxConstant.MENU_MODUL,operType = "修改菜单",operDesc = "修改菜单列表")
     @RequestMapping("/update")
+    @ApiOperation("修改菜单")
     //@RequiresPermissions("system:osysmenu:update")
     public CommonResult update(@RequestBody OSysMenuEntity oSysMenu){
 		oSysMenuService.updateById(oSysMenu);
@@ -91,6 +99,7 @@ public class OSysMenuController {
      */
     @MoliAspectLog(operModul = OldxConstant.MENU_MODUL,operType = "批量删除菜单",operDesc = "删除菜单列表")
     @RequestMapping("/delete")
+    @ApiOperation("删除某个菜单")
     //@RequiresPermissions("system:osysmenu:delete")
     public CommonResult delete(@RequestBody Long[] menuIds){
 		oSysMenuService.removeByIds(Arrays.asList(menuIds));

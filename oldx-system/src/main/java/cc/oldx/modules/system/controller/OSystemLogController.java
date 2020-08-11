@@ -4,6 +4,8 @@ import cc.oldx.common.utils.CommonResult;
 import cc.oldx.common.utils.PageUtils;
 import cc.oldx.mbg.domain.OSystemLogEntity;
 import cc.oldx.modules.system.service.OSystemLogService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("ware/osystemlog")
+@Api("系统日志-log")
 public class OSystemLogController {
     @Autowired
     private OSystemLogService oSystemLogService;
@@ -26,6 +29,7 @@ public class OSystemLogController {
      * 列表
      */
     @RequestMapping("/list")
+    @ApiOperation("日志列表查询")
     //@RequiresPermissions("ware:osystemlog:list")
     public CommonResult list(@RequestParam Map<String, Object> params) {
         PageUtils page = oSystemLogService.queryPage(params);
@@ -38,6 +42,7 @@ public class OSystemLogController {
      * 信息
      */
     @RequestMapping("/info/{id}")
+    @ApiOperation("")
     //@RequiresPermissions("ware:osystemlog:info")
     public CommonResult info(@PathVariable("id") String id) {
         OSystemLogEntity oSystemLog = oSystemLogService.getById(id);
