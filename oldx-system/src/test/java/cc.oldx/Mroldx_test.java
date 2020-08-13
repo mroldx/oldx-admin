@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import redis.clients.jedis.Jedis;
 
 /**
  * @Author: moli
@@ -20,11 +21,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class Mroldx_test {
     @Autowired
     private RedisUtil redisUtil;
+
+    @Autowired
+    private Jedis jedis;
     @Test
     public void testRedis(){
         String code = RandomUtil.randomString("fdsafsd6464716f7dafds7fs4af6",4);
         String key = MD5Util.MD5Encode(code+System.currentTimeMillis(), "utf-8");
         redisUtil.set(key, code, 60);
+
         System.out.println(1);
 
         Object o = redisUtil.get(key);
