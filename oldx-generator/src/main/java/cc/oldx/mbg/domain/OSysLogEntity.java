@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
+import org.springframework.context.annotation.Primary;
 
 /**
  * 
@@ -17,6 +18,7 @@ import lombok.Data;
  */
 @Data
 @TableName("o_sys_log")
+@Primary
 public class OSysLogEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 

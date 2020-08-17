@@ -41,9 +41,9 @@ public class OldxWebLogAspect {
     private static final ThreadLocal<Long> timeTreadLocal = new ThreadLocal<>();
 
     @Autowired
-    private OSystemLogService logService;
+    private OSystemLogService oSystemLogService;
     @Autowired
-    private OExpLogService expLogService;
+    private OExpLogService oExpLogService;
 
     /**
      * 设置日志切人点，在有此注解的位置处切入代码
@@ -105,7 +105,7 @@ public class OldxWebLogAspect {
             logEntity.setUri(request.getRequestURI());
             logEntity.setCreateTime(new Date());
             //   logEntity.setOperVer(operVer);
-            logService.save(logEntity);
+            oSystemLogService.save(logEntity);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -153,7 +153,7 @@ public class OldxWebLogAspect {
             //  excepLog.setOperVer(operVer);
             excepLog.setCreateTime(new Date());
 
-            expLogService.save(excepLog);
+            oExpLogService.save(excepLog);
 
         } catch (Exception e2) {
             e2.printStackTrace();

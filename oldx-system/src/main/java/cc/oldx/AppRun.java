@@ -1,5 +1,6 @@
 package cc.oldx;
 
+import com.thebeastshop.forest.springboot.annotation.ForestScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -12,9 +13,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @SpringBootApplication
 @EnableSwagger2
+@ForestScan(basePackages = "cc.oldx.modules.system.service")
 public class AppRun {
     public static void main(String[] args) {
         SpringApplication.run(AppRun.class,args);
-
     }
 }

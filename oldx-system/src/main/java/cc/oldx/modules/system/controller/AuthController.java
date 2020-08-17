@@ -35,7 +35,7 @@ public class AuthController {
     @Autowired
     private RedisUtil redisUti;
     @Autowired
-    private OSysUserService sysUserService;
+    private OSysUserService oSysUserService;
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
@@ -46,11 +46,11 @@ public class AuthController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ApiOperation("注册用户")
     public CommonResult register(@RequestBody OSysUserParam oSysUserParam) {
-        OSysUserEntity sysUser = sysUserService.register(oSysUserParam);
+        OSysUserEntity sysUser = oSysUserService.register(oSysUserParam);
         if (sysUser == null) {
             return CommonResult.error("用户名已存在，请重试");
         }
-        sysUserService.save(sysUser);
+        oSysUserService.save(sysUser);
 
         return CommonResult.ok("注册成功");
     }
@@ -59,7 +59,7 @@ public class AuthController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ApiOperation("系统登录")
     public CommonResult login(@RequestBody OSysUserParam oSysUserParam) {
-        String token = sysUserService.login(oSysUserParam.getUsername(), oSysUserParam.getPassword());
+        String token = oSysUserService.login(oSysUserParam.getUsername(), oSysUserParam.getPassword());
         if (token == null) {
             return CommonResult.error("用户名或密码错误");
         }
