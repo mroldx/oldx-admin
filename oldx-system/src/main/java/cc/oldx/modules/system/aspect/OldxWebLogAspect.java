@@ -137,14 +137,16 @@ public class OldxWebLogAspect {
             // 获取请求的方法名
             String methodName = method.getName();
             methodName = className + "." + methodName;
+            excepLog.setMethod(methodName);
             // 请求的参数
             Map<String, String> rtnMap = converMap(request.getParameterMap());
             // 将参数所在的数组转换成json
             String params = JSON.toJSONString(rtnMap);
             excepLog.setRequestParam(params);
-            excepLog.setMethod(methodName);
+
             excepLog.setExpName(e.getClass().getName());
-            excepLog.setExpMessage(stackTraceToString(e.getClass().getName(), e.getMessage(), e.getStackTrace()));
+            Throwable throwable = e.fillInStackTrace();
+            excepLog.setExpMessage(throwable.toString());
             //todo
 //            excepLog.setOperUserId(UserShiroUtil.getCurrentUserLoginName());
 //            excepLog.setOperUserName(UserShiroUtil.getCurrentUserName());

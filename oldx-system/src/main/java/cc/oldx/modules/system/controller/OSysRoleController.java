@@ -1,22 +1,18 @@
 package cc.oldx.modules.system.controller;
 
+import cc.oldx.common.utils.CommonResult;
+import cc.oldx.common.utils.PageUtils;
+import cc.oldx.mbg.domain.OSysRoleEntity;
+import cc.oldx.modules.system.service.OSysRoleService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.Arrays;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import cc.oldx.mbg.domain.OSysRoleEntity;
-import cc.oldx.modules.system.service.OSysRoleService;
-import cc.oldx.common.utils.PageUtils;
-import cc.oldx.common.utils.CommonResult;
 
 
 
@@ -62,13 +58,13 @@ public class OSysRoleController {
     /**
      * 保存
      */
-    @RequestMapping("/save")
+    @RequestMapping(value = "/save",method = RequestMethod.POST)
     @ApiOperation("新增一个角色")
     //@RequiresPermissions("system:osysrole:save")
     public CommonResult save(@RequestBody OSysRoleEntity oSysRole){
-		oSysRoleService.save(oSysRole);
+		oSysRoleService.createRole(oSysRole);
 
-        return CommonResult.ok();
+        return CommonResult.ok().put("message","成功");
     }
 
     /**
