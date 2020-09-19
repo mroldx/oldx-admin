@@ -4,7 +4,7 @@ import cc.oldx.common.utils.CommonResult;
 import cc.oldx.modules.system.service.AmapClient;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,11 +18,12 @@ import java.util.Map;
  * @Date: 2020/3/17 4:48
  */
 @RestController
+@RequiredArgsConstructor
 @Api("首页")
 public class IndexController {
 
-    @Autowired
-    private AmapClient amapClient;
+
+    private final AmapClient amapClient;
 
     @RequestMapping("/map_test")
     public CommonResult aa() {

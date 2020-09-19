@@ -6,6 +6,7 @@ import cc.oldx.mbg.domain.OExpLogEntity;
 import cc.oldx.modules.system.service.OExpLogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("ware/oexplog")
 @Api("全局日志")
+@RequiredArgsConstructor
 public class OExpLogController {
     @Autowired
     private OExpLogService oExpLogService;

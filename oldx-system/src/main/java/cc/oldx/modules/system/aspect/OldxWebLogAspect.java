@@ -8,6 +8,7 @@ import cc.oldx.modules.system.service.OExpLogService;
 import cc.oldx.modules.system.service.OSystemLogService;
 import cn.hutool.core.util.IdUtil;
 import com.alibaba.fastjson.JSON;
+import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -16,7 +17,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -35,15 +35,16 @@ import java.util.Map;
 
 @Aspect
 @Component
+@RequiredArgsConstructor
 public class OldxWebLogAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(OldxWebLogAspect.class);
     private static final ThreadLocal<Long> timeTreadLocal = new ThreadLocal<>();
 
-    @Autowired
-    private OSystemLogService oSystemLogService;
-    @Autowired
-    private OExpLogService oExpLogService;
+
+    private final OSystemLogService oSystemLogService;
+
+    private final OExpLogService oExpLogService;
 
     /**
      * 设置日志切人点，在有此注解的位置处切入代码

@@ -1,21 +1,17 @@
 package cc.oldx.modules.system.controller;
 
+import cc.oldx.common.utils.CommonResult;
+import cc.oldx.common.utils.PageUtils;
+import cc.oldx.mbg.domain.OSysLogEntity;
+import cc.oldx.modules.system.service.OSysLogService;
+import io.swagger.annotations.Api;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.Arrays;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
-import io.swagger.annotations.Api;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import cc.oldx.mbg.domain.OSysLogEntity;
-import cc.oldx.modules.system.service.OSysLogService;
-import cc.oldx.common.utils.PageUtils;
-import cc.oldx.common.utils.CommonResult;
 
 
 
@@ -29,9 +25,10 @@ import cc.oldx.common.utils.CommonResult;
 @RestController
 @RequestMapping("system/osyslog")
 @Api("log")
+@RequiredArgsConstructor
 public class OSysLogController {
-    @Autowired
-    private OSysLogService oSysLogService;
+
+    private final OSysLogService oSysLogService;
 
     /**
      * 列表

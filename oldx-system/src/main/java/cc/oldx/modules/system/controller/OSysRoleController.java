@@ -6,7 +6,7 @@ import cc.oldx.mbg.domain.OSysRoleEntity;
 import cc.oldx.modules.system.service.OSysRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -26,9 +26,9 @@ import java.util.Map;
 @RestController
 @RequestMapping("system/osysrole")
 @Api("角色-sysrole")
+@RequiredArgsConstructor
 public class OSysRoleController {
-    @Autowired
-    private OSysRoleService oSysRoleService;
+    private final OSysRoleService oSysRoleService;
 
     /**
      * 列表

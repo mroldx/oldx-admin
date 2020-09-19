@@ -10,7 +10,7 @@ import cc.oldx.modules.system.dto.OSysUserParam;
 import cc.oldx.modules.system.service.OSysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,16 +31,17 @@ import java.util.Map;
 @RestController
 @Api("认证服务相关api")
 @RequestMapping("/auth")
+@RequiredArgsConstructor
 public class AuthController {
-    @Autowired
-    private RedisUtil redisUti;
-    @Autowired
-    private OSysUserService oSysUserService;
+
+    private final RedisUtil redisUti;
+
+    private final OSysUserService oSysUserService;
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
-    private JwtTokenUtil jwtTokenUtil;
+    private final JwtTokenUtil jwtTokenUtil;
 
     @MoliAspectLog(operModul = OldxConstant.USER_MODUL, operType = "用户注册", operDesc = "用户注册接口")
     @RequestMapping(value = "/register", method = RequestMethod.POST)

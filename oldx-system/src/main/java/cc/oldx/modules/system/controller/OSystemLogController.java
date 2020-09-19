@@ -6,7 +6,7 @@ import cc.oldx.mbg.domain.OSystemLogEntity;
 import cc.oldx.modules.system.service.OSystemLogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -21,9 +21,10 @@ import java.util.Map;
 @RestController
 @RequestMapping("ware/osystemlog")
 @Api("系统日志-log")
+@RequiredArgsConstructor
 public class OSystemLogController {
-    @Autowired
-    private OSystemLogService oSystemLogService;
+
+    private final OSystemLogService oSystemLogService;
 
     /**
      * 列表
