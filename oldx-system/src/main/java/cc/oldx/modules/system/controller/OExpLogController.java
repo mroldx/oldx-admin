@@ -35,7 +35,7 @@ public class OExpLogController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     //@RequiresPermissions("ware:oexplog:list")
     public CommonResult list(@RequestParam Map<String, Object> params){
         PageUtils page = oExpLogService.queryPage(params);
@@ -47,7 +47,7 @@ public class OExpLogController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{id}")
+    @GetMapping("/info/{id}")
     @ApiOperation("查询日志ID")
     //@RequiresPermissions("ware:oexplog:info")
     public CommonResult info(@PathVariable("id") String id){
@@ -59,7 +59,7 @@ public class OExpLogController {
     /**
      * 保存
      */
-    @RequestMapping("/save")
+    @PostMapping("/save")
     //@RequiresPermissions("ware:oexplog:save")
     public CommonResult save(@RequestBody OExpLogEntity oExpLog){
 		oExpLogService.save(oExpLog);
@@ -70,7 +70,7 @@ public class OExpLogController {
     /**
      * 修改
      */
-    @RequestMapping("/update")
+    @GetMapping("/update")
     //@RequiresPermissions("ware:oexplog:update")
     public CommonResult update(@RequestBody OExpLogEntity oExpLog){
 		oExpLogService.updateById(oExpLog);
@@ -81,7 +81,7 @@ public class OExpLogController {
     /**
      * 删除
      */
-    @RequestMapping("/delete")
+    @GetMapping("/delete")
     //@RequiresPermissions("ware:oexplog:delete")
     public CommonResult delete(@RequestBody String[] ids){
 		oExpLogService.removeByIds(Arrays.asList(ids));

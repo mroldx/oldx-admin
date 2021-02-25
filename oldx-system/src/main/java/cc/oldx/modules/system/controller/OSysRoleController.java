@@ -33,7 +33,7 @@ public class OSysRoleController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     //@RequiresPermissions("system:osysrole:list")
     @ApiOperation("条件查询列表")
     public CommonResult list(@RequestParam Map<String, Object> params){
@@ -46,7 +46,7 @@ public class OSysRoleController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{id}")
+    @GetMapping("/info/{id}")
     @ApiOperation("查询某个角色")
     //@RequiresPermissions("system:osysrole:info")
     public CommonResult info(@PathVariable("id") Long id){
@@ -58,7 +58,7 @@ public class OSysRoleController {
     /**
      * 保存
      */
-    @RequestMapping(value = "/save",method = RequestMethod.POST)
+    @PostMapping(value = "/save")
     @ApiOperation("新增一个角色")
     //@RequiresPermissions("system:osysrole:save")
     public CommonResult save(@RequestBody OSysRoleEntity oSysRole){
@@ -70,7 +70,7 @@ public class OSysRoleController {
     /**
      * 修改
      */
-    @RequestMapping("/update")
+    @PostMapping("/update")
     @ApiOperation("修改一个角色的属性")
     //@RequiresPermissions("system:osysrole:update")
     public CommonResult update(@RequestBody OSysRoleEntity oSysRole){
@@ -82,7 +82,7 @@ public class OSysRoleController {
     /**
      * 删除
      */
-    @RequestMapping("/delete")
+    @GetMapping("/delete")
     @ApiOperation("删除一个角色")
     //@RequiresPermissions("system:osysrole:delete")
     public CommonResult delete(@RequestBody Long[] ids){

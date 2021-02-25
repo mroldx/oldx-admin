@@ -3,6 +3,7 @@ package cc.oldx;
 import cc.oldx.common.utils.MD5Util;
 import cc.oldx.common.utils.RedisUtil;
 import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.StrUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,11 @@ public class Mroldx_test {
 
         Object o = redisUtil.get(key);
         System.out.println(o);
+    }
+
+    @Test
+    public void testHutool(){
+        boolean b = StrUtil.hasBlank("", "");
+        System.out.println(b);
     }
 }

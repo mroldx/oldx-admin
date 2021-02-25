@@ -34,7 +34,7 @@ public class OSysUserController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     @ApiOperation("条件查询用户列表")
     //@RequiresPermissions("system:osysuser:list")
     public CommonResult list(@RequestParam Map<String, Object> params){
@@ -47,7 +47,7 @@ public class OSysUserController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{userId}")
+    @GetMapping("/info/{userId}")
     @ApiOperation("查询某个用户")
     //@RequiresPermissions("system:osysuser:info")
     public CommonResult info(@PathVariable("userId") Long userId){
@@ -58,7 +58,7 @@ public class OSysUserController {
     /**
      * 修改
      */
-    @RequestMapping("/update")
+    @PostMapping("/update")
     @ApiOperation("修改某个用户")
     //@RequiresPermissions("system:osysuser:update")
     public CommonResult update(@RequestBody OSysUserEntity oSysUser){
@@ -71,7 +71,7 @@ public class OSysUserController {
      * 删除
      */
     @ApiOperation("删除某个用户")
-    @RequestMapping("/delete")
+    @GetMapping("/delete")
     //@RequiresPermissions("system:osysuser:delete")
     public CommonResult delete(@RequestBody Long[] userIds){
 		oSysUserService.removeByIds(Arrays.asList(userIds));

@@ -33,7 +33,7 @@ public class OSysLogController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     //@RequiresPermissions("system:osyslog:list")
     public CommonResult list(@RequestParam Map<String, Object> params){
         PageUtils page = oSysLogService.queryPage(params);
@@ -45,7 +45,7 @@ public class OSysLogController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{id}")
+    @GetMapping("/info/{id}")
     //@RequiresPermissions("system:osyslog:info")
     public CommonResult info(@PathVariable("id") Long id){
 		OSysLogEntity oSysLog = oSysLogService.getById(id);
@@ -56,7 +56,7 @@ public class OSysLogController {
     /**
      * 保存
      */
-    @RequestMapping("/save")
+    @PostMapping("/save")
     //@RequiresPermissions("system:osyslog:save")
     public CommonResult save(@RequestBody OSysLogEntity oSysLog){
 		oSysLogService.save(oSysLog);
@@ -67,7 +67,7 @@ public class OSysLogController {
     /**
      * 修改
      */
-    @RequestMapping("/update")
+    @PostMapping("/update")
     //@RequiresPermissions("system:osyslog:update")
     public CommonResult update(@RequestBody OSysLogEntity oSysLog){
 		oSysLogService.updateById(oSysLog);
@@ -78,7 +78,7 @@ public class OSysLogController {
     /**
      * 删除
      */
-    @RequestMapping("/delete")
+    @GetMapping("/delete")
     //@RequiresPermissions("system:osyslog:delete")
     public CommonResult delete(@RequestBody Long[] ids){
 		oSysLogService.removeByIds(Arrays.asList(ids));

@@ -35,7 +35,7 @@ public class OSysUserRoleController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     @ApiOperation("查询用户角色对应列表")
     //@RequiresPermissions("system:osysuserrole:list")
     public CommonResult list(@RequestParam Map<String, Object> params){
@@ -48,7 +48,7 @@ public class OSysUserRoleController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{userId}")
+    @GetMapping("/info/{userId}")
     @ApiOperation("查询某个用户对应的权限")
     //@RequiresPermissions("system:osysuserrole:info")
     public CommonResult info(@PathVariable("userId") Long userId){
@@ -61,7 +61,7 @@ public class OSysUserRoleController {
      * 保存
      */
     @ApiOperation("新增用户与对应的角色")
-    @RequestMapping("/save")
+    @PostMapping("/save")
     //@RequiresPermissions("system:osysuserrole:save")
     public CommonResult save(@RequestBody OSysUserRoleEntity oSysUserRole){
 		oSysUserRoleService.save(oSysUserRole);
@@ -72,7 +72,7 @@ public class OSysUserRoleController {
     /**
      * 修改
      */
-    @RequestMapping("/update")
+    @PostMapping("/update")
     //@RequiresPermissions("system:osysuserrole:update")
     public CommonResult update(@RequestBody OSysUserRoleEntity oSysUserRole){
 		oSysUserRoleService.updateById(oSysUserRole);
@@ -83,7 +83,7 @@ public class OSysUserRoleController {
     /**
      * 删除
      */
-    @RequestMapping("/delete")
+    @GetMapping("/delete")
     //@RequiresPermissions("system:osysuserrole:delete")
     public CommonResult delete(@RequestBody Long[] userIds){
 		oSysUserRoleService.removeByIds(Arrays.asList(userIds));
