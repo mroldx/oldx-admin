@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
-@MapperScan({"cc.oldx.mbg.mapper","cc.oldx.modules.system.dao"})
+@MapperScan("cc.oldx.mbg.mapper")
 public class MyBatisConfig {
     //打印sql执行语句
     @Bean
