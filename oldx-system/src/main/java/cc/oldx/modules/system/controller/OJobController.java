@@ -47,7 +47,7 @@ public class OJobController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{id}")
+    @GetMapping("/info/{id}")
     @ApiOperation("查询某个定时任务")
     //@RequiresPermissions("system:ojob:info")
     public CommonResult info(@PathVariable("id") Long id){
@@ -59,7 +59,7 @@ public class OJobController {
     /**
      * 保存
      */
-    @RequestMapping("/save")
+    @PostMapping("/save")
     @ApiOperation("新增定时任务")
     //@RequiresPermissions("system:ojob:save")
     public CommonResult save(@RequestBody OJobEntity oJob){
@@ -71,7 +71,7 @@ public class OJobController {
     /**
      * 修改
      */
-    @RequestMapping("/update")
+    @PostMapping("/update")
     @ApiOperation("更新定时任务")
     //@RequiresPermissions("system:ojob:update")
     public CommonResult update(@RequestBody OJobEntity oJob){
@@ -83,7 +83,7 @@ public class OJobController {
     /**
      * 删除
      */
-    @RequestMapping("/delete")
+    @GetMapping("/delete")
     @ApiOperation("删除定时任务")
     //@RequiresPermissions("system:ojob:delete")
     public CommonResult delete(@RequestBody Long[] ids){

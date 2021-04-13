@@ -12,10 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -44,7 +41,7 @@ public class AuthController {
     private final JwtTokenUtil jwtTokenUtil;
 
     @MoliAspectLog(operModul = OldxConstant.USER_MODUL, operType = "用户注册", operDesc = "用户注册接口")
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @PostMapping(value = "/register")
     @ApiOperation("注册用户")
     public CommonResult register(@RequestBody OSysUserParam oSysUserParam) {
         OSysUserEntity sysUser = oSysUserService.register(oSysUserParam);
@@ -57,7 +54,7 @@ public class AuthController {
     }
 
     @MoliAspectLog(operModul = OldxConstant.USER_MODUL, operType = "用户登录", operDesc = "用户登录接口")
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @PostMapping(value = "/login")
     @ApiOperation("系统登录")
     public CommonResult login(@RequestBody OSysUserParam oSysUserParam) {
         String token = oSysUserService.login(oSysUserParam.getUsername(), oSysUserParam.getPassword());
@@ -71,7 +68,7 @@ public class AuthController {
     }
 
     @MoliAspectLog(operModul = OldxConstant.USER_MODUL, operType = "token刷新", operDesc = "token刷新接口")
-    @RequestMapping(value = "/refresh/token", method = RequestMethod.POST)
+    @PostMapping(value = "/refresh/token")
     @ApiOperation("token刷新")
     public CommonResult refresh(HttpServletRequest request) {
         String authHeader = request.getHeader(this.tokenHeader);

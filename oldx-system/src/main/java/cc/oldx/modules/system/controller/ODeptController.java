@@ -33,7 +33,7 @@ public class ODeptController {
      * 列表
      */
     @MoliAspectLog(operModul = OldxConstant.DEPT_MODUL, operType = "部门查询列表", operDesc = "查询部门所有人员")
-    @GetMapping("/list")
+    @PostMapping("/list")
     @ApiOperation("部门查询列表")
     //@RequiresPermissions("system:odept:list")
     public CommonResult list(@RequestParam Map<String, Object> params) {
@@ -86,7 +86,7 @@ public class ODeptController {
      * 删除
      */
     @MoliAspectLog(operModul = OldxConstant.DEPT_MODUL, operType = "删除某个部门", operDesc = "删除部门")
-    @DeleteMapping("/delete")
+    @RequestMapping("/delete")
     @ApiOperation("批量删除部门")
     //@RequiresPermissions("system:odept:delete")
     public CommonResult delete(@RequestBody Long[] deptIds) {

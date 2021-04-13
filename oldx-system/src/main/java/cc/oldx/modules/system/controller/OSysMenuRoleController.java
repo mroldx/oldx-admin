@@ -48,7 +48,7 @@ public class OSysMenuRoleController {
      * 信息
      */
     @ApiOperation("查询某个角色对应的权限")
-    @RequestMapping("/info/{roleId}")
+    @GetMapping("/info/{roleId}")
     //@RequiresPermissions("system:osysmenurole:info")
     public CommonResult info(@PathVariable("roleId") Long roleId){
 		OSysMenuRoleEntity oSysMenuRole = oSysMenuRoleService.getById(roleId);
@@ -60,7 +60,7 @@ public class OSysMenuRoleController {
      * 保存
      */
     @ApiOperation("新增角色与所对应的菜单权限")
-    @RequestMapping("/save")
+    @PostMapping("/save")
     //@RequiresPermissions("system:osysmenurole:save")
     public CommonResult save(@RequestBody OSysMenuRoleEntity oSysMenuRole){
 		oSysMenuRoleService.save(oSysMenuRole);
@@ -71,7 +71,7 @@ public class OSysMenuRoleController {
     /**
      * 修改
      */
-    @RequestMapping("/update")
+    @PostMapping("/update")
     @ApiOperation("修改某个角色与权限")
     //@RequiresPermissions("system:osysmenurole:update")
     public CommonResult update(@RequestBody OSysMenuRoleEntity oSysMenuRole){
@@ -83,7 +83,7 @@ public class OSysMenuRoleController {
     /**
      * 删除
      */
-    @RequestMapping("/delete")
+    @GetMapping("/delete")
     @ApiOperation("删除某个角色对应的权限")
     //@RequiresPermissions("system:osysmenurole:delete")
     public CommonResult delete(@RequestBody Long[] roleIds){

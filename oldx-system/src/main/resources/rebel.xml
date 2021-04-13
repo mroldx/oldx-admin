@@ -9,7 +9,7 @@
 	<id>oldx-system</id>
 
 	<classpath>
-		<dir name="D:/Oldx-admin/github/oldx-admin/oldx-system/target/classes">
+		<dir name="D:/git_code/oldx-admin/oldx-system/target/classes">
 		</dir>
 	</classpath>
 

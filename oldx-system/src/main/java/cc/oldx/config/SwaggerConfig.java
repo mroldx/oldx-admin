@@ -36,7 +36,7 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
         return new ApiInfo(
                 "oldx-admin后台 Swagger 实例文档",
                 "oldx-admin后台 Swagger 实例文档",
-                "API V1.0",
+                "API V1.0  ",
                 "oldx-admin",
                 new Contact("oldx-admin", "http://mroldx.xyz", "974751082@qq.com"),
                 "Apache", "http://www.apache.org/", Collections.emptyList());

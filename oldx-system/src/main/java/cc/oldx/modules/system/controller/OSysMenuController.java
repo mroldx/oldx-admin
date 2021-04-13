@@ -47,7 +47,7 @@ public class OSysMenuController {
     }
 
     @MoliAspectLog(operModul = OldxConstant.MENU_MODUL, operType = "获取菜单树结构", operDesc = "菜单树结构列表")
-    @RequestMapping("/listTree")
+    @GetMapping("/listTree")
     @ApiOperation("获取菜单树形结构")
     @PreAuthorize("hasAuthority('menu:list')")
     public CommonResult getMenu(Long userId) {
@@ -60,7 +60,7 @@ public class OSysMenuController {
      */
     @ApiOperation("查询指定菜单列表")
     @MoliAspectLog(operModul = OldxConstant.MENU_MODUL, operType = "条件查询菜单", operDesc = "查询菜单列表")
-    @RequestMapping("/info/{menuId}")
+    @GetMapping("/info/{menuId}")
     //@RequiresPermissions("system:osysmenu:info")
     public CommonResult info(@PathVariable("menuId") Long menuId) {
         OSysMenuEntity oSysMenu = oSysMenuService.getById(menuId);
@@ -73,7 +73,7 @@ public class OSysMenuController {
      */
     @ApiOperation("新增菜单")
     @MoliAspectLog(operModul = OldxConstant.MENU_MODUL, operType = "新增菜单", operDesc = "新增菜单列表")
-    @RequestMapping("/save")
+    @PostMapping("/save")
     //@RequiresPermissions("system:osysmenu:save")
     public CommonResult save(@RequestBody OSysMenuEntity oSysMenu) {
         oSysMenuService.save(oSysMenu);
@@ -85,7 +85,7 @@ public class OSysMenuController {
      * 修改
      */
     @MoliAspectLog(operModul = OldxConstant.MENU_MODUL, operType = "修改菜单", operDesc = "修改菜单列表")
-    @RequestMapping("/update")
+    @PostMapping("/update")
     @ApiOperation("修改菜单")
     //@RequiresPermissions("system:osysmenu:update")
     public CommonResult update(@RequestBody OSysMenuEntity oSysMenu) {
@@ -98,7 +98,7 @@ public class OSysMenuController {
      * 删除
      */
     @MoliAspectLog(operModul = OldxConstant.MENU_MODUL, operType = "批量删除菜单", operDesc = "删除菜单列表")
-    @RequestMapping("/delete")
+    @GetMapping("/delete")
     @ApiOperation("删除某个菜单")
     //@RequiresPermissions("system:osysmenu:delete")
     public CommonResult delete(@RequestBody Long[] menuIds) {

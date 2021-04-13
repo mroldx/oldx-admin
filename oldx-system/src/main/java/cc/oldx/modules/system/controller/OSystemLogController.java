@@ -42,7 +42,7 @@ public class OSystemLogController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{id}")
+    @GetMapping("/info/{id}")
     @ApiOperation("")
     //@RequiresPermissions("ware:osystemlog:info")
     public CommonResult info(@PathVariable("id") String id) {
@@ -54,7 +54,7 @@ public class OSystemLogController {
     /**
      * 保存
      */
-    @RequestMapping("/save")
+    @PostMapping("/save")
     //@RequiresPermissions("ware:osystemlog:save")
     public CommonResult save(@RequestBody OSystemLogEntity oSystemLog) {
         oSystemLogService.save(oSystemLog);
@@ -65,7 +65,7 @@ public class OSystemLogController {
     /**
      * 修改
      */
-    @RequestMapping("/update")
+    @PostMapping("/update")
     //@RequiresPermissions("ware:osystemlog:update")
     public CommonResult update(@RequestBody OSystemLogEntity oSystemLog) {
         oSystemLogService.updateById(oSystemLog);
@@ -76,7 +76,7 @@ public class OSystemLogController {
     /**
      * 删除
      */
-    @RequestMapping("/delete")
+    @GetMapping("/delete")
     //@RequiresPermissions("ware:osystemlog:delete")
     public CommonResult delete(@RequestBody String[] ids) {
         oSystemLogService.removeByIds(Arrays.asList(ids));

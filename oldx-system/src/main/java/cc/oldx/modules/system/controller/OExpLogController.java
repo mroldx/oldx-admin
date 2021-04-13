@@ -5,6 +5,7 @@ import cc.oldx.common.utils.PageUtils;
 import cc.oldx.mbg.domain.OExpLogEntity;
 import cc.oldx.modules.system.service.OExpLogService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -46,8 +47,8 @@ public class OExpLogController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{id}")
-    @GetMapping("查询日志ID")
+    @GetMapping("/info/{id}")
+    @ApiOperation("查询日志ID")
     //@RequiresPermissions("ware:oexplog:info")
     public CommonResult info(@PathVariable("id") String id){
 		OExpLogEntity oExpLog = oExpLogService.getById(id);
@@ -69,7 +70,7 @@ public class OExpLogController {
     /**
      * 修改
      */
-    @PutMapping("/update")
+    @GetMapping("/update")
     //@RequiresPermissions("ware:oexplog:update")
     public CommonResult update(@RequestBody OExpLogEntity oExpLog){
 		oExpLogService.updateById(oExpLog);
@@ -80,7 +81,7 @@ public class OExpLogController {
     /**
      * 删除
      */
-    @DeleteMapping("/delete")
+    @GetMapping("/delete")
     //@RequiresPermissions("ware:oexplog:delete")
     public CommonResult delete(@RequestBody String[] ids){
 		oExpLogService.removeByIds(Arrays.asList(ids));
