@@ -34,7 +34,7 @@ public class OSysUserController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     @ApiOperation("条件查询用户列表")
     //@RequiresPermissions("system:osysuser:list")
     public CommonResult list(@RequestParam Map<String, Object> params){

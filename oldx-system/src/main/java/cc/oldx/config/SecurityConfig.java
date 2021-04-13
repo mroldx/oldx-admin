@@ -39,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private OSysUserDetailsService OSysUserDetailsService;
     @Autowired
     private OldxAuthenticationAccessDeniedHandler oldxAuthenticationAccessDeniedHandler;
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         log.info("开始执行securityConfig");
@@ -71,9 +72,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS)
                 .permitAll()
                 .antMatchers("/hello5").access("hasAuthority('user:add')")
-              //测试时全部运行访问
-                 .antMatchers("/**")
-                 .permitAll()
+                //测试时全部运行访问
+                .antMatchers("/**")
+                .permitAll()
+
                 .anyRequest()// 除上面外的所有请求全部需要鉴权认证
                 .authenticated();
         //允许访问静态资源

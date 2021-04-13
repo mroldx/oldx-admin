@@ -50,6 +50,7 @@ public class OSysMenuServiceImpl extends ServiceImpl<OSysMenuDao, OSysMenuEntity
             menu.setCharten(getCha(menu, oSysMenusList));
             return menu;
         }).collect(Collectors.toList());
+        System.out.println(oSysMenusList);
         return oSysMenusList;
     }
 

@@ -6,7 +6,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -25,21 +27,21 @@ public class IndexController {
 
     private final AmapClient amapClient;
 
-    @RequestMapping("/map_test")
+    @RequestMapping(value = "/map_test",method = RequestMethod.POST)
     public CommonResult aa() {
         Map result = amapClient.getLocation("121.475078", "31.223577");
         System.out.println(result);
         return CommonResult.ok(result);
     }
 
-    @RequestMapping("/t/t")
+    @GetMapping("/t/t")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @ApiOperation("测试1")
     public String tre() {
         return "dasdasdasdsad";
     }
 
-    @RequestMapping("/tt")
+    @GetMapping("/tt")
     @ApiOperation("测试1-权限 user-add")
     @PreAuthorize("hasAuthority('user:add')")
     public String trweqwee() {

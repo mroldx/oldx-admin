@@ -34,7 +34,7 @@ public class OSysMenuRoleController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     @ApiOperation("角色菜单列表")
     //@RequiresPermissions("system:osysmenurole:list")
     public CommonResult list(@RequestParam Map<String, Object> params){

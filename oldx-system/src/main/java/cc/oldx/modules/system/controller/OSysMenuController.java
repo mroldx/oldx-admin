@@ -37,7 +37,7 @@ public class OSysMenuController {
      * 列表
      */
     @MoliAspectLog(operModul = OldxConstant.MENU_MODUL, operType = "条件查询菜单", operDesc = "查询菜单列表")
-    @RequestMapping("/list")
+    @GetMapping("/list")
     @ApiOperation("系统菜单列表")
     //@RequiresPermissions("system:osysmenu:list")
     public CommonResult list(@RequestParam Map<String, Object> params) {

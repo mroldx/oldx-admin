@@ -33,7 +33,7 @@ public class OSysLogController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     //@RequiresPermissions("system:osyslog:list")
     public CommonResult list(@RequestParam Map<String, Object> params){
         PageUtils page = oSysLogService.queryPage(params);

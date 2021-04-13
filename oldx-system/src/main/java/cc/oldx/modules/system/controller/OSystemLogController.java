@@ -29,7 +29,7 @@ public class OSystemLogController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     @ApiOperation("日志列表查询")
     //@RequiresPermissions("ware:osystemlog:list")
     public CommonResult list(@RequestParam Map<String, Object> params) {

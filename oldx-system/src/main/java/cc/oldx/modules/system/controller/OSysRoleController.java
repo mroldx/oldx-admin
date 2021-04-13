@@ -33,7 +33,7 @@ public class OSysRoleController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     //@RequiresPermissions("system:osysrole:list")
     @ApiOperation("条件查询列表")
     public CommonResult list(@RequestParam Map<String, Object> params){

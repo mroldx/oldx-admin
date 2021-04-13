@@ -67,7 +67,6 @@ public class AuthController {
         Map<String, Object> tokenMap = new HashMap<>();
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
-        //   redisUti.set("moli_token",token,3600);
         return CommonResult.ok(tokenMap);
     }
 

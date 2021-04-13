@@ -34,7 +34,7 @@ public class OJobController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     @ApiOperation("定时任务列表")
     //@RequiresPermissions("system:ojob:list")
     public CommonResult list(@RequestParam Map<String, Object> params){

@@ -33,7 +33,7 @@ public class ODeptController {
      * 列表
      */
     @MoliAspectLog(operModul = OldxConstant.DEPT_MODUL, operType = "部门查询列表", operDesc = "查询部门所有人员")
-    @RequestMapping("/list")
+    @GetMapping("/list")
     @ApiOperation("部门查询列表")
     //@RequiresPermissions("system:odept:list")
     public CommonResult list(@RequestParam Map<String, Object> params) {
@@ -47,7 +47,7 @@ public class ODeptController {
      * 信息
      */
     @MoliAspectLog(operModul = OldxConstant.DEPT_MODUL, operType = "部门查询单个", operDesc = "查询某个ID的信息")
-    @RequestMapping("/info/{deptId}")
+    @GetMapping("/info/{deptId}")
     @ApiOperation("部门查询某个")
     //@RequiresPermissions("system:odept:info")
     public CommonResult info(@PathVariable("deptId") Long deptId) {
@@ -60,7 +60,7 @@ public class ODeptController {
      * 保存
      */
     @MoliAspectLog(operModul = OldxConstant.DEPT_MODUL, operType = "部门保存", operDesc = "保存人员")
-    @RequestMapping("/save")
+    @PostMapping("/save")
     @ApiOperation("新增部门列表")
     //@RequiresPermissions("system:odept:save")
     public CommonResult save(@RequestBody ODeptEntity oDept) {
@@ -73,7 +73,7 @@ public class ODeptController {
      * 修改
      */
     @MoliAspectLog(operModul = OldxConstant.DEPT_MODUL, operType = "部门修改", operDesc = "修改部门")
-    @RequestMapping("/update")
+    @PostMapping("/update")
     @ApiOperation("更新部门")
     //@RequiresPermissions("system:odept:update")
     public CommonResult update(@RequestBody ODeptEntity oDept) {
@@ -86,7 +86,7 @@ public class ODeptController {
      * 删除
      */
     @MoliAspectLog(operModul = OldxConstant.DEPT_MODUL, operType = "删除某个部门", operDesc = "删除部门")
-    @RequestMapping("/delete")
+    @DeleteMapping("/delete")
     @ApiOperation("批量删除部门")
     //@RequiresPermissions("system:odept:delete")
     public CommonResult delete(@RequestBody Long[] deptIds) {

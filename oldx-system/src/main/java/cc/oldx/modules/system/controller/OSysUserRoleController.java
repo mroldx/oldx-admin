@@ -35,7 +35,7 @@ public class OSysUserRoleController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     @ApiOperation("查询用户角色对应列表")
     //@RequiresPermissions("system:osysuserrole:list")
     public CommonResult list(@RequestParam Map<String, Object> params){
