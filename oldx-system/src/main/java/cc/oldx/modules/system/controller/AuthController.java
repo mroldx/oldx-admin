@@ -61,7 +61,7 @@ public class AuthController {
         if (token == null) {
             return CommonResult.error("用户名或密码错误");
         }
-        Map<String, Object> tokenMap = new HashMap<>();
+        Map<String, Object> tokenMap = new HashMap<>(3);
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
         return CommonResult.ok(tokenMap);
